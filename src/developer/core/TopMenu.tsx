@@ -1,7 +1,9 @@
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { BellIcon, MenuAlt2Icon } from '@heroicons/react/outline';
+import { BellIcon, CloudUploadIcon, MenuAlt2Icon } from '@heroicons/react/outline';
 import { SearchIcon } from '@heroicons/react/solid';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '../utils/routing';
 
 export default function TopMenu() {
     return (
@@ -35,6 +37,12 @@ export default function TopMenu() {
                     </form>
                 </div>
                 <div className='ml-4 flex items-center md:ml-6'>
+                    <Link
+                        to={ROUTES.release.tree}
+                        className='bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
+                    >
+                        <CloudUploadIcon className='h-6 w-6' aria-hidden='true' />
+                    </Link>
                     <button
                         type='button'
                         className='bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'

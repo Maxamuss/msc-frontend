@@ -12,4 +12,7 @@ export const ROUTES = {
         list: '/package/',
         create: '/package/create/',
     },
+    release: {
+        tree: '/releases/',
+    },
 }

@@ -9,7 +9,6 @@ export function getSchemaList(args: ISchemaList) {
         .then(res => res.json())
         .then(
             (result) => {
-                console.log(result)
                 args.setIsLoaded(true);
                 args.setResults(result);
             },
