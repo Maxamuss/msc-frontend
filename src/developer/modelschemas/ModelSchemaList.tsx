@@ -9,7 +9,7 @@ const headerProps: IHeader = {
     title: 'Models',
     tools: [
         {
-            text: 'Add Model',
+            children: 'Add Model',
             icon: PlusCircleIcon,
             to: ROUTES.modelschema.create
         }

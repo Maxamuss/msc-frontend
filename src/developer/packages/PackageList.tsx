@@ -9,7 +9,7 @@ const headerProps: IHeader = {
     title: 'Packages',
     tools: [
         {
-            text: 'Add Package',
+            children: 'Add Package',
             icon: PlusCircleIcon,
             to: ROUTES.package.create
         }
