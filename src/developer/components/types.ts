@@ -40,8 +40,14 @@ export interface ILoadingSpinner {
 }
 
 export interface ITable {
+    path: string;
     fields: Array<{
         fieldName: string;
         headerName: string;
+    }>;
+    actions: Array<{
+        text: 'View';
+        to: string;
+        keys: Array<string>;
     }>;
 }

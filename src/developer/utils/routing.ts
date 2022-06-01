@@ -1,6 +1,7 @@
-const ROUTES = {
+export const ROUTES = {
     modelschema: {
         list: '/modelschema/',
+        detail: '/modelschema/:id/',
         create: '/modelschema/create/',
     },
     function: {
@@ -12,4 +13,3 @@ const ROUTES = {
         create: '/package/create/',
     },
 }
-export default ROUTES; 

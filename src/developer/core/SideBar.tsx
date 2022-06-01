@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { NavLink } from 'react-router-dom';
 import { CodeIcon, CogIcon, CollectionIcon, ColorSwatchIcon, CubeTransparentIcon, CursorClickIcon, FingerPrintIcon, UserGroupIcon, UsersIcon, XIcon } from '@heroicons/react/outline';
 
-import ROUTES from './routing';
+import { ROUTES } from '../utils/routing';
 
 const sections = [
     {

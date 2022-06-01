@@ -3,7 +3,7 @@ import { PlusCircleIcon } from '@heroicons/react/outline';
 import Header from '../components/Header';
 import Table from '../components/Table';
 import { IHeader, ITable } from '../components/types';
-import ROUTES from '../core/routing';
+import { ROUTES } from '../utils/routing';
 
 const headerProps: IHeader = {
     title: 'Packages',
@@ -16,12 +16,14 @@ const headerProps: IHeader = {
     ]
 }
 const tableProps: ITable = {
+    path: '',
     fields: [
         {
             fieldName: 'package_name',
             headerName: 'Package Name'
         }
-    ]
+    ],
+    actions: []
 }
 
 export default function PackageList() {
