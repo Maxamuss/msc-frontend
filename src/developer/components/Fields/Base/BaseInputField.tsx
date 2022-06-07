@@ -9,7 +9,7 @@ export default function BaseInputField(props: IFormField) {
             <BaseLabel {...props} />
             <div className="mt-1">
                 <input
-                    // {...props.register}
+                    {...props.register}
                     type={props.type}
                     name={props.name}
                     placeholder={props.placeholder}

@@ -15,7 +15,7 @@ export interface IForm {
         label: string;
         widget: any;
     }>;
-    method?: 'post' | 'get';
+    method: 'post' | 'get';
     submitButtonText?: string;
 }
 
@@ -27,6 +27,7 @@ export interface IFormField {
     default?: string;
     placeholder?: string;
     helpText?: string;
+    register?: any;
 }
 
 export interface IHeader {
@@ -49,5 +50,12 @@ export interface ITable {
         text: 'View';
         to: string;
         keys: Array<string>;
+    }>;
+}
+
+export interface ITabs {
+    tabs: Array<{
+        tabName: string;
+        tabContent: any;
     }>;
 }
