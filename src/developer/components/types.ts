@@ -36,13 +36,13 @@ export interface IHeader {
     tools?: Array<IButton>;
 }
 
-
 export interface ILoadingSpinner {
     theme?: 'light' | 'dark';
 }
 
 export interface ITable {
     path: string;
+    filterField?: string;
     fields: Array<{
         fieldName: string;
         headerName: string;
@@ -63,5 +63,6 @@ export interface ITabs {
 
 export interface ISchemaObjectWrapper {
     path: string;
+    fields?: Array<string>;
     children: JSX.Element[] | JSX.Element | string;
 }

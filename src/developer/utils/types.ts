@@ -3,5 +3,6 @@ export interface ISchemaDataProps {
     setResults: Function;
     setIsLoaded: Function;
     setError: Function;
+    fields?: Array<string>;
     wait?: number;
 }

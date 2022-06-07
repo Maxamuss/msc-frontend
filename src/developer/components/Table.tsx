@@ -15,11 +15,18 @@ export default function Table(props: ITable) {
     }, [])
 
     const getResults = (wait: number) => {
+        let fields: Array<string> = [];
+
+        props.fields.forEach((field) => {
+            fields.push(field.fieldName)
+        })
+
         getSchemaData({
             path: props.path,
             setResults: setResults,
             setIsLoaded: setIsLoaded,
             setError: setError,
+            fields: fields,
             wait: wait,
         });
     }

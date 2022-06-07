@@ -2,8 +2,10 @@ import TextField from '../components/Fields/TextField';
 import Form from '../components/Form';
 import Header from '../components/Header';
 import SchemaObjectWrapper from '../components/SchemaObjectWrapper';
+import Table from '../components/Table';
 import Tabs from '../components/Tabs';
-import { IHeader, IForm, ITabs } from '../components/types';
+import { IHeader, IForm, ITabs, ITable } from '../components/types';
+import { ROUTES } from '../utils/routing';
 
 function TabConfiguration() {
     const headerProps: IHeader = {
@@ -44,9 +46,29 @@ function TabPages() {
         title: 'Model Pages',
         subtitle: 'Pages belonging to this model.'
     }
+    const tableProps: ITable = {
+        path: '/modelschema/',
+        filterField: 'pages',
+        fields: [
+            {
+                fieldName: 'page_name',
+                headerName: 'Page Name'
+            }
+        ],
+        actions: [
+            {
+                text: 'Edit',
+                to: ROUTES.modelschema.detail,
+                keys: ['id']
+            }
+        ]
+    }
 
     return (
-        <Header key='header' {...headerProps} />
+        <>
+            <Header key='header' {...headerProps} />
+            <Table key='table' {...tableProps} />
+        </>
     );
 }
 function TabWorkflows() {
@@ -102,6 +124,7 @@ export default function ModelSchemaDetail() {
     return (
         <SchemaObjectWrapper
             path='/modelschema/${id}/'
+            fields={['model_name']}
         >
             <>
                 <Header {...headerProps} />

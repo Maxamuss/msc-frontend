@@ -25,6 +25,7 @@ export default function SchemaObjectWrapper(props: ISchemaObjectWrapper) {
             setResults: setSchema,
             setIsLoaded: setIsLoaded,
             setError: setError,
+            fields: props.fields,
         });
     }, [])
 

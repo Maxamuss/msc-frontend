@@ -16,7 +16,7 @@ const headerProps: IHeader = {
     ]
 }
 const tableProps: ITable = {
-    path: '',
+    path: '/package/',
     fields: [
         {
             fieldName: 'package_name',

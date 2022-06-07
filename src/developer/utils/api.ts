@@ -5,7 +5,20 @@ const getBaseURL = () => {
 }
 
 export function getSchemaData(args: ISchemaDataProps) {
-    fetch(getBaseURL() + args.path)
+    let url = getBaseURL() + args.path;
+
+    if (args.fields) {
+        url += '?fields=';
+        args.fields.forEach((field, i) => {
+            if (args.fields?.length == i + 1) {
+                url += field
+            } else {
+                url += `${field}&`
+            }
+        })
+    }
+
+    fetch(url)
         .then(res => res.json())
         .then(
             (result) => {
