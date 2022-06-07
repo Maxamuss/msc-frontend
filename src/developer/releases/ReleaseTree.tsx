@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ReactFlow, {
     MiniMap,
     Controls,
@@ -20,15 +20,49 @@ interface IRelease {
     parent: number | undefined;
 }
 
+const dagreGraph = new dagre.graphlib.Graph();
+dagreGraph.setDefaultEdgeLabel(() => ({}));
+const nodeWidth = 172;
+const nodeHeight = 36;
 
+const getElementsLayout = (nodes: Array<any>, edges: Array<any>, direction = 'TB') => {
+    const isHorizontal = direction === 'LR';
+    dagreGraph.setGraph({ rankdir: direction });
+
+    nodes.forEach((node) => {
+        dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
+    });
+
+    edges.forEach((edge) => {
+        dagreGraph.setEdge(edge.source, edge.target);
+    });
+
+    dagre.layout(dagreGraph);
+
+    nodes.forEach((node) => {
+        const nodeWithPosition = dagreGraph.node(node.id);
+        node.targetPosition = 'bottom';
+        node.sourcePosition = 'top';
+
+        // We are shifting the dagre node position (anchor=center center) to the top left
+        // so it matches the React Flow node anchor point (top left).
+        node.position = {
+            x: nodeWithPosition.x - nodeWidth / 2,
+            y: nodeWithPosition.y - nodeHeight / 2,
+        };
+
+        return node;
+    });
+
+    return { nodes, edges };
+};
 
 export default function ReleaseTree() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [releases, setReleases]: [Array<IRelease>, Function] = useState([]);
-    const [nodes, setNodes, onNodesChange] = useNodesState([]);
-    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-    const onConnect = (params: any) => setEdges((eds) => addEdge(params, eds));
+    const [nodes, setNodes] = useNodesState([]);
+    const [edges, setEdges] = useEdgesState([]);
 
     useEffect(() => {
         getReleases();
@@ -48,9 +82,10 @@ export default function ReleaseTree() {
             let newNodes: Array<any> = [];
             let newEdges: Array<any> = [];
 
-            releases.forEach((release: IRelease) => {
+            releases.reverse().forEach((release: IRelease) => {
                 newNodes.push({
-                    id: release.id,
+                    id: release.id.toString(),
+                    position: { x: 0, y: 0 },
                     data: {
                         label: (
                             <>
@@ -58,21 +93,24 @@ export default function ReleaseTree() {
                             </>
                         ),
                     },
-                    position: { x: 100, y: 100 },
                 });
                 if (release.parent) {
                     newEdges.push({
                         id: `${release.parent}-${release.id}`,
-                        source: release.parent,
-                        target: release.id,
+                        source: release.parent.toString(),
+                        target: release.id.toString(),
                     });
                 }
             });
-            console.log(newNodes)
-            console.log(newEdges)
+            const { nodes: nodesLayout, edges: edgesLayout } = getElementsLayout(
+                newNodes,
+                newEdges,
+                'BT'
+            );
 
-            setEdges(newEdges);
-            setNodes(newNodes);
+            setNodes([...nodesLayout]);
+            setEdges([...edgesLayout]);
+
             setIsLoaded(true);
         }
     }, [releases])
@@ -87,8 +125,7 @@ export default function ReleaseTree() {
                 <ReactFlow
                     defaultNodes={nodes}
                     defaultEdges={edges}
-                    onConnect={onConnect}
-                    onEdgeUpdate={onEdgeUpdate}
+                    fitView
                 >
                     <MiniMap />
                     <Controls />
