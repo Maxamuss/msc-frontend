@@ -1,21 +1,39 @@
+import { PlusCircleIcon } from '@heroicons/react/outline';
 import Header from '../components/Header';
 import Table from '../components/Table';
+import { ROUTES } from '../utils/routing';
 
+const headerConfig = {
+    title: 'Function',
+    tools: [
+        {
+            children: 'Add Function',
+            icon: PlusCircleIcon,
+            to: ROUTES.function.create
+        }
+    ]
+}
 const tableConfig = {
-    path: '',
+    path: '/function/',
     fields: [
         {
             fieldName: 'function_name',
             headerName: 'Function Name'
         }
     ],
-    actions: []
+    actions: [
+        {
+            text: 'View',
+            to: ROUTES.function.detail,
+            keys: ['id'],
+        }
+    ]
 }
 
 export default function FunctionList() {
     return (
         <>
-            <Header title='Functions' />
+            <Header {...headerConfig} />
             <Table {...tableConfig} />
         </>
     )

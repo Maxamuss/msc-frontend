@@ -36,6 +36,7 @@ export interface IHeader {
     tools?: Array<IButton>;
 }
 
+
 export interface ILoadingSpinner {
     theme?: 'light' | 'dark';
 }
@@ -47,7 +48,7 @@ export interface ITable {
         headerName: string;
     }>;
     actions: Array<{
-        text: 'View';
+        text: string;
         to: string;
         keys: Array<string>;
     }>;
@@ -58,4 +59,9 @@ export interface ITabs {
         tabName: string;
         tabContent: any;
     }>;
+}
+
+export interface ISchemaObjectWrapper {
+    path: string;
+    children: JSX.Element[] | JSX.Element | string;
 }

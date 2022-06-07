@@ -1,6 +1,4 @@
-import internal from "stream";
-
-export interface ISchemaList {
+export interface ISchemaDataProps {
     path: string;
     setResults: Function;
     setIsLoaded: Function;

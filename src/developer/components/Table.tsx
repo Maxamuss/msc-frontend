@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { generatePath } from 'react-router';
 
 import { ITable } from './types';
-import { getSchemaList } from '../utils/api';
+import { getSchemaData } from '../utils/api';
 import { Link } from 'react-router-dom';
 
 export default function Table(props: ITable) {
@@ -15,7 +15,7 @@ export default function Table(props: ITable) {
     }, [])
 
     const getResults = (wait: number) => {
-        getSchemaList({
+        getSchemaData({
             path: props.path,
             setResults: setResults,
             setIsLoaded: setIsLoaded,

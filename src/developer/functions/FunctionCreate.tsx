@@ -4,21 +4,21 @@ import { IHeader, IForm } from '../components/types';
 import TextField from '../components/Fields/TextField';
 
 const headerProps: IHeader = {
-    title: 'Model Detail',
+    title: 'Create Function',
 }
 const formProps: IForm = {
-    action: '/modelschema/',
+    action: '/function/',
     method: 'post',
     fields: [
         {
-            fieldName: 'model_name',
-            label: 'Model Name',
+            fieldName: 'function_name',
+            label: 'Function Name',
             widget: TextField,
         }
     ],
 }
 
-export default function ModelSchemaCreate() {
+export default function FunctionCreate() {
     return (
         <>
             <Header {...headerProps} />

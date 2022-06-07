@@ -1,9 +1,9 @@
 import TextField from '../components/Fields/TextField';
 import Form from '../components/Form';
 import Header from '../components/Header';
-import SchemaObjectWrapper from '../components/SchemaObjectWrapper';
 import Tabs from '../components/Tabs';
 import { IHeader, IForm, ITabs } from '../components/types';
+import SchemaObjectWrapper from '../components/SchemaObjectWrapper';
 
 function TabConfiguration() {
     const headerProps: IHeader = {
@@ -25,7 +25,7 @@ function TabConfiguration() {
     return (
         <>
             <Header key='header' {...headerProps} />
-            <Form key='form' {...formProps} />
+            {/* <Form key='form' {...formProps} /> */}
         </>
     );
 }
@@ -39,39 +39,9 @@ function TabFields() {
         <Header key='header' {...headerProps} />
     );
 }
-function TabPages() {
-    const headerProps: IHeader = {
-        title: 'Model Pages',
-        subtitle: 'Pages belonging to this model.'
-    }
-
-    return (
-        <Header key='header' {...headerProps} />
-    );
-}
-function TabWorkflows() {
-    const headerProps: IHeader = {
-        title: 'Model Workflows',
-        subtitle: 'Workflows belonging to this model.'
-    }
-
-    return (
-        <Header key='header' {...headerProps} />
-    );
-}
-function TabPermissions() {
-    const headerProps: IHeader = {
-        title: 'Model Permissions',
-        subtitle: 'Permissions belonging to this model.'
-    }
-
-    return (
-        <Header key='header' {...headerProps} />
-    );
-}
 
 const headerProps: IHeader = {
-    title: 'Model: ${model_name}',
+    title: 'Function: ${function_name}',
 }
 const tabsProps: ITabs = {
     tabs: [
@@ -80,28 +50,16 @@ const tabsProps: ITabs = {
             tabContent: TabConfiguration,
         },
         {
-            tabName: 'Fields',
+            tabName: 'Implementation',
             tabContent: TabFields,
-        },
-        {
-            tabName: 'Pages',
-            tabContent: TabPages,
-        },
-        {
-            tabName: 'Workflows',
-            tabContent: TabWorkflows,
-        },
-        {
-            tabName: 'Permissions',
-            tabContent: TabPermissions,
         },
     ]
 }
 
-export default function ModelSchemaDetail() {
+export default function FunctionDetail() {
     return (
         <SchemaObjectWrapper
-            path='/modelschema/${id}/'
+            path='/function/${id}/'
         >
             <>
                 <Header {...headerProps} />

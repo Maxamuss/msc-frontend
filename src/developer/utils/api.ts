@@ -1,10 +1,10 @@
-import { ISchemaList } from './types';
+import { ISchemaDataProps } from './types';
 
 const getBaseURL = () => {
     return 'http://localhost:8000/internal-api/developer'
 }
 
-export function getSchemaList(args: ISchemaList) {
+export function getSchemaData(args: ISchemaDataProps) {
     fetch(getBaseURL() + args.path)
         .then(res => res.json())
         .then(

@@ -9,7 +9,7 @@ import ReactFlow, {
 import dagre from 'dagre';
 
 
-import { getSchemaList } from '../utils/api';
+import { getSchemaData } from '../utils/api';
 
 interface IRelease {
     id: string;
@@ -69,7 +69,7 @@ export default function ReleaseTree() {
     }, [])
 
     const getReleases = () => {
-        getSchemaList({
+        getSchemaData({
             path: '/releases/',
             setResults: setReleases,
             setIsLoaded: () => { },
