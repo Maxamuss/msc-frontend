@@ -8,7 +8,7 @@ const headerProps: IHeader = {
 }
 const formProps: IForm = {
     action: '/modelschema/',
-    method: 'post',
+    method: 'POST',
     fields: [
         {
             fieldName: 'model_name',

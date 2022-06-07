@@ -1,10 +1,10 @@
-import { ISchemaDataProps } from './types';
+import { IGetSchemaData, ISendSchemaData } from './types';
 
 const getBaseURL = () => {
     return 'http://localhost:8000/internal-api/developer'
 }
 
-export function getSchemaData(args: ISchemaDataProps) {
+export function getSchemaData(args: IGetSchemaData) {
     let url = getBaseURL() + args.path;
 
     if (args.fields) {
@@ -25,13 +25,33 @@ export function getSchemaData(args: ISchemaDataProps) {
                 args.setIsLoaded(true);
                 args.setResults(result);
             },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
             (error) => {
                 args.setIsLoaded(true);
                 args.setError(error);
             }
         )
 
+}
+
+export function sendSchemaData(args: ISendSchemaData) {
+    const setResults = args.setResults ? args.setResults : () => { };
+
+    fetch(getBaseURL() + args.path, {
+        method: args.method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(args.data),
+    })
+        .then(res => res.json())
+        .then(
+            (result) => {
+                args.setIsLoaded(true);
+                setResults(result);
+            },
+            (error) => {
+                args.setIsLoaded(true);
+                args.setError(error);
+            }
+        )
 }

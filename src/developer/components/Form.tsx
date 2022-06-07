@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { sendSchemaData } from '../utils/api';
 
 import Button from './Button';
 import LoadingSpinner from './LoadingSpinner';
@@ -8,11 +9,20 @@ import { IForm } from './types';
 export default function Form(props: IForm) {
     const { control, handleSubmit } = useForm();
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState(null);
 
     const onSubmit = (data: any) => {
         setIsSubmitting(true);
-        console.log(data)
+        console.log(data);
         // postData(model, resource.id, page, props.id, action, data, setFormResult, setIsSubmitting, setError);
+        sendSchemaData({
+            path: props.action,
+            method: props.method,
+            data: data,
+            setIsLoaded: setIsSubmitting,
+            setError: setError,
+        })
+        setIsSubmitting(false);
     }
 
     return (

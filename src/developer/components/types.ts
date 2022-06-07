@@ -15,7 +15,7 @@ export interface IForm {
         label: string;
         widget: any;
     }>;
-    method: 'post' | 'get';
+    method: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
     submitButtonText?: string;
 }
 

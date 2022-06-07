@@ -14,7 +14,7 @@ function TabConfiguration() {
     }
     const formProps: IForm = {
         action: '/modelschema/',
-        method: 'post',
+        method: 'POST',
         fields: [
             {
                 fieldName: 'model_name',

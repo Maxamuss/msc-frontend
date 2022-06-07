@@ -8,7 +8,7 @@ const headerProps: IHeader = {
 }
 const formProps: IForm = {
     action: '/function/',
-    method: 'post',
+    method: 'POST',
     fields: [
         {
             fieldName: 'function_name',
