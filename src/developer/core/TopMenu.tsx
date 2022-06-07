@@ -1,11 +1,17 @@
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { BellIcon, CloudUploadIcon, MenuAlt2Icon } from '@heroicons/react/outline';
+import { BellIcon, CloudUploadIcon, LightningBoltIcon, MenuAlt2Icon } from '@heroicons/react/outline';
 import { SearchIcon } from '@heroicons/react/solid';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../utils/routing';
+import { publishRelease } from '../releases/api';
 
 export default function TopMenu() {
+
+    const handlePublishRelease = () => {
+        publishRelease();
+    }
+
     return (
         <div className='top-0 z-10 flex-shrink-0 flex h-16 bg-white border-200 border-b'>
             <button
@@ -37,6 +43,13 @@ export default function TopMenu() {
                     </form>
                 </div>
                 <div className='ml-4 flex items-center md:ml-6'>
+                    <button
+                        type='button'
+                        onClick={handlePublishRelease}
+                        className='bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
+                    >
+                        <LightningBoltIcon className='h-6 w-6' aria-hidden='true' />
+                    </button>
                     <Link
                         to={ROUTES.release.tree}
                         className='bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
@@ -47,7 +60,6 @@ export default function TopMenu() {
                         type='button'
                         className='bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
                     >
-                        <span className='sr-only'>View notifications</span>
                         <BellIcon className='h-6 w-6' aria-hidden='true' />
                     </button>
 

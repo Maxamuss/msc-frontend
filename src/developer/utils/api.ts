@@ -1,6 +1,6 @@
 import { IGetSchemaData, ISendSchemaData } from './types';
 
-const getBaseURL = () => {
+export const getBaseURL = () => {
     return 'http://localhost:8000/internal-api/developer'
 }
 
