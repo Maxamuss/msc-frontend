@@ -94,7 +94,14 @@ function TabPages() {
 
     const headerProps: IHeader = {
         title: 'Model Pages',
-        subtitle: 'Pages belonging to this model.'
+        subtitle: 'Pages belonging to this model.',
+        tools: [
+            {
+                children: 'Create Page',
+                icon: PlusCircleIcon,
+                to: ROUTES.page.editor,
+            }
+        ]
     }
     const tableProps: ITable = {
         path: '/page/',

@@ -8,6 +8,7 @@ import FunctionList from '../functions/FunctionList';
 import FunctionDetail from '../functions/FunctionDetail';
 import FunctionCreate from '../functions/FunctionCreate';
 import PackageList from '../packages/PackageList';
+import PageEditor from '../pages/PageEditor';
 import ReleaseTree from '../releases/ReleaseTree';
 import { ROUTES } from '../utils/routing';
 
@@ -26,6 +27,7 @@ function App() {
             <Route path={ROUTES.function.detail} element={<FunctionDetail />} />
             <Route path={ROUTES.function.create} element={<FunctionCreate />} />
             <Route path={ROUTES.package.list} element={<PackageList />} />
+            <Route path={ROUTES.page.editor} element={<PageEditor />} />
             <Route path={ROUTES.release.tree} element={<ReleaseTree />} />
           </Routes>
         </main>

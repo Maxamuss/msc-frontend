@@ -16,6 +16,9 @@ export const ROUTES = {
         detail: '/package/:id/',
         create: '/package/create/',
     },
+    page: {
+        editor: '/page/editor/'
+    },
     release: {
         tree: '/releases/',
     },
