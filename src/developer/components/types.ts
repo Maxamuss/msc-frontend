@@ -45,18 +45,26 @@ export interface ILoadingSpinner {
     theme?: 'light' | 'dark';
 }
 
+// *** Table ***
+
+export interface ITableField {
+    fieldName: string;
+    headerName: string;
+}
+
+export interface ITableAction {
+    text: string;
+    to: string;
+    keys: Array<string>;
+}
+
+// If data present, Table does not retrieve data from path.
 export interface ITable {
     path: string;
-    filters?: any;
-    fields: Array<{
-        fieldName: string;
-        headerName: string;
-    }>;
-    actions: Array<{
-        text: string;
-        to: string;
-        keys: Array<string>;
-    }>;
+    data?: any;
+    fields: Array<ITableField>;
+    actions?: Array<ITableAction>;
+    tools?: Array<IButton>;
 }
 
 export interface ITabs {

@@ -1,35 +1,35 @@
 import { useEffect, useState } from 'react';
-import { generatePath } from 'react-router';
 
-import { ITable } from './types';
+import { ITable, IButton } from './types';
 import { getSchemaData } from '../utils/api';
 import { Link } from 'react-router-dom';
 import { generateSchemaPath } from '../utils/routing';
 
 export default function Table(props: ITable) {
     const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(true);
     const [results, setResults] = useState([]);
+
+    const actions = props.actions ?? [];
+    const tools = props.tools ?? [];
 
     useEffect(() => {
         getResults(700);
     }, [])
 
     const getResults = (wait: number) => {
-        let fields: Array<string> = [];
-
-        props.fields.forEach((field) => {
-            fields.push(field.fieldName)
-        })
-
-        getSchemaData({
-            path: props.path,
-            setResults: setResults,
-            setIsLoaded: setIsLoaded,
-            setError: setError,
-            fields: fields,
-            wait: wait,
-        });
+        if (props.data) {
+            setResults(props.data);
+        } else {
+            setIsLoaded(false);
+            getSchemaData({
+                path: props.path,
+                setResults: setResults,
+                setIsLoaded: setIsLoaded,
+                setError: setError,
+                wait: wait,
+            });
+        }
     }
 
     return (
@@ -44,7 +44,7 @@ export default function Table(props: ITable) {
                                         {field.headerName}
                                     </th>
                                 ))}
-                                {props.actions.length > 0 &&
+                                {[...actions, ...tools].length > 0 &&
                                     <th scope='col' className='relative py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 lg:pr-8'>
                                         Actions
                                     </th>
@@ -53,17 +53,32 @@ export default function Table(props: ITable) {
                         </thead>
                         <tbody className='divide-y divide-gray-200 bg-white'>
                             {error
-                                ? <tr>Error</tr>
+                                ? <tr><td colSpan={props.fields.length}>Error</td></tr>
                                 : !isLoaded
-                                    ? <tr>Loading</tr>
+                                    ? <tr><td colSpan={props.fields.length}>Loading</td></tr>
                                     : results.map((result, rowIdx) => (
                                         <tr key={rowIdx}>
                                             {props.fields.map((field, colIdx) => (
-                                                <td key={colIdx} className='whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'>{result[field.fieldName]}</td>
+                                                <td key={colIdx} className='whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'>
+                                                    {result[field.fieldName] ?? '-'}
+                                                </td>
                                             ))}
-                                            {props.actions.length > 0 &&
+                                            {[...actions, ...tools].length > 0 &&
                                                 <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8'>
-                                                    {props.actions.map((action, idx) => {
+                                                    {tools.map((action, idx) => {
+                                                        const handleOnClick = () => { if (action.onClick) action.onClick() }
+
+                                                        return (
+                                                            <button
+                                                                type='button'
+                                                                onClick={handleOnClick}
+                                                                className='text-indigo-600 hover:text-indigo-900'
+                                                            >
+                                                                {action.children}
+                                                            </button>
+                                                        )
+                                                    })}
+                                                    {actions.map((action, idx) => {
                                                         const to = generateSchemaPath(action.to, action.keys, result);
 
                                                         return (
@@ -73,7 +88,8 @@ export default function Table(props: ITable) {
                                                                 className='text-indigo-600 hover:text-indigo-900'
                                                             >
                                                                 {action.text}
-                                                            </Link>);
+                                                            </Link>
+                                                        );
                                                     })}
                                                 </td>
                                             }

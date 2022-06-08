@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { PlusCircleIcon } from '@heroicons/react/outline';
 
 import TextField from '../components/Fields/TextField';
 import Form from '../components/Form';
@@ -39,11 +40,45 @@ function TabFields() {
     const schemaContext = useContext(SchemaContext);
     const headerProps: IHeader = {
         title: 'Model Fields',
-        subtitle: 'Fields belonging to this model.'
+        subtitle: 'Fields defined for this model.',
+        tools: [
+            {
+                children: 'Add Field',
+                icon: PlusCircleIcon,
+                onClick: () => { alert('test') }
+            }
+        ]
+    }
+    const tableProps: ITable = {
+        path: '',
+        data: schemaContext.schema.fields || [],
+        fields: [
+            {
+                fieldName: 'field_name',
+                headerName: 'Field Name',
+            },
+            {
+                fieldName: 'field_type',
+                headerName: 'Field Type',
+            },
+            {
+                fieldName: 'required',
+                headerName: 'Required',
+            },
+        ],
+        tools: [
+            {
+                children: 'Edit',
+                onClick: () => { alert('test') }
+            }
+        ]
     }
 
     return (
-        <Header key='header' {...headerProps} />
+        <>
+            <Header key='header' {...headerProps} />
+            <Table key='table' {...tableProps} />
+        </>
     );
 }
 function TabPages() {
@@ -55,9 +90,6 @@ function TabPages() {
     }
     const tableProps: ITable = {
         path: '/page/',
-        filters: {
-            'model_id': '9244db77-7f5d-414f-ab86-a072bdffdc22'
-        },
         fields: [
             {
                 fieldName: 'page_name',
