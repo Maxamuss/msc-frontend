@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { PlusCircleIcon } from '@heroicons/react/outline';
 
 import TextField from '../components/Fields/TextField';
@@ -9,6 +9,7 @@ import Table from '../components/Table';
 import Tabs from '../components/Tabs';
 import { IHeader, IForm, ITabs, ITable, ISchemaContext } from '../components/types';
 import { ROUTES } from '../utils/routing';
+import FieldModal from './components/FieldModal';
 
 function TabConfiguration() {
     const schemaContext: ISchemaContext = useContext(SchemaContext);
@@ -37,6 +38,12 @@ function TabConfiguration() {
     );
 }
 function TabFields() {
+    const [showFieldModal, setShowFieldModal] = useState(false);
+
+    const openModal = (field: any) => {
+        setShowFieldModal(true)
+    }
+
     const schemaContext = useContext(SchemaContext);
     const headerProps: IHeader = {
         title: 'Model Fields',
@@ -45,7 +52,7 @@ function TabFields() {
             {
                 children: 'Add Field',
                 icon: PlusCircleIcon,
-                onClick: () => { alert('test') }
+                onClick: () => { openModal(null) }
             }
         ]
     }
@@ -69,7 +76,7 @@ function TabFields() {
         tools: [
             {
                 children: 'Edit',
-                onClick: () => { alert('test') }
+                onClick: () => { openModal(null) }
             }
         ]
     }
@@ -78,6 +85,7 @@ function TabFields() {
         <>
             <Header key='header' {...headerProps} />
             <Table key='table' {...tableProps} />
+            <FieldModal key='modal' isOpen={showFieldModal} onClose={() => setShowFieldModal(false)} />
         </>
     );
 }
