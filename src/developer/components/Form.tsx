@@ -1,13 +1,16 @@
 import { useContext, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { sendSchemaData } from '../utils/api';
+import { useNavigate } from 'react-router-dom';
 
+import { sendSchemaData } from '../utils/api';
 import Button from './Button';
 import LoadingSpinner from './LoadingSpinner';
 import { SchemaContext } from './SchemaObjectWrapper';
 import { IForm, ISchemaContext } from './types';
+import { generateSchemaPath } from '../utils/routing';
 
 export default function Form(props: IForm) {
+    let navigate = useNavigate();
     const schemaContext: ISchemaContext = useContext(SchemaContext);
 
     const { control, handleSubmit } = useForm();
@@ -32,7 +35,13 @@ export default function Form(props: IForm) {
     useEffect(() => {
         if (formResult && !error) {
             setIsSubmitting(false);
-            schemaContext.setSchema(formResult);
+
+            if (props.navigate) {
+                console.log(formResult)
+                navigate(generateSchemaPath(props.navigate.to, props.navigate.keys, formResult));
+            } else {
+                schemaContext.setSchema(formResult);
+            }
         }
     }, [formResult, error])
 

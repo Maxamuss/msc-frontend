@@ -1,3 +1,5 @@
+import { generatePath } from "react-router-dom";
+
 export const ROUTES = {
     modelschema: {
         list: '/modelschema/',
@@ -17,4 +19,15 @@ export const ROUTES = {
     release: {
         tree: '/releases/',
     },
+}
+
+
+
+export function generateSchemaPath(to: string, keys: Array<string>, data: any): string {
+    let args: any = {};
+    keys.forEach((key) => {
+        args[key as keyof typeof args] = data[key];
+    })
+
+    return generatePath(to, args)
 }

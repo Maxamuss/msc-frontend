@@ -17,7 +17,10 @@ export interface IForm {
     }>;
     method: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
     data?: any;
-    navigate?: string;
+    navigate?: {
+        to: string;
+        keys: Array<string>;
+    };
     submitButtonText?: string;
 }
 

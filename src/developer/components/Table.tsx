@@ -4,6 +4,7 @@ import { generatePath } from 'react-router';
 import { ITable } from './types';
 import { getSchemaData } from '../utils/api';
 import { Link } from 'react-router-dom';
+import { generateSchemaPath } from '../utils/routing';
 
 export default function Table(props: ITable) {
     const [error, setError] = useState(null);
@@ -63,15 +64,12 @@ export default function Table(props: ITable) {
                                             {props.actions.length > 0 &&
                                                 <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8'>
                                                     {props.actions.map((action, idx) => {
-                                                        let args = {};
-                                                        action.keys.forEach((key) => {
-                                                            args[key as keyof typeof args] = result[key];
-                                                        })
+                                                        const to = generateSchemaPath(action.to, action.keys, result);
 
                                                         return (
                                                             <Link
                                                                 key={idx}
-                                                                to={generatePath(action.to, args)}
+                                                                to={to}
                                                                 className='text-indigo-600 hover:text-indigo-900'
                                                             >
                                                                 {action.text}
