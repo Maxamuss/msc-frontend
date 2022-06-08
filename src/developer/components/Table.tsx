@@ -52,9 +52,9 @@ export default function Table(props: ITable) {
                         </thead>
                         <tbody className='divide-y divide-gray-200 bg-white'>
                             {error
-                                ? <div>Error</div>
+                                ? <tr>Error</tr>
                                 : !isLoaded
-                                    ? <div>Loading</div>
+                                    ? <tr>Loading</tr>
                                     : results.map((result, rowIdx) => (
                                         <tr key={rowIdx}>
                                             {props.fields.map((field, colIdx) => (

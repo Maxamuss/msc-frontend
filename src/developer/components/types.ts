@@ -17,6 +17,7 @@ export interface IForm {
     }>;
     method: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
     data?: any;
+    navigate?: string;
     submitButtonText?: string;
 }
 
@@ -66,4 +67,9 @@ export interface ISchemaObjectWrapper {
     path: string;
     fields?: Array<string>;
     children: JSX.Element[] | JSX.Element | string;
+}
+
+export interface ISchemaContext {
+    schema?: any;
+    setSchema: Function;
 }

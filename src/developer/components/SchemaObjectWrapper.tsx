@@ -4,9 +4,12 @@ import { useParams } from 'react-router-dom';
 import { getSchemaData } from '../utils/api';
 import { inject } from '../utils/render';
 import LoadingSpinner from './LoadingSpinner';
-import { ISchemaObjectWrapper } from './types';
+import { ISchemaContext, ISchemaObjectWrapper } from './types';
 
-export const SchemaContext = createContext({});
+export const SchemaContext = createContext<ISchemaContext>({
+    schema: {},
+    setSchema: () => { },
+});
 
 export default function SchemaObjectWrapper(props: ISchemaObjectWrapper) {
     let params = useParams();
@@ -25,13 +28,18 @@ export default function SchemaObjectWrapper(props: ISchemaObjectWrapper) {
         });
     }, [])
 
+    const context: ISchemaContext = {
+        schema: schema,
+        setSchema: setSchema,
+    }
+
     if (error) {
         return <div>error</div>;
     } else if (!isLoaded) {
         return <LoadingSpinner />;
     } else {
         return (
-            <SchemaContext.Provider value={schema}>
+            <SchemaContext.Provider value={context}>
                 {props.children}
             </SchemaContext.Provider>
         );

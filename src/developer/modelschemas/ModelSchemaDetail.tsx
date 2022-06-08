@@ -6,18 +6,19 @@ import Header from '../components/Header';
 import SchemaObjectWrapper, { SchemaContext } from '../components/SchemaObjectWrapper';
 import Table from '../components/Table';
 import Tabs from '../components/Tabs';
-import { IHeader, IForm, ITabs, ITable } from '../components/types';
+import { IHeader, IForm, ITabs, ITable, ISchemaContext } from '../components/types';
 import { ROUTES } from '../utils/routing';
 
 function TabConfiguration() {
-    const schemaContext = useContext(SchemaContext);
+    const schemaContext: ISchemaContext = useContext(SchemaContext);
+
     const headerProps: IHeader = {
         title: 'Model Configuration',
         subtitle: 'Configuration for this model.'
     }
     const formProps: IForm = {
-        action: '/modelschema/',
-        method: 'POST',
+        action: `/modelschema/${schemaContext.schema.id}/`,
+        method: 'PUT',
         fields: [
             {
                 fieldName: 'model_name',
@@ -30,7 +31,7 @@ function TabConfiguration() {
     return (
         <>
             <Header key='header' {...headerProps} />
-            <Form key='form' data={schemaContext} {...formProps} />
+            <Form key='form' {...formProps} />
         </>
     );
 }

@@ -1,29 +1,40 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { sendSchemaData } from '../utils/api';
 
 import Button from './Button';
 import LoadingSpinner from './LoadingSpinner';
-import { IForm } from './types';
+import { SchemaContext } from './SchemaObjectWrapper';
+import { IForm, ISchemaContext } from './types';
 
 export default function Form(props: IForm) {
+    const schemaContext: ISchemaContext = useContext(SchemaContext);
+
     const { control, handleSubmit } = useForm();
+
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [formResult, setFormResult] = useState(null);
     const [error, setError] = useState(null);
 
     const onSubmit = (data: any) => {
         setIsSubmitting(true);
-        console.log(data);
-        // postData(model, resource.id, page, props.id, action, data, setFormResult, setIsSubmitting, setError);
         sendSchemaData({
             path: props.action,
             method: props.method,
             data: data,
             setIsLoaded: setIsSubmitting,
+            setResults: setFormResult,
             setError: setError,
         })
-        setIsSubmitting(false);
+
     }
+
+    useEffect(() => {
+        if (formResult && !error) {
+            setIsSubmitting(false);
+            schemaContext.setSchema(formResult);
+        }
+    }, [formResult, error])
 
     return (
         <div className='bg-white overflow-hidden border-200 border-b p-4'>
@@ -31,18 +42,17 @@ export default function Form(props: IForm) {
                 <div className='grid grid-cols-1 gap-y-6 md:grid-cols-2 xl:grid-cols-3 md:gap-x-6'>
                     {props.fields.map((field) => {
                         const FieldWidget = field.widget;
-                        const data = props.data ?? {};
-                        const fieldConfig = {
-                            name: field.fieldName,
+                        const data = schemaContext.schema ?? {};
+                        const fieldProps = {
                             label: field.label,
-                            value: data[field.fieldName]
                         };
 
                         return <Controller
-                            key={fieldConfig.name}
-                            name={fieldConfig.name}
+                            key={field.fieldName}
+                            name={field.fieldName}
+                            defaultValue={data[field.fieldName]}
                             control={control}
-                            render={({ field }) => <FieldWidget {...field} {...fieldConfig} />}
+                            render={({ field }) => <FieldWidget {...field} {...fieldProps} />}
                         />;
                     })}
                 </div>
