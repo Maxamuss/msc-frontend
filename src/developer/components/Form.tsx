@@ -31,9 +31,11 @@ export default function Form(props: IForm) {
                 <div className='grid grid-cols-1 gap-y-6 md:grid-cols-2 xl:grid-cols-3 md:gap-x-6'>
                     {props.fields.map((field) => {
                         const FieldWidget = field.widget;
+                        const data = props.data ?? {};
                         const fieldConfig = {
                             name: field.fieldName,
-                            label: field.label
+                            label: field.label,
+                            value: data[field.fieldName]
                         };
 
                         return <Controller

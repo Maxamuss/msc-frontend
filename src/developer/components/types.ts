@@ -16,6 +16,7 @@ export interface IForm {
         widget: any;
     }>;
     method: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+    data?: any;
     submitButtonText?: string;
 }
 
@@ -42,7 +43,7 @@ export interface ILoadingSpinner {
 
 export interface ITable {
     path: string;
-    filterField?: string;
+    filters?: any;
     fields: Array<{
         fieldName: string;
         headerName: string;

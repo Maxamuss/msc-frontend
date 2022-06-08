@@ -6,15 +6,14 @@ import { IHeader } from './types';
 
 export default function Header(props: IHeader) {
     const schemaContext = useContext(SchemaContext);
-    const schema = schemaContext?.schema || {};
 
     return (
         <div className="sm:flex sm:items-center sm:justify-between bg-white p-6 border-200 border-b">
             <div>
-                <h3 className="text-xl font-semibold text-gray-900">{renderText(props.title, schema)}</h3>
+                <h3 className="text-xl font-semibold text-gray-900">{renderText(props.title, schemaContext)}</h3>
                 {props.subtitle &&
                     <p className="mt-2 text-sm text-gray-700">
-                        {renderText(props.subtitle, schema)}
+                        {renderText(props.subtitle, schemaContext)}
                     </p>
                 }
             </div>

@@ -6,18 +6,14 @@ import { inject } from '../utils/render';
 import LoadingSpinner from './LoadingSpinner';
 import { ISchemaObjectWrapper } from './types';
 
-export const SchemaContext = createContext({ schema: null });
+export const SchemaContext = createContext({});
 
 export default function SchemaObjectWrapper(props: ISchemaObjectWrapper) {
     let params = useParams();
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [schema, setSchema] = useState(null);
-
-    const context = {
-        schema: schema
-    };
+    const [schema, setSchema] = useState({});
 
     useEffect(() => {
         getSchemaData({
@@ -35,7 +31,7 @@ export default function SchemaObjectWrapper(props: ISchemaObjectWrapper) {
         return <LoadingSpinner />;
     } else {
         return (
-            <SchemaContext.Provider value={context}>
+            <SchemaContext.Provider value={schema}>
                 {props.children}
             </SchemaContext.Provider>
         );

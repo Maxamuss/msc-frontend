@@ -1,13 +1,16 @@
+import { useContext } from 'react';
+
 import TextField from '../components/Fields/TextField';
 import Form from '../components/Form';
 import Header from '../components/Header';
-import SchemaObjectWrapper from '../components/SchemaObjectWrapper';
+import SchemaObjectWrapper, { SchemaContext } from '../components/SchemaObjectWrapper';
 import Table from '../components/Table';
 import Tabs from '../components/Tabs';
 import { IHeader, IForm, ITabs, ITable } from '../components/types';
 import { ROUTES } from '../utils/routing';
 
 function TabConfiguration() {
+    const schemaContext = useContext(SchemaContext);
     const headerProps: IHeader = {
         title: 'Model Configuration',
         subtitle: 'Configuration for this model.'
@@ -27,11 +30,12 @@ function TabConfiguration() {
     return (
         <>
             <Header key='header' {...headerProps} />
-            <Form key='form' {...formProps} />
+            <Form key='form' data={schemaContext} {...formProps} />
         </>
     );
 }
 function TabFields() {
+    const schemaContext = useContext(SchemaContext);
     const headerProps: IHeader = {
         title: 'Model Fields',
         subtitle: 'Fields belonging to this model.'
@@ -42,13 +46,17 @@ function TabFields() {
     );
 }
 function TabPages() {
+    const schemaContext = useContext(SchemaContext);
+
     const headerProps: IHeader = {
         title: 'Model Pages',
         subtitle: 'Pages belonging to this model.'
     }
     const tableProps: ITable = {
-        path: '/modelschema/',
-        filterField: 'pages',
+        path: '/page/',
+        filters: {
+            'model_id': '9244db77-7f5d-414f-ab86-a072bdffdc22'
+        },
         fields: [
             {
                 fieldName: 'page_name',
