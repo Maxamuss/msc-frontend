@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import { PlusCircleIcon } from '@heroicons/react/outline';
 
-import TextField from '../components/Fields/TextField';
 import Form from '../components/Form';
 import Header from '../components/Header';
 import SchemaObjectWrapper, { SchemaContext } from '../components/SchemaObjectWrapper';
@@ -10,6 +9,8 @@ import Tabs from '../components/Tabs';
 import { IHeader, IForm, ITabs, ITable, ISchemaContext } from '../components/types';
 import { ROUTES } from '../utils/routing';
 import FieldModal from './components/FieldModal';
+import { IInputField } from '../components/Fields/types';
+import InputField from '../components/Fields/InputField';
 
 function TabConfiguration() {
     const schemaContext: ISchemaContext = useContext(SchemaContext);
@@ -23,10 +24,11 @@ function TabConfiguration() {
         method: 'PUT',
         fields: [
             {
-                fieldName: 'model_name',
+                name: 'model_name',
                 label: 'Model Name',
-                widget: TextField,
-            }
+                type: 'text',
+                widget: InputField,
+            } as IInputField
         ],
     }
 

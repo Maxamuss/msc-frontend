@@ -1,9 +1,8 @@
-import { IFormField } from '../../types';
-import BaseHelpText from './BaseHelpText';
-import BaseLabel from './BaseLabel';
+import { IInputField } from './types';
+import BaseLabel from './Base/BaseLabel';
+import BaseHelpText from './Base/BaseHelpText';
 
-
-export default function BaseInputField(props: IFormField) {
+export default function InputField(props: IInputField) {
     return (
         <div>
             <BaseLabel {...props} />

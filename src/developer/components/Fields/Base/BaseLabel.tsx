@@ -1,9 +1,13 @@
-import { IFormField } from '../../types';
+import { IBaseLabel } from '../types';
 
-export default function BaseLabel(props: IFormField) {
+export default function BaseLabel(props: IBaseLabel) {
     return (
-        <label htmlFor={props.id} className="block text-sm font-medium text-blue-gray-900 capitalize">
-            {props.label}
-        </label>
+        <>
+            {props.label &&
+                <label htmlFor={props.id} className="block text-sm font-medium text-blue-gray-900 capitalize">
+                    {props.label}
+                </label>
+            }
+        </>
     );
 }

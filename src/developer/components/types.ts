@@ -1,4 +1,5 @@
 import React from 'react';
+import { ISelectField, IInputField } from './Fields/types';
 
 export interface IButton {
     children: JSX.Element[] | JSX.Element | string;
@@ -10,11 +11,9 @@ export interface IButton {
 
 export interface IForm {
     action: string;
-    fields: Array<{
-        fieldName: string;
-        label: string;
-        widget: any;
-    }>;
+    fields: Array<
+        IInputField | ISelectField
+    >;
     method: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
     data?: any;
     navigate?: {
@@ -22,17 +21,7 @@ export interface IForm {
         keys: Array<string>;
     };
     submitButtonText?: string;
-}
-
-export interface IFormField {
-    name: string;
-    id: string;
-    label: string;
-    type?: string;
-    default?: string;
-    placeholder?: string;
-    helpText?: string;
-    register?: any;
+    // onSubmit?: Function;
 }
 
 export interface IHeader {

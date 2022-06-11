@@ -29,7 +29,6 @@ export default function Form(props: IForm) {
             setResults: setFormResult,
             setError: setError,
         })
-
     }
 
     useEffect(() => {
@@ -37,7 +36,6 @@ export default function Form(props: IForm) {
             setIsSubmitting(false);
 
             if (props.navigate) {
-                console.log(formResult)
                 navigate(generateSchemaPath(props.navigate.to, props.navigate.keys, formResult));
             } else {
                 schemaContext.setSchema(formResult);
@@ -49,21 +47,12 @@ export default function Form(props: IForm) {
         <div className='bg-white overflow-hidden border-200 border-b p-4'>
             <form key='form' className='space-y-8 divide-y divide-y-blue-gray-200' onSubmit={handleSubmit(onSubmit)}>
                 <div className='grid grid-cols-1 gap-y-6 md:grid-cols-2 xl:grid-cols-3 md:gap-x-6'>
-                    {props.fields.map((field) => {
-                        const FieldWidget = field.widget;
+                    {/* {props.fields.map((fieldProps) => {
+                        const FieldWidget = fieldProps.widget;
                         const data = schemaContext.schema ?? {};
-                        const fieldProps = {
-                            label: field.label,
-                        };
 
-                        return <Controller
-                            key={field.fieldName}
-                            name={field.fieldName}
-                            defaultValue={data[field.fieldName]}
-                            control={control}
-                            render={({ field }) => <FieldWidget {...field} {...fieldProps} />}
-                        />;
-                    })}
+                        
+                    })} */}
                 </div>
                 <Button key='submitButton' type='submit'>
                     <>

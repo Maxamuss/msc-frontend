@@ -1,6 +1,6 @@
-import { IFormField } from '../../types';
+import { IBaseHelpText } from '../types';
 
-export default function BaseHelpText(props: IFormField) {
+export default function BaseHelpText(props: IBaseHelpText) {
     return (
         <>
             {props.helpText &&

@@ -1,6 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useContext, useRef } from 'react';
-import TextField from '../../components/Fields/TextField';
+import InputField from '../../components/Fields/InputField';
+import SelectField from '../../components/Fields/SelectField';
+import { IInputField, ISelectField } from '../../components/Fields/types';
 import Form from '../../components/Form';
 import { SchemaContext } from '../../components/SchemaObjectWrapper';
 import { IForm, ISchemaContext } from '../../components/types';
@@ -19,11 +21,24 @@ export default function FieldModal(props: IFieldModal) {
         method: 'PUT',
         fields: [
             {
-                fieldName: 'field_name',
+                name: 'field_name',
+                widget: InputField,
+                type: 'text',
                 label: 'Field Name',
-                widget: TextField,
-            },
+            } as IInputField,
+            {
+                name: 'field_type',
+                widget: SelectField,
+                label: 'Field Type',
+                options: [
+                    { id: 'text', name: 'Text' },
+                    { id: 'text', name: 'Text' },
+                ]
+            } as ISelectField,
         ],
+        // onSubmit: () => {
+
+        // }
     }
 
     return (

@@ -1,9 +1,11 @@
-import TextField from '../components/Fields/TextField';
+import TextField from '../components/Fields/InputField';
 import Form from '../components/Form';
 import Header from '../components/Header';
 import Tabs from '../components/Tabs';
 import { IHeader, IForm, ITabs } from '../components/types';
 import SchemaObjectWrapper from '../components/SchemaObjectWrapper';
+import InputField from '../components/Fields/InputField';
+import { IInputField } from '../components/Fields/types';
 
 function TabConfiguration() {
     const headerProps: IHeader = {
@@ -14,11 +16,11 @@ function TabConfiguration() {
         action: '/modelschema/',
         method: 'POST',
         fields: [
-            {
-                fieldName: 'model_name',
-                label: 'Model Name',
-                widget: TextField,
-            }
+            // {
+            //     name: 'model_name',
+            //     label: 'Model Name',
+            //     widget: InputField,
+            // } as IInputField
         ],
     }
 
