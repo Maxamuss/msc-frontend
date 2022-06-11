@@ -1,5 +1,15 @@
 import { getBaseURL } from '../utils/api';
 
+export interface IRelease {
+    id: string;
+    release_version: string;
+    release_notes: string;
+    released_at: string;
+    current_release: boolean;
+    parent: number | undefined;
+    unapplied_changes: number;
+}
+
 export function publishRelease() {
     console.log(getBaseURL() + '/releases/publish/', {
         method: 'POST'

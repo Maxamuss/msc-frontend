@@ -1,32 +1,23 @@
-import { useCallback, useEffect, useState } from 'react';
-import ReactFlow, {
-    MiniMap,
-    Controls,
-    useNodesState,
-    useEdgesState,
-    addEdge
-} from 'react-flow-renderer';
+import { useEffect, useState } from 'react';
+import ReactFlow, { useNodesState, useEdgesState, Background, BackgroundVariant } from 'react-flow-renderer';
 import dagre from 'dagre';
 
-
+import UnappliedChangesNode from './UnappliedChangesNode';
+import ReleaseNode from './ReleaseNode';
 import { getSchemaData } from '../utils/api';
+import { IRelease } from './api';
 
-interface IRelease {
-    id: string;
-    release_version: string;
-    release_notes: string;
-    released_at: string;
-    current_release: boolean;
-    parent: number | undefined;
-}
+const nodeTypes = {
+    unappliedChangesNode: UnappliedChangesNode,
+    release: ReleaseNode,
+};
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
-const nodeWidth = 172;
-const nodeHeight = 36;
+const nodeWidth = 300;
+const nodeHeight = 75;
 
-const getElementsLayout = (nodes: Array<any>, edges: Array<any>, direction = 'TB') => {
-    const isHorizontal = direction === 'LR';
+const getElementsLayout = (nodes: Array<any>, edges: Array<any>, direction = 'BT') => {
     dagreGraph.setGraph({ rankdir: direction });
 
     nodes.forEach((node) => {
@@ -85,14 +76,12 @@ export default function ReleaseTree() {
             releases.reverse().forEach((release: IRelease) => {
                 newNodes.push({
                     id: release.id.toString(),
+                    type: 'release',
                     position: { x: 0, y: 0 },
                     data: {
-                        label: (
-                            <>
-                                {release.release_version}
-                            </>
-                        ),
+                        release: release
                     },
+                    draggable: false,
                 });
                 if (release.parent) {
                     newEdges.push({
@@ -101,12 +90,26 @@ export default function ReleaseTree() {
                         target: release.id.toString(),
                     });
                 }
+
+                if (release.unapplied_changes > 0) {
+                    const id = release.id.toString() + '_changes';
+                    newNodes.push({
+                        id: id,
+                        type: 'unappliedChangesNode',
+                        position: { x: 0, y: 0 },
+                        data: {
+                            unappliedChanges: release.unapplied_changes
+                        },
+                        draggable: false,
+                    });
+                    newEdges.push({
+                        id: `${release.parent}-${release.id}`,
+                        source: release.id.toString(),
+                        target: id,
+                    });
+                }
             });
-            const { nodes: nodesLayout, edges: edgesLayout } = getElementsLayout(
-                newNodes,
-                newEdges,
-                'BT'
-            );
+            const { nodes: nodesLayout, edges: edgesLayout } = getElementsLayout(newNodes, newEdges);
 
             setNodes([...nodesLayout]);
             setEdges([...edgesLayout]);
@@ -114,6 +117,7 @@ export default function ReleaseTree() {
             setIsLoaded(true);
         }
     }, [releases])
+
 
     if (error) {
         return <div>Error:</div>;
@@ -125,10 +129,14 @@ export default function ReleaseTree() {
                 <ReactFlow
                     defaultNodes={nodes}
                     defaultEdges={edges}
+                    nodeTypes={nodeTypes}
+                    defaultZoom={2}
+                    minZoom={1}
+                    maxZoom={3}
+                    // snapGrid={[16, 16]}
                     fitView
                 >
-                    <MiniMap />
-                    <Controls />
+                    <Background variant={BackgroundVariant.Dots} gap={16} size={0.5} />
                 </ReactFlow>
             </div>
         );
