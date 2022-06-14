@@ -148,7 +148,7 @@ function TabPages() {
             {
                 children: 'Create Page',
                 icon: PlusCircleIcon,
-                to: ROUTES.page.editor,
+                to: ROUTES.page.create,
             }
         ]
     }
@@ -163,15 +163,15 @@ function TabPages() {
         actions: [
             {
                 children: 'Edit',
-                to: ROUTES.modelschema.detail,
+                to: ROUTES.page.edit,
             }
         ]
     }
 
     return (
         <>
-            <Header key='header' {...headerProps} />
-            <Table key='table' {...tableProps} />
+            <Header {...headerProps} />
+            <Table {...tableProps} />
         </>
     );
 }

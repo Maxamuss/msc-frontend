@@ -29,7 +29,8 @@ function App() {
             <Route path={ROUTES.function.detail} element={<FunctionDetail />} />
             <Route path={ROUTES.function.create} element={<FunctionCreate />} />
             <Route path={ROUTES.package.list} element={<PackageList />} />
-            <Route path={ROUTES.page.editor} element={<PageEditor />} />
+            <Route path={ROUTES.page.create} element={<PageEditor />} />
+            <Route path={ROUTES.page.edit} element={<PageEditor />} />
             <Route path={ROUTES.release.tree} element={<ReleaseTree />} />
           </Routes>
         </main>
