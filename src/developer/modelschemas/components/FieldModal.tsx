@@ -20,21 +20,21 @@ export default function FieldModal(props: IFieldModal) {
         action: `/modelschema/${schemaContext.schema.id}/`,
         method: 'PUT',
         fields: [
-            {
-                name: 'field_name',
-                widget: InputField,
-                type: 'text',
-                label: 'Field Name',
-            } as IInputField,
-            {
-                name: 'field_type',
-                widget: SelectField,
-                label: 'Field Type',
-                options: [
-                    { id: 'text', name: 'Text' },
-                    { id: 'text', name: 'Text' },
-                ]
-            } as ISelectField,
+            // {
+            //     name: 'field_name',
+            //     widget: InputField,
+            //     type: 'text',
+            //     label: 'Field Name',
+            // } as IInputField,
+            // {
+            //     name: 'field_type',
+            //     widget: SelectField,
+            //     label: 'Field Type',
+            //     options: [
+            //         { id: 'text', name: 'Text' },
+            //         { id: 'text', name: 'Text' },
+            //     ]
+            // } as ISelectField,
         ],
         // onSubmit: () => {
 

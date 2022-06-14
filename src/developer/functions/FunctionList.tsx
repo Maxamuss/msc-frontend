@@ -23,9 +23,8 @@ const tableConfig = {
     ],
     actions: [
         {
-            text: 'View',
+            children: 'View',
             to: ROUTES.function.detail,
-            keys: ['id'],
         }
     ]
 }

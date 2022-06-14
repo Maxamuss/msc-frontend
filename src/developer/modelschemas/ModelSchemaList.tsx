@@ -11,7 +11,7 @@ const headerProps: IHeader = {
         {
             children: 'Add Model',
             icon: PlusCircleIcon,
-            to: ROUTES.modelschema.create
+            to: ROUTES.modelschema.create,
         }
     ]
 }
@@ -25,9 +25,8 @@ const tableProps: ITable = {
     ],
     actions: [
         {
-            text: 'View',
+            children: 'View',
             to: ROUTES.modelschema.detail,
-            keys: ['id']
         }
     ]
 }

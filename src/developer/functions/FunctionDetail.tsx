@@ -16,18 +16,20 @@ function TabConfiguration() {
         action: '/modelschema/',
         method: 'POST',
         fields: [
-            // {
-            //     name: 'model_name',
-            //     label: 'Model Name',
-            //     widget: InputField,
-            // } as IInputField
+            {
+                name: 'function_name',
+                fieldType: 'input',
+                type: 'text',
+                label: 'Function Name',
+
+            } as IInputField
         ],
     }
 
     return (
         <>
             <Header key='header' {...headerProps} />
-            {/* <Form key='form' {...formProps} /> */}
+            <Form key='form' {...formProps} />
         </>
     );
 }
@@ -60,9 +62,7 @@ const tabsProps: ITabs = {
 
 export default function FunctionDetail() {
     return (
-        <SchemaObjectWrapper
-            path='/function/${id}/'
-        >
+        <SchemaObjectWrapper path='/function/${id}/'>
             <>
                 <Header {...headerProps} />
                 <Tabs {...tabsProps} />

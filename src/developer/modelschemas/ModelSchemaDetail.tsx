@@ -1,16 +1,15 @@
 import { useContext, useState } from 'react';
-import { PlusCircleIcon } from '@heroicons/react/outline';
+import { PlusCircleIcon, TrashIcon } from '@heroicons/react/outline';
 
 import Form from '../components/Form';
 import Header from '../components/Header';
 import SchemaObjectWrapper, { SchemaContext } from '../components/SchemaObjectWrapper';
 import Table from '../components/Table';
 import Tabs from '../components/Tabs';
+import FieldModal from './components/FieldModal';
 import { IHeader, IForm, ITabs, ITable, ISchemaContext } from '../components/types';
 import { ROUTES } from '../utils/routing';
-import FieldModal from './components/FieldModal';
 import { IInputField } from '../components/Fields/types';
-import InputField from '../components/Fields/InputField';
 
 function TabConfiguration() {
     const schemaContext: ISchemaContext = useContext(SchemaContext);
@@ -25,9 +24,10 @@ function TabConfiguration() {
         fields: [
             {
                 name: 'model_name',
-                label: 'Model Name',
+                fieldType: 'input',
                 type: 'text',
-                widget: InputField,
+                label: 'Model Name',
+
             } as IInputField
         ],
     }
@@ -75,7 +75,7 @@ function TabFields() {
                 headerName: 'Required',
             },
         ],
-        tools: [
+        actions: [
             {
                 children: 'Edit',
                 onClick: () => { openModal(null) }
@@ -115,9 +115,8 @@ function TabPages() {
         ],
         actions: [
             {
-                text: 'Edit',
+                children: 'Edit',
                 to: ROUTES.modelschema.detail,
-                keys: ['id']
             }
         ]
     }
@@ -152,6 +151,13 @@ function TabPermissions() {
 
 const headerProps: IHeader = {
     title: 'Model: ${model_name}',
+    tools: [
+        {
+            children: 'Delete',
+            icon: TrashIcon,
+            to: ROUTES.modelschema.delete,
+        }
+    ]
 }
 const tabsProps: ITabs = {
     tabs: [
@@ -180,10 +186,7 @@ const tabsProps: ITabs = {
 
 export default function ModelSchemaDetail() {
     return (
-        <SchemaObjectWrapper
-            path='/modelschema/${id}/'
-            fields={['model_name']}
-        >
+        <SchemaObjectWrapper path='/modelschema/${id}/'>
             <>
                 <Header {...headerProps} />
                 <Tabs {...tabsProps} />

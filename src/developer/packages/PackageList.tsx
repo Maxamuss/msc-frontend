@@ -11,7 +11,7 @@ const headerProps: IHeader = {
         {
             children: 'Add Package',
             icon: PlusCircleIcon,
-            to: ROUTES.package.create
+            navigate: { to: ROUTES.package.create, keys: [] },
         }
     ]
 }

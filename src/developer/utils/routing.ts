@@ -5,6 +5,7 @@ export const ROUTES = {
         list: '/modelschema/',
         detail: '/modelschema/:id/',
         create: '/modelschema/create/',
+        delete: '/modelschema/:id/delete/'
     },
     function: {
         list: '/function/',
@@ -24,13 +25,6 @@ export const ROUTES = {
     },
 }
 
-
-
-export function generateSchemaPath(to: string, keys: Array<string>, data: any): string {
-    let args: any = {};
-    keys.forEach((key) => {
-        args[key as keyof typeof args] = data[key];
-    })
-
-    return generatePath(to, args)
+export function generateSchemaPath(to: string, data: any): string {
+    return generatePath(to, data)
 }

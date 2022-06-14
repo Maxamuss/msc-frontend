@@ -3,9 +3,10 @@ import Form from '../components/Form';
 import { IHeader, IForm } from '../components/types';
 import { ROUTES } from '../utils/routing';
 import { IInputField } from '../components/Fields/types';
+import SchemaObjectWrapper from '../components/SchemaObjectWrapper';
 
 const headerProps: IHeader = {
-    title: 'Model Detail',
+    title: 'Delete Model: ${model_name}',
 }
 const formProps: IForm = {
     action: '/modelschema/',
@@ -22,11 +23,15 @@ const formProps: IForm = {
     navigate: { to: ROUTES.modelschema.detail, keys: ['id'] }
 }
 
-export default function ModelSchemaCreate() {
+export default function ModelSchemaDelete() {
     return (
-        <>
-            <Header {...headerProps} />
-            <Form {...formProps} />
-        </>
+        <SchemaObjectWrapper
+            path='/modelschema/${id}/'
+            fields={['model_name']}
+        >
+            <>
+                <Header {...headerProps} />
+            </>
+        </SchemaObjectWrapper>
     )
 }

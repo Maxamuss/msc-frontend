@@ -4,6 +4,7 @@ import TopMenu from './TopMenu';
 import ModelSchemaList from '../modelschemas/ModelSchemaList';
 import ModelSchemaCreate from '../modelschemas/ModelSchemaCreate';
 import ModelSchemaDetail from '../modelschemas/ModelSchemaDetail';
+import ModelSchemaDelete from '../modelschemas/ModelSchemaDelete';
 import FunctionList from '../functions/FunctionList';
 import FunctionDetail from '../functions/FunctionDetail';
 import FunctionCreate from '../functions/FunctionCreate';
@@ -23,6 +24,7 @@ function App() {
             <Route path={ROUTES.modelschema.list} element={<ModelSchemaList />} />
             <Route path={ROUTES.modelschema.create} element={<ModelSchemaCreate />} />
             <Route path={ROUTES.modelschema.detail} element={<ModelSchemaDetail />} />
+            <Route path={ROUTES.modelschema.delete} element={<ModelSchemaDelete />} />
             <Route path={ROUTES.function.list} element={<FunctionList />} />
             <Route path={ROUTES.function.detail} element={<FunctionDetail />} />
             <Route path={ROUTES.function.create} element={<FunctionCreate />} />

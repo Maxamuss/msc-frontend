@@ -11,7 +11,6 @@ export default function Table(props: ITable) {
     const [results, setResults] = useState([]);
 
     const actions = props.actions ?? [];
-    const tools = props.tools ?? [];
 
     useEffect(() => {
         getResults(700);
@@ -44,7 +43,7 @@ export default function Table(props: ITable) {
                                         {field.headerName}
                                     </th>
                                 ))}
-                                {[...actions, ...tools].length > 0 &&
+                                {actions.length > 0 &&
                                     <th scope='col' className='relative py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 lg:pr-8'>
                                         Actions
                                     </th>
@@ -63,33 +62,35 @@ export default function Table(props: ITable) {
                                                     {result[field.fieldName] ?? '-'}
                                                 </td>
                                             ))}
-                                            {[...actions, ...tools].length > 0 &&
+                                            {actions.length > 0 &&
                                                 <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8'>
-                                                    {tools.map((action, idx) => {
-                                                        const handleOnClick = () => { if (action.onClick) action.onClick() }
-
-                                                        return (
-                                                            <button
-                                                                type='button'
-                                                                onClick={handleOnClick}
-                                                                className='text-indigo-600 hover:text-indigo-900'
-                                                            >
-                                                                {action.children}
-                                                            </button>
-                                                        )
-                                                    })}
                                                     {actions.map((action, idx) => {
-                                                        const to = generateSchemaPath(action.to, action.keys, result);
+                                                        if (action.to) {
+                                                            return (
+                                                                <Link
+                                                                    key={idx}
+                                                                    to={generateSchemaPath(action.to, result)}
+                                                                    className='text-indigo-600 hover:text-indigo-900'
+                                                                >
+                                                                    {action.icon && <action.icon className='-ml-1 mr-2 h-5 w-5 text-gray-500' />}
+                                                                    {action.children}
+                                                                </Link>
+                                                            );
+                                                        } else {
 
-                                                        return (
-                                                            <Link
-                                                                key={idx}
-                                                                to={to}
-                                                                className='text-indigo-600 hover:text-indigo-900'
-                                                            >
-                                                                {action.text}
-                                                            </Link>
-                                                        );
+                                                            return (
+                                                                <button
+                                                                    key={action.type || 'button'}
+                                                                    type={action.type || 'button'}
+                                                                    onClick={action.onClick}
+                                                                    className='text-indigo-600 hover:text-indigo-900'
+                                                                >
+                                                                    {action.icon && <action.icon className='-ml-1 mr-2 h-5 w-5 text-gray-500' />}
+                                                                    {action.children}
+                                                                </button>
+                                                            );
+                                                        }
+
                                                     })}
                                                 </td>
                                             }

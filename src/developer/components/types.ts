@@ -1,25 +1,20 @@
 import React from 'react';
-import { ISelectField, IInputField } from './Fields/types';
+import { IBaseField } from './Fields/types';
 
 export interface IButton {
     children: JSX.Element[] | JSX.Element | string;
     to?: string;
     icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
     type?: 'button' | 'submit' | 'reset' | undefined;
-    onClick?: Function;
+    onClick?: any;
 }
 
 export interface IForm {
     action: string;
-    fields: Array<
-        IInputField | ISelectField
-    >;
+    fields: Array<IBaseField>;
     method: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
     data?: any;
-    navigate?: {
-        to: string;
-        keys: Array<string>;
-    };
+    to?: string;
     submitButtonText?: string;
     // onSubmit?: Function;
 }
@@ -41,19 +36,12 @@ export interface ITableField {
     headerName: string;
 }
 
-export interface ITableAction {
-    text: string;
-    to: string;
-    keys: Array<string>;
-}
-
 // If data present, Table does not retrieve data from path.
 export interface ITable {
     path: string;
     data?: any;
     fields: Array<ITableField>;
-    actions?: Array<ITableAction>;
-    tools?: Array<IButton>;
+    actions?: Array<IButton>;
 }
 
 export interface ITabs {

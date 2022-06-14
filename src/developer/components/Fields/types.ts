@@ -9,6 +9,7 @@ export interface IBaseLabel {
 
 export interface IBaseField extends IBaseHelpText, IBaseLabel {
     name: string;
+    fieldType: string;
     defaultValue?: string;
     placeholder?: string;
 }
