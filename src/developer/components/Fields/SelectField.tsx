@@ -35,7 +35,7 @@ export default function SelectField(props: ISelectField) {
                                 leaveFrom="opacity-100"
                                 leaveTo="opacity-0"
                             >
-                                <Listbox.Options className="absolute mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm" style={{ zIndex: 99999 }}>
+                                <Listbox.Options className="z-10 absolute mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm" style={{ zIndex: 99999 }}>
                                     {props.options && props.options.map((option) => (
                                         <Listbox.Option
                                             key={option.id}

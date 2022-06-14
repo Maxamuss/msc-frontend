@@ -82,7 +82,7 @@ export default function Table(props: ITable) {
                                                                 <button
                                                                     key={action.type || 'button'}
                                                                     type={action.type || 'button'}
-                                                                    onClick={action.onClick}
+                                                                    onClick={() => action.onClick(result)}
                                                                     className='text-indigo-600 hover:text-indigo-900'
                                                                 >
                                                                     {action.icon && <action.icon className='-ml-1 mr-2 h-5 w-5 text-gray-500' />}
@@ -90,7 +90,6 @@ export default function Table(props: ITable) {
                                                                 </button>
                                                             );
                                                         }
-
                                                     })}
                                                 </td>
                                             }

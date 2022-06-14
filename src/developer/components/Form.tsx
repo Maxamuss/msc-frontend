@@ -39,7 +39,7 @@ export default function Form(props: IForm) {
             setIsLoaded: setIsSubmitting,
             setResults: setFormResult,
             setError: setError,
-        })
+        });
     }
 
     useEffect(() => {
