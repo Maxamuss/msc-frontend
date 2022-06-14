@@ -2,13 +2,11 @@ import { useEffect, useState } from 'react';
 import ReactFlow, { useNodesState, useEdgesState, Background, BackgroundVariant } from 'react-flow-renderer';
 import dagre from 'dagre';
 
-import UnappliedChangesNode from './UnappliedChangesNode';
 import ReleaseNode from './ReleaseNode';
 import { getSchemaData } from '../utils/api';
 import { IRelease } from './api';
 
 const nodeTypes = {
-    unappliedChangesNode: UnappliedChangesNode,
     release: ReleaseNode,
 };
 
@@ -90,24 +88,6 @@ export default function ReleaseTree() {
                         target: release.id.toString(),
                     });
                 }
-
-                if (release.unapplied_changes > 0) {
-                    const id = release.id.toString() + '_changes';
-                    newNodes.push({
-                        id: id,
-                        type: 'unappliedChangesNode',
-                        position: { x: 0, y: 0 },
-                        data: {
-                            unappliedChanges: release.unapplied_changes
-                        },
-                        draggable: false,
-                    });
-                    newEdges.push({
-                        id: `${release.parent}-${release.id}`,
-                        source: release.id.toString(),
-                        target: id,
-                    });
-                }
             });
             const { nodes: nodesLayout, edges: edgesLayout } = getElementsLayout(newNodes, newEdges);
 
@@ -133,7 +113,6 @@ export default function ReleaseTree() {
                     defaultZoom={2}
                     minZoom={1}
                     maxZoom={3}
-                    // snapGrid={[16, 16]}
                     fitView
                 >
                     <Background variant={BackgroundVariant.Dots} gap={16} size={0.5} />

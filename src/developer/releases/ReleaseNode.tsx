@@ -14,7 +14,14 @@ const ReleaseNode: FC<NodeProps> = ({ data, isConnectable }) => {
             <Handle type="target" position={Position.Bottom} style={sourceHandleStyle} />
             <Handle type="source" position={Position.Top} style={targetHandleStyle} />
             <div className='w-full bg-gray-50 border-b px-2 py-1 text-lg flex justify-between' style={{ height: '30px' }}>
-                {release.release_version}
+                <div>
+                    {release.release_version}
+                    {release.unapplied_changes > 0 &&
+                        <div className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 z-1">
+                            {release.unapplied_changes} changes
+                        </div>
+                    }
+                </div>
                 {release.current_release &&
                     <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 z-1">
                         Current
