@@ -13,7 +13,7 @@ function TabConfiguration() {
         subtitle: 'Configuration for this model.'
     }
     const formProps: IForm = {
-        action: '/modelschema/',
+        action: '/function/',
         method: 'POST',
         fields: [
             {

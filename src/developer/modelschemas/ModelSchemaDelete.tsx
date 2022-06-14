@@ -20,7 +20,6 @@ const formProps: IForm = {
 
         } as IInputField
     ],
-    navigate: { to: ROUTES.modelschema.detail, keys: ['id'] }
 }
 
 export default function ModelSchemaDelete() {

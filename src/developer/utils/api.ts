@@ -34,8 +34,6 @@ export function getSchemaData(args: IGetSchemaData) {
 }
 
 export function sendSchemaData(args: ISendSchemaData) {
-    const setResults = args.setResults ? args.setResults : () => { };
-
     fetch(getBaseURL() + args.path, {
         method: args.method,
         headers: {
@@ -47,7 +45,10 @@ export function sendSchemaData(args: ISendSchemaData) {
         .then(
             (result) => {
                 args.setIsLoaded(true);
-                setResults(result);
+
+                if (args.setResults) {
+                    args.setResults(result)
+                }
             },
             (error) => {
                 args.setIsLoaded(true);

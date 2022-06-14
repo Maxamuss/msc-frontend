@@ -7,12 +7,12 @@ import SchemaObjectWrapper, { SchemaContext } from '../components/SchemaObjectWr
 import Table from '../components/Table';
 import Tabs from '../components/Tabs';
 import FieldModal from './components/FieldModal';
-import { IHeader, IForm, ITabs, ITable, ISchemaContext } from '../components/types';
+import { IHeader, IForm, ITabs, ITable } from '../components/types';
 import { ROUTES } from '../utils/routing';
 import { IInputField } from '../components/Fields/types';
 
 function TabConfiguration() {
-    const schemaContext: ISchemaContext = useContext(SchemaContext);
+    const schemaContext = useContext(SchemaContext);
 
     const headerProps: IHeader = {
         title: 'Model Configuration',
@@ -106,7 +106,7 @@ function TabPages() {
         ]
     }
     const tableProps: ITable = {
-        path: '/page/',
+        path: `/page/>/${schemaContext.schema.id}/`,
         fields: [
             {
                 fieldName: 'page_name',
@@ -129,13 +129,33 @@ function TabPages() {
     );
 }
 function TabWorkflows() {
+    const schemaContext = useContext(SchemaContext);
+
     const headerProps: IHeader = {
         title: 'Model Workflows',
         subtitle: 'Workflows belonging to this model.'
     }
+    const tableProps: ITable = {
+        path: `/workflow/>/${schemaContext.schema.id}/`,
+        fields: [
+            {
+                fieldName: 'workflow_name',
+                headerName: 'Workflow Name'
+            }
+        ],
+        actions: [
+            {
+                children: 'Edit',
+                to: ROUTES.modelschema.detail,
+            }
+        ]
+    }
 
     return (
-        <Header key='header' {...headerProps} />
+        <>
+            <Header key='header' {...headerProps} />
+            <Table key='table' {...tableProps} />
+        </>
     );
 }
 function TabPermissions() {

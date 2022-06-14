@@ -19,7 +19,7 @@ const formProps: IForm = {
 
         } as IInputField
     ],
-    navigate: { to: ROUTES.modelschema.detail, keys: ['id'] }
+    to: ROUTES.modelschema.detail,
 }
 
 export default function ModelSchemaCreate() {
