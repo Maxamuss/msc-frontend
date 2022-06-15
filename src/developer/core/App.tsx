@@ -11,6 +11,7 @@ import FunctionCreate from '../functions/FunctionCreate';
 import PackageList from '../packages/PackageList';
 import PageEditor from '../pages/PageEditor';
 import ReleaseTree from '../releases/ReleaseTree';
+import WorkflowEditor from '../workflows/WorkflowEditor';
 import { ROUTES } from '../utils/routing';
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
             <Route path={ROUTES.page.create} element={<PageEditor />} />
             <Route path={ROUTES.page.edit} element={<PageEditor />} />
             <Route path={ROUTES.release.tree} element={<ReleaseTree />} />
+            <Route path={ROUTES.workflow.create} element={<WorkflowEditor />} />
+            <Route path={ROUTES.workflow.edit} element={<WorkflowEditor />} />
           </Routes>
         </main>
       </div>

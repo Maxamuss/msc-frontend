@@ -24,6 +24,10 @@ export const ROUTES = {
     release: {
         tree: '/releases/',
     },
+    workflow: {
+        create: '/workflow/create/:id/',
+        edit: '/workflow/edit/:id/',
+    },
 }
 
 export function generateSchemaPath(to: string, data: any): string {

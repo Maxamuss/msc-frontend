@@ -76,15 +76,15 @@ function TabFields() {
             data: schema,
             setIsLoaded: () => { },
             setResults: setFormResult,
-            setError: setFormResult,
+            setError: setError,
         });
 
     }
 
     useEffect(() => {
         if (formResult && !error) {
-            setShowFieldModal(false);
             schemaContext.setSchema(formResult);
+            setShowFieldModal(false);
         }
     }, [formResult, error])
 
@@ -126,7 +126,7 @@ function TabFields() {
 
     return (
         <>
-            <Header {...headerProps} key={schemaContext.schema.fields.length} />
+            <Header {...headerProps} />
             <Table {...tableProps} />
             <FieldModal
                 onSubmit={onSubmit}
@@ -180,7 +180,14 @@ function TabWorkflows() {
 
     const headerProps: IHeader = {
         title: 'Model Workflows',
-        subtitle: 'Workflows belonging to this model.'
+        subtitle: 'Workflows belonging to this model.',
+        tools: [
+            {
+                children: 'Create Workflow',
+                icon: PlusCircleIcon,
+                to: ROUTES.workflow.create,
+            }
+        ]
     }
     const tableProps: ITable = {
         path: `/workflow/>/${schemaContext.schema.id}/`,
@@ -193,7 +200,7 @@ function TabWorkflows() {
         actions: [
             {
                 children: 'Edit',
-                to: ROUTES.modelschema.detail,
+                to: ROUTES.workflow.edit,
             }
         ]
     }
