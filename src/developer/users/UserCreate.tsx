@@ -2,21 +2,37 @@ import Header from '../components/Header';
 import Form from '../components/Form';
 import { IHeader, IForm } from '../components/types';
 import { IInputField } from '../components/Fields/types';
+import { ROUTES } from '../utils/routing';
 
 const headerProps: IHeader = {
-    title: 'Create Function',
+    title: 'Add User',
 }
 const formProps: IForm = {
-    action: '/function/',
+    action: '/user/',
     method: 'POST',
+    to: ROUTES.user.detail,
     fields: [
         {
-            name: 'function_name',
+            name: 'email',
             fieldType: 'input',
             type: 'text',
-            label: 'Function Name',
+            label: 'Email',
 
-        } as IInputField
+        } as IInputField,
+        {
+            name: 'first_name',
+            fieldType: 'input',
+            type: 'text',
+            label: 'First Name',
+
+        } as IInputField,
+        {
+            name: 'last_name',
+            fieldType: 'input',
+            type: 'text',
+            label: 'Last Name',
+
+        } as IInputField,
     ],
 }
 

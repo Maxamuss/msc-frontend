@@ -10,16 +10,18 @@ export const ROUTES = {
     function: {
         list: '/function/',
         create: '/function/create/',
-        detail: '/function/:id/',
+        detail: '/function/edit/:id/',
+        delete: '/function/delete/:id/',
     },
     package: {
         list: '/package/',
         create: '/package/create/',
-        detail: '/package/:id/',
+        detail: '/package/edit/:id/',
+        delete: '/package/delete/:id/',
     },
     page: {
         list: '/page/',
-        create: '/page/create/:modelId/',
+        create: '/page/create/:id/',
         detail: '/page/edit/:id/',
     },
     release: {
@@ -27,13 +29,14 @@ export const ROUTES = {
     },
     workflow: {
         list: '/workflow/',
-        create: '/workflow/create/:modelId/',
+        create: '/workflow/create/:id/',
         detail: '/workflow/edit/:id/',
     },
     user: {
         list: '/user/',
         create: '/user/create/',
         detail: '/user/edit/:id/',
+        delete: '/user/delete/:id/',
     },
     group: {
         list: '/group/',

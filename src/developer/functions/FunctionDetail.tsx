@@ -6,6 +6,8 @@ import { IHeader, IForm, ITabs } from '../components/types';
 import SchemaObjectWrapper from '../components/SchemaObjectWrapper';
 import InputField from '../components/Fields/InputField';
 import { IInputField } from '../components/Fields/types';
+import { TrashIcon } from '@heroicons/react/outline';
+import { ROUTES } from '../utils/routing';
 
 function TabConfiguration() {
     const headerProps: IHeader = {
@@ -46,6 +48,13 @@ function TabFields() {
 
 const headerProps: IHeader = {
     title: 'Function: ${function_name}',
+    tools: [
+        {
+            children: 'Delete',
+            icon: TrashIcon,
+            to: ROUTES.function.delete,
+        }
+    ]
 }
 const tabsProps: ITabs = {
     tabs: [

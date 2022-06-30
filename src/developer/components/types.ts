@@ -61,3 +61,9 @@ export interface ISchemaContext {
     schema?: any;
     setSchema: Function;
 }
+
+export interface ISchemaObjectDelete {
+    resource: string;
+    resourceName: string;
+    resourcePrimaryField: string;
+}

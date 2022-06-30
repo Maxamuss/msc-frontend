@@ -6,63 +6,98 @@ import { IHeader, IForm, ITabs } from '../components/types';
 import SchemaObjectWrapper from '../components/SchemaObjectWrapper';
 import InputField from '../components/Fields/InputField';
 import { IInputField } from '../components/Fields/types';
+import { ROUTES } from '../utils/routing';
+import { TrashIcon } from '@heroicons/react/outline';
 
-function TabConfiguration() {
+function TabAccountDetails() {
     const headerProps: IHeader = {
-        title: 'Model Configuration',
-        subtitle: 'Configuration for this model.'
+        title: 'Account Details',
+        subtitle: 'Account information for this user.'
     }
     const formProps: IForm = {
         action: '/function/',
         method: 'POST',
         fields: [
             {
-                name: 'function_name',
+                name: 'email',
                 fieldType: 'input',
                 type: 'text',
-                label: 'Function Name',
+                label: 'Email',
 
-            } as IInputField
+            } as IInputField,
+            {
+                name: 'first_name',
+                fieldType: 'input',
+                type: 'text',
+                label: 'First Name',
+
+            } as IInputField,
+            {
+                name: 'last_name',
+                fieldType: 'input',
+                type: 'text',
+                label: 'Last Name',
+
+            } as IInputField,
         ],
     }
 
     return (
         <>
-            <Header key='header' {...headerProps} />
-            <Form key='form' {...formProps} />
+            <Header {...headerProps} />
+            <Form {...formProps} />
         </>
     );
 }
-function TabFields() {
+function TabGroups() {
     const headerProps: IHeader = {
-        title: 'Model Fields',
-        subtitle: 'Fields belonging to this model.'
+        title: 'Groups',
     }
 
     return (
-        <Header key='header' {...headerProps} />
+        <Header {...headerProps} />
+    );
+}
+function TabPermissions() {
+    const headerProps: IHeader = {
+        title: 'Permissions',
+    }
+
+    return (
+        <Header {...headerProps} />
     );
 }
 
 const headerProps: IHeader = {
-    title: 'Function: ${function_name}',
+    title: 'User: ${email}',
+    tools: [
+        {
+            children: 'Delete',
+            icon: TrashIcon,
+            to: ROUTES.user.delete,
+        }
+    ]
 }
 const tabsProps: ITabs = {
     tabs: [
         {
-            tabName: 'Configuration',
-            tabContent: TabConfiguration,
+            tabName: 'Account Details',
+            tabContent: TabAccountDetails,
         },
         {
-            tabName: 'Implementation',
-            tabContent: TabFields,
+            tabName: 'Groups',
+            tabContent: TabGroups,
+        },
+        {
+            tabName: 'Permissions',
+            tabContent: TabPermissions,
         },
     ]
 }
 
 export default function UserDetail() {
     return (
-        <SchemaObjectWrapper path='/function/${id}/'>
+        <SchemaObjectWrapper path='/user/${id}/'>
             <>
                 <Header {...headerProps} />
                 <Tabs {...tabsProps} />

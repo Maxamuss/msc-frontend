@@ -11,6 +11,7 @@ import ModelSchemaDelete from '../modelschemas/ModelSchemaDelete';
 import FunctionList from '../functions/FunctionList';
 import FunctionDetail from '../functions/FunctionDetail';
 import FunctionCreate from '../functions/FunctionCreate';
+import FunctionDelete from '../functions/FunctionDelete';
 
 import PackageList from '../packages/PackageList';
 
@@ -21,6 +22,7 @@ import ReleaseTree from '../releases/ReleaseTree';
 import UserList from '../users/UserList';
 import UserCreate from '../users/UserCreate';
 import UserDetail from '../users/UserDetail';
+import UserDelete from '../users/UserDelete';
 
 import WorkflowEditor from '../workflows/WorkflowEditor';
 import WorkflowList from '../workflows/WorkflowList';
@@ -42,6 +44,7 @@ function App() {
             <Route path={ROUTES.function.list} element={<FunctionList />} />
             <Route path={ROUTES.function.detail} element={<FunctionDetail />} />
             <Route path={ROUTES.function.create} element={<FunctionCreate />} />
+            <Route path={ROUTES.function.delete} element={<FunctionDelete />} />
             <Route path={ROUTES.package.list} element={<PackageList />} />
             <Route path={ROUTES.page.create} element={<PageEditor />} />
             <Route path={ROUTES.page.detail} element={<PageEditor />} />
@@ -49,6 +52,7 @@ function App() {
             <Route path={ROUTES.user.list} element={<UserList />} />
             <Route path={ROUTES.user.create} element={<UserCreate />} />
             <Route path={ROUTES.user.detail} element={<UserDetail />} />
+            <Route path={ROUTES.user.delete} element={<UserDelete />} />
             <Route path={ROUTES.workflow.list} element={<WorkflowList />} />
             <Route path={ROUTES.workflow.create} element={<WorkflowEditor />} />
             <Route path={ROUTES.workflow.detail} element={<WorkflowEditor />} />
