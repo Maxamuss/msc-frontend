@@ -23,6 +23,7 @@ import UserCreate from '../users/UserCreate';
 import UserDetail from '../users/UserDetail';
 
 import WorkflowEditor from '../workflows/WorkflowEditor';
+import WorkflowList from '../workflows/WorkflowList';
 
 import { ROUTES } from '../utils/routing';
 
@@ -48,6 +49,7 @@ function App() {
             <Route path={ROUTES.user.list} element={<UserList />} />
             <Route path={ROUTES.user.create} element={<UserCreate />} />
             <Route path={ROUTES.user.detail} element={<UserDetail />} />
+            <Route path={ROUTES.workflow.list} element={<WorkflowList />} />
             <Route path={ROUTES.workflow.create} element={<WorkflowEditor />} />
             <Route path={ROUTES.workflow.detail} element={<WorkflowEditor />} />
             <Route path='*' element={<PageNotFound />} />
