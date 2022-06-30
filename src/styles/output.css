@@ -1257,6 +1257,9 @@ select {
 .pb-20 {
 	padding-bottom: 5rem;
 }
+.pl-6 {
+	padding-left: 1.5rem;
+}
 .text-left {
 	text-align: left;
 }

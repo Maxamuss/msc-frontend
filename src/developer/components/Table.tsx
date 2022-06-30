@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ITable, IButton } from './types';
+import { ITable } from './types';
 import { getSchemaData } from '../utils/api';
 import { Link } from 'react-router-dom';
 import { generateSchemaPath } from '../utils/routing';
@@ -39,7 +39,11 @@ export default function Table(props: ITable) {
                         <thead className='bg-gray-50'>
                             <tr>
                                 {props.fields.map((field, idx) => (
-                                    <th key={idx} scope='col' className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'>
+                                    <th
+                                        key={idx}
+                                        scope='col'
+                                        className={(idx == 0 ? 'pl-6 pr-3' : 'px-3 ') + 'py-3.5 text-left text-sm font-semibold text-gray-900'}
+                                    >
                                         {field.headerName}
                                     </th>
                                 ))}
@@ -58,7 +62,11 @@ export default function Table(props: ITable) {
                                     : results.map((result, rowIdx) => (
                                         <tr key={rowIdx}>
                                             {props.fields.map((field, colIdx) => (
-                                                <td key={colIdx} className='whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'>
+                                                <td
+                                                    key={colIdx}
+                                                    className={(colIdx == 0 ? 'pl-6 pr-3' : 'px-3 ') + 'whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'}
+                                                // className='whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'
+                                                >
                                                     {result[field.fieldName] ?? '-'}
                                                 </td>
                                             ))}
