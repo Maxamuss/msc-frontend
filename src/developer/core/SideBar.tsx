@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { NavLink } from 'react-router-dom';
-import { CodeIcon, CogIcon, CollectionIcon, ColorSwatchIcon, CubeTransparentIcon, CursorClickIcon, FingerPrintIcon, UserGroupIcon, UsersIcon, XIcon } from '@heroicons/react/outline';
+import { BookOpenIcon, CodeIcon, CogIcon, CollectionIcon, ColorSwatchIcon, CubeTransparentIcon, CursorClickIcon, FingerPrintIcon, LightningBoltIcon, UserGroupIcon, UsersIcon, XIcon } from '@heroicons/react/outline';
 
 import { ROUTES } from '../utils/routing';
 
@@ -22,13 +22,23 @@ const sections = [
             {
                 'name': 'Packages',
                 'icon': CollectionIcon,
-                'to': 'package'
-            }
+                'to': ROUTES.package.list
+            },
+            {
+                'name': 'Workflows',
+                'icon': LightningBoltIcon,
+                'to': ROUTES.workflow.list
+            },
         ]
     },
     {
         'section_name': 'Interface',
         'links': [
+            {
+                'name': 'Pages',
+                'icon': BookOpenIcon,
+                'to': ROUTES.page.list
+            },
             {
                 'name': 'Navigation',
                 'icon': CursorClickIcon,
@@ -47,17 +57,17 @@ const sections = [
             {
                 'name': 'Users',
                 'icon': UsersIcon,
-                'to': 'user'
+                'to': ROUTES.user.list,
             },
             {
                 'name': 'Groups',
                 'icon': UserGroupIcon,
-                'to': 'group'
+                'to': ROUTES.group.list,
             },
             {
                 'name': 'Permissions',
                 'icon': FingerPrintIcon,
-                'to': 'permission'
+                'to': ROUTES.permission.list,
             },
             {
                 'name': 'Settings',

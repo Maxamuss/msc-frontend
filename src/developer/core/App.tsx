@@ -1,17 +1,29 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import SideBar from './SideBar';
 import TopMenu from './TopMenu';
+import PageNotFound from './PageNotFound';
+
 import ModelSchemaList from '../modelschemas/ModelSchemaList';
 import ModelSchemaCreate from '../modelschemas/ModelSchemaCreate';
 import ModelSchemaDetail from '../modelschemas/ModelSchemaDetail';
 import ModelSchemaDelete from '../modelschemas/ModelSchemaDelete';
+
 import FunctionList from '../functions/FunctionList';
 import FunctionDetail from '../functions/FunctionDetail';
 import FunctionCreate from '../functions/FunctionCreate';
+
 import PackageList from '../packages/PackageList';
+
 import PageEditor from '../pages/PageEditor';
+
 import ReleaseTree from '../releases/ReleaseTree';
+
+import UserList from '../users/UserList';
+import UserCreate from '../users/UserCreate';
+import UserDetail from '../users/UserDetail';
+
 import WorkflowEditor from '../workflows/WorkflowEditor';
+
 import { ROUTES } from '../utils/routing';
 
 function App() {
@@ -31,10 +43,14 @@ function App() {
             <Route path={ROUTES.function.create} element={<FunctionCreate />} />
             <Route path={ROUTES.package.list} element={<PackageList />} />
             <Route path={ROUTES.page.create} element={<PageEditor />} />
-            <Route path={ROUTES.page.edit} element={<PageEditor />} />
+            <Route path={ROUTES.page.detail} element={<PageEditor />} />
             <Route path={ROUTES.release.tree} element={<ReleaseTree />} />
+            <Route path={ROUTES.user.list} element={<UserList />} />
+            <Route path={ROUTES.user.create} element={<UserCreate />} />
+            <Route path={ROUTES.user.detail} element={<UserDetail />} />
             <Route path={ROUTES.workflow.create} element={<WorkflowEditor />} />
-            <Route path={ROUTES.workflow.edit} element={<WorkflowEditor />} />
+            <Route path={ROUTES.workflow.detail} element={<WorkflowEditor />} />
+            <Route path='*' element={<PageNotFound />} />
           </Routes>
         </main>
       </div>

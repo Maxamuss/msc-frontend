@@ -163,7 +163,7 @@ function TabPages() {
         actions: [
             {
                 children: 'Edit',
-                to: ROUTES.page.edit,
+                to: ROUTES.page.detail,
             }
         ]
     }
@@ -200,7 +200,7 @@ function TabWorkflows() {
         actions: [
             {
                 children: 'Edit',
-                to: ROUTES.workflow.edit,
+                to: ROUTES.workflow.detail,
             }
         ]
     }

@@ -3,30 +3,47 @@ import { generatePath } from "react-router-dom";
 export const ROUTES = {
     modelschema: {
         list: '/modelschema/',
-        detail: '/modelschema/:id/',
         create: '/modelschema/create/',
+        detail: '/modelschema/:id/',
         delete: '/modelschema/:id/delete/'
     },
     function: {
         list: '/function/',
-        detail: '/function/:id/',
         create: '/function/create/',
+        detail: '/function/:id/',
     },
     package: {
         list: '/package/',
-        detail: '/package/:id/',
         create: '/package/create/',
+        detail: '/package/:id/',
     },
     page: {
-        create: '/page/create/:id/',
-        edit: '/page/edit/:id/',
+        list: '/page/',
+        create: '/page/create/:modelId/',
+        detail: '/page/edit/:id/',
     },
     release: {
         tree: '/releases/',
     },
     workflow: {
-        create: '/workflow/create/:id/',
-        edit: '/workflow/edit/:id/',
+        list: '/workflow/',
+        create: '/workflow/create/:modelId/',
+        detail: '/workflow/edit/:id/',
+    },
+    user: {
+        list: '/user/',
+        create: '/user/create/',
+        detail: '/user/edit/:id/',
+    },
+    group: {
+        list: '/group/',
+        create: '/group/create/',
+        detail: '/group/edit/:id/',
+    },
+    permission: {
+        list: '/permission/',
+        create: '/permission/create/',
+        detail: '/permission/edit/:id/',
     },
 }
 
