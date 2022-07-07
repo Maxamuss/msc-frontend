@@ -1,81 +1,13 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { NavLink } from 'react-router-dom';
-import { CodeIcon, CogIcon, CollectionIcon, ColorSwatchIcon, CubeTransparentIcon, CursorClickIcon, FingerPrintIcon, UserGroupIcon, UsersIcon, XIcon } from '@heroicons/react/outline';
+import { XIcon } from '@heroicons/react/outline';
+import { useSelector } from 'react-redux';
 
-import { ROUTES } from '../../developer/utils/routing';
-
-const sections = [
-    {
-        'section_name': 'Data',
-        'links': [
-            {
-                'name': 'Models',
-                'icon': CubeTransparentIcon,
-                'to': ROUTES.modelschema.list
-            },
-            {
-                'name': 'Functions',
-                'icon': CodeIcon,
-                'to': ROUTES.function.list
-            },
-            {
-                'name': 'Packages',
-                'icon': CollectionIcon,
-                'to': 'package'
-            }
-        ]
-    },
-    {
-        'section_name': 'Interface',
-        'links': [
-            {
-                'name': 'Navigation',
-                'icon': CursorClickIcon,
-                'to': 'navigation'
-            },
-            {
-                'name': 'Styles',
-                'icon': ColorSwatchIcon,
-                'to': 'styles'
-            }
-        ]
-    },
-    {
-        'section_name': 'Administration',
-        'links': [
-            {
-                'name': 'Users',
-                'icon': UsersIcon,
-                'to': 'user'
-            },
-            {
-                'name': 'Groups',
-                'icon': UserGroupIcon,
-                'to': 'group'
-            },
-            {
-                'name': 'Permissions',
-                'icon': FingerPrintIcon,
-                'to': 'permission'
-            },
-            {
-                'name': 'Settings',
-                'icon': CogIcon,
-                'to': 'model'
-            }
-        ]
-    }
-];
-
-interface ISideBar {
-    applicationConfig: any;
-}
-
-export default function SideBar(props: ISideBar) {
+export default function SideBar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    console.log(props.applicationConfig)
+    const models = useSelector((state: any) => state.application.models);
 
     return (
         <div>
@@ -165,17 +97,17 @@ export default function SideBar(props: ISideBar) {
                     </div>
                     <div className='mt-5 flex-1 flex flex-col'>
                         <nav className='flex-1 px-2 pb-4 space-y-2'>
-                            {props.applicationConfig.models.map((model: any) => (
+                            {models.map((model: any) => (
                                 <NavLink
-                                    key={model.model_name}
-                                    to={model.model_name}
+                                    key={model.definition.model_name}
+                                    to={model.definition.model_name}
                                     className={isActive =>
                                         'group flex items-center px-2 py-2 text-sm font-medium rounded-md' + (!isActive ? ' bg-indigo-800 text-white' : ' text-indigo-100 hover:bg-indigo-600')
                                     }
 
                                 >
                                     {/* <link.icon className='mr-3 flex-shrink-0 h-6 w-6 text-indigo-300' aria-hidden='true' /> */}
-                                    {model.model_name}
+                                    {model.definition.model_name}
                                 </NavLink>
                             ))}
                         </nav>
