@@ -153,7 +153,7 @@ function TabPages() {
         ]
     }
     const tableProps: ITable = {
-        path: `/page/>/${schemaContext.schema.id}/`,
+        path: `/page/?modelschema_id=${schemaContext.schema.id}`,
         fields: [
             {
                 fieldName: 'page_name',
@@ -190,7 +190,7 @@ function TabWorkflows() {
         ]
     }
     const tableProps: ITable = {
-        path: `/workflow/>/${schemaContext.schema.id}/`,
+        path: `/workflow/?modelschema_id=${schemaContext.schema.id}`,
         fields: [
             {
                 fieldName: 'workflow_name',
