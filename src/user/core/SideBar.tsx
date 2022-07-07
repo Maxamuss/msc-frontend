@@ -75,6 +75,8 @@ interface ISideBar {
 export default function SideBar(props: ISideBar) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
+    console.log(props.applicationConfig)
+
     return (
         <div>
             <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -163,36 +165,18 @@ export default function SideBar(props: ISideBar) {
                     </div>
                     <div className='mt-5 flex-1 flex flex-col'>
                         <nav className='flex-1 px-2 pb-4 space-y-2'>
-                            {sections.map((section, index) => (
-                                <div key={index} className='space-y-1'>
-                                    <h3 className='px-2 text-xs font-semibold text-indigo-100 uppercase tracking-wider'>
-                                        {section.section_name}
-                                    </h3>
-                                    <div className='flex flex-col'>
-                                        {section.links.map((link) => (
-                                            // <button onClick={() => navigateLink(navigate, link.to, {})} key={link.name}>
-                                            //     <div className={classNames(
-                                            //         false ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600',
-                                            //         'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
-                                            //     )}>
-                                            //         <Icon iconName={link.icon} className='mr-3 flex-shrink-0 h-6 w-6 text-indigo-300' aria-hidden='true' />
-                                            //         {link.name}
-                                            //     </div>
-                                            // </button>
-                                            <NavLink
-                                                key={link.name}
-                                                to={link.to}
-                                                className={isActive =>
-                                                    'group flex items-center px-2 py-2 text-sm font-medium rounded-md' + (!isActive ? ' bg-indigo-800 text-white' : ' text-indigo-100 hover:bg-indigo-600')
-                                                }
+                            {props.applicationConfig.models.map((model: any) => (
+                                <NavLink
+                                    key={model.model_name}
+                                    to={model.model_name}
+                                    className={isActive =>
+                                        'group flex items-center px-2 py-2 text-sm font-medium rounded-md' + (!isActive ? ' bg-indigo-800 text-white' : ' text-indigo-100 hover:bg-indigo-600')
+                                    }
 
-                                            >
-                                                <link.icon className='mr-3 flex-shrink-0 h-6 w-6 text-indigo-300' aria-hidden='true' />
-                                                {link.name}
-                                            </NavLink>
-                                        ))}
-                                    </div>
-                                </div>
+                                >
+                                    {/* <link.icon className='mr-3 flex-shrink-0 h-6 w-6 text-indigo-300' aria-hidden='true' /> */}
+                                    {model.model_name}
+                                </NavLink>
                             ))}
                         </nav>
                     </div>
