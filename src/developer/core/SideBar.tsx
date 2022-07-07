@@ -7,7 +7,7 @@ import { ROUTES } from '../utils/routing';
 
 const sections = [
     {
-        'section_name': 'Data',
+        'section_name': '',
         'links': [
             {
                 'name': 'Models',
@@ -31,26 +31,26 @@ const sections = [
             },
         ]
     },
-    {
-        'section_name': 'Interface',
-        'links': [
-            {
-                'name': 'Pages',
-                'icon': BookOpenIcon,
-                'to': ROUTES.page.list
-            },
-            {
-                'name': 'Navigation',
-                'icon': CursorClickIcon,
-                'to': 'navigation'
-            },
-            {
-                'name': 'Styles',
-                'icon': ColorSwatchIcon,
-                'to': 'styles'
-            }
-        ]
-    },
+    // {
+    //     'section_name': 'Interface',
+    //     'links': [
+    //         {
+    //             'name': 'Pages',
+    //             'icon': BookOpenIcon,
+    //             'to': ROUTES.page.list
+    //         },
+    //         {
+    //             'name': 'Navigation',
+    //             'icon': CursorClickIcon,
+    //             'to': 'navigation'
+    //         },
+    //         {
+    //             'name': 'Styles',
+    //             'icon': ColorSwatchIcon,
+    //             'to': 'styles'
+    //         }
+    //     ]
+    // },
     {
         'section_name': 'Administration',
         'links': [
@@ -171,9 +171,11 @@ export default function SideBar() {
                         <nav className='flex-1 px-2 pb-4 space-y-2'>
                             {sections.map((section, index) => (
                                 <div key={index} className='space-y-1'>
-                                    <h3 className='px-2 text-xs font-semibold text-indigo-100 uppercase tracking-wider'>
-                                        {section.section_name}
-                                    </h3>
+                                    {section.section_name &&
+                                        <h3 className='px-2 text-xs font-semibold text-indigo-100 uppercase tracking-wider'>
+                                            {section.section_name}
+                                        </h3>
+                                    }
                                     <div className='flex flex-col'>
                                         {section.links.map((link) => (
                                             // <button onClick={() => navigateLink(navigate, link.to, {})} key={link.name}>
