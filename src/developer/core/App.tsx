@@ -1,7 +1,7 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import SideBar from './SideBar';
 import TopMenu from './TopMenu';
-import PageNotFound from './PageNotFound';
+import PageNotFound from '../../core/PageNotFound';
 
 import ModelSchemaList from '../modelschemas/ModelSchemaList';
 import ModelSchemaCreate from '../modelschemas/ModelSchemaCreate';

@@ -1,0 +1,15 @@
+export const componentMap: any = {
+    // header: Header,
+    // column: Column,
+    // table: Table,
+    // button: Button,
+    // container: Container,
+    // tabs: Tabs,
+    // form: Form,
+    // inline: Inline,
+    // 'core@model-field-form': ModelFieldForm,
+    // 'core@workflow-editor': Workflow,
+    // 'core@page-editor': PageEditor,
+    // 'core@app-navigation': ApplicationNavigation,
+    // 'core@app-styles': ApplicationStyles,
+}

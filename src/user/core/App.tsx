@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import SideBar from './SideBar';
 import TopMenu from './TopMenu';
 import LoadingSpinner from '../../developer/components/LoadingSpinner';
 import { getLayoutData } from '../utils/api';
-import { IApplicationConfig } from './models/types';
+import { IApplicationConfig, IModel } from './models/types';
 import { setApplication } from '../store/applicationSlice';
+import Model from './models/model';
+import Page from './Page';
 
 export default function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [applicationConfig, setApplicationConfig] = useState<IApplicationConfig | undefined>(undefined);
+  const [routes, setRoutes] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -22,7 +25,7 @@ export default function App() {
     getLayoutData({
       path: '/layout/__application__/',
       setResults: setApplicationConfig,
-      setIsLoaded: setIsLoaded,
+      setIsLoaded: () => { },
       setError: setError,
       wait: 0,
       useCache: useCache,
@@ -31,7 +34,17 @@ export default function App() {
 
   useEffect(() => {
     if (applicationConfig) {
-      dispatch(setApplication(applicationConfig))
+      let applicationDefinition: any = {};
+      let models: any = [];
+
+      applicationConfig.models.map((model: IModel) => {
+        models.push(new Model(model));
+      })
+
+      applicationDefinition['models'] = models;
+
+      dispatch(setApplication(applicationDefinition));
+      setIsLoaded(true);
     }
   }, [applicationConfig]);
 
@@ -46,6 +59,9 @@ export default function App() {
         <div className='md:pl-64 flex flex-col flex-1'>
           <TopMenu />
           <main>
+            <Routes>
+              <Route path="/*" element={<Page />} />
+            </Routes>
           </main>
         </div>
       </BrowserRouter>

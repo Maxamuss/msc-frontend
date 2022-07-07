@@ -100,7 +100,7 @@ export default function SideBar() {
                             {models.map((model: any) => (
                                 <NavLink
                                     key={model.definition.model_name}
-                                    to={model.definition.model_name}
+                                    to={model.model_name_lower()}
                                     className={isActive =>
                                         'group flex items-center px-2 py-2 text-sm font-medium rounded-md' + (!isActive ? ' bg-indigo-800 text-white' : ' text-indigo-100 hover:bg-indigo-600')
                                     }
