@@ -42,7 +42,7 @@ export function getModelObjects(modelName: string, setResults: Function, setPagi
 }
 
 export function getModelObject(model: Model, modelId: string, setResource: Function, setIsLoaded: Function, setError: Function) {
-    let url = getBaseURL() + `/data/${model.model_name_lower()}/${modelId}/`;
+    const url = getBaseURL() + `/data/${model.model_name_lower()}/${modelId}/`;
 
     fetch(url)
         .then(res => res.json())
@@ -58,19 +58,19 @@ export function getModelObject(model: Model, modelId: string, setResource: Funct
         )
 }
 
-export function sendModelObject(data: any, method: string, setResource: Function, setIsLoaded: Function, setError: Function, model?: Model, modelId?: string) {
+export function sendModelObject(data: any, method: string, setResource: Function, setIsSubmitting: Function, setError: Function, model?: Model, modelId?: string) {
     let url;
 
     if (model) {
         url = getBaseURL() + `/data/${model.model_name_lower()}/`;
     } else {
-        setIsLoaded(true);
+        setIsSubmitting(false);
         setError({});
         return
     }
 
     if (modelId) {
-        url += `/${modelId}/`;
+        url += `${modelId}/`;
     }
 
     fetch(url, {
@@ -88,12 +88,11 @@ export function sendModelObject(data: any, method: string, setResource: Function
         })
         .then(result => {
             setResource(result);
-            setIsLoaded(true);
         })
         .catch(response => {
             response.json().then((json: any) => {
-                setIsLoaded(true);
                 setError(json);
+                setIsSubmitting(false);
             })
         })
 }

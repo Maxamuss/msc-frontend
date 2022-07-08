@@ -45,7 +45,7 @@ export default function Form(props: IForm) {
     }
 
     useEffect(() => {
-        if (formResult && !error) {
+        if (formResult) {
 
             if (props.to) {
                 navigate(populateTo(props.to, pageContext.model, formResult));
@@ -58,7 +58,7 @@ export default function Form(props: IForm) {
             //     schemaContext.setSchema(formResult);
             // }
         }
-    }, [formResult, error])
+    }, [formResult])
 
     return (
         <div className='bg-white overflow-hidden border-200 border-b p-4'>

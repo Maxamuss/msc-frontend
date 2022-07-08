@@ -68,7 +68,6 @@ export default function Table(props: ITable) {
                                             {actions.length > 0 &&
                                                 <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8'>
                                                     {actions.map((action, idx) => {
-                                                        console.log(action.to)
                                                         if (action.to) {
                                                             return (
                                                                 <Link
