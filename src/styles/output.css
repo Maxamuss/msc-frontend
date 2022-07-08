@@ -879,15 +879,6 @@ select {
 .h-32 {
 	height: 8rem;
 }
-.h-4 {
-	height: 1rem;
-}
-.h-3 {
-	height: 0.75rem;
-}
-.h-2 {
-	height: 0.5rem;
-}
 .max-h-60 {
 	max-height: 15rem;
 }
@@ -918,11 +909,11 @@ select {
 .w-48 {
 	width: 12rem;
 }
-.w-32 {
-	width: 8rem;
-}
 .w-64 {
 	width: 16rem;
+}
+.w-32 {
+	width: 8rem;
 }
 .min-w-full {
 	min-width: 100%;
@@ -1041,11 +1032,6 @@ select {
 	border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
 	border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
 }
-.divide-x > :not([hidden]) ~ :not([hidden]) {
-	--tw-divide-x-reverse: 0;
-	border-right-width: calc(1px * var(--tw-divide-x-reverse));
-	border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
-}
 .divide-gray-300 > :not([hidden]) ~ :not([hidden]) {
 	--tw-divide-opacity: 1;
 	border-color: rgba(209, 213, 219, var(--tw-divide-opacity));
@@ -1053,10 +1039,6 @@ select {
 .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
 	--tw-divide-opacity: 1;
 	border-color: rgba(229, 231, 235, var(--tw-divide-opacity));
-}
-.divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
-	--tw-divide-opacity: 1;
-	border-color: rgba(243, 244, 246, var(--tw-divide-opacity));
 }
 .overflow-auto {
 	overflow: auto;
@@ -1101,9 +1083,6 @@ select {
 }
 .border-r {
 	border-right-width: 1px;
-}
-.border-t {
-	border-top-width: 1px;
 }
 .border-gray-300 {
 	--tw-border-opacity: 1;
@@ -1164,8 +1143,8 @@ select {
 .p-1 {
 	padding: 0.25rem;
 }
-.p-3 {
-	padding: 0.75rem;
+.p-2 {
+	padding: 0.5rem;
 }
 .px-4 {
 	padding-left: 1rem;
@@ -1223,10 +1202,6 @@ select {
 	padding-top: 0px;
 	padding-bottom: 0px;
 }
-.px-8 {
-	padding-left: 2rem;
-	padding-right: 2rem;
-}
 .pl-6 {
 	padding-left: 1.5rem;
 }
@@ -1268,9 +1243,6 @@ select {
 }
 .pb-20 {
 	padding-bottom: 5rem;
-}
-.pl-8 {
-	padding-left: 2rem;
 }
 .text-left {
 	text-align: left;
@@ -1315,12 +1287,6 @@ select {
 }
 .font-normal {
 	font-weight: 400;
-}
-.font-thin {
-	font-weight: 100;
-}
-.font-light {
-	font-weight: 300;
 }
 .uppercase {
 	text-transform: uppercase;

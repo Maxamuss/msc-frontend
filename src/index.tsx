@@ -5,7 +5,8 @@ import DeveloperApp from './developer/core/App';
 import UserApp from './user/core/App';
 import './styles/output.css';
 import { Provider } from 'react-redux';
-import store from './user/store/store';
+import userStore from './user/store/store';
+import developerStore from './developer/store/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,10 +16,14 @@ const site = window.location.host.split('.')[1] ? window.location.host.split('.'
 let App;
 
 if (site == 'dev') {
-  App = <DeveloperApp />;
+  App = (
+    <Provider store={developerStore}>
+      <DeveloperApp />
+    </Provider>
+  )
 } else {
   App = (
-    <Provider store={store}>
+    <Provider store={userStore}>
       <UserApp />
     </Provider>
   )

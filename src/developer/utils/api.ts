@@ -22,8 +22,10 @@ export function getSchemaData(args: IGetSchemaData) {
         .then(res => res.json())
         .then(
             (result) => {
+                const data = result.results;
+
                 args.setIsLoaded(true);
-                args.setResults(result);
+                args.setResults(data);
             },
             (error) => {
                 args.setIsLoaded(true);

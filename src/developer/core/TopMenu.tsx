@@ -26,7 +26,6 @@ export default function TopMenu() {
             <div className='flex-1 px-4 flex justify-between'>
                 <div className='flex-1 flex'></div>
                 <div className='mr-4 ml-4 flex items-center md:ml-6'>
-                    <ReleaseOverview />
                     <button
                         type='button'
                         onClick={handlePublishRelease}
@@ -34,6 +33,7 @@ export default function TopMenu() {
                     >
                         <LightningBoltIcon className='h-6 w-6' aria-hidden='true' />
                     </button>
+                    <ReleaseOverview />
                     <Link
                         to={ROUTES.release.tree}
                         className='bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'

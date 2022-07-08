@@ -59,7 +59,7 @@ export default function Table(props: ITable) {
                                 ? <tr><td colSpan={props.fields.length}>Error</td></tr>
                                 : !isLoaded
                                     ? <tr><td colSpan={props.fields.length}>Loading</td></tr>
-                                    : results.map((result, rowIdx) => (
+                                    : (results ?? []).map((result, rowIdx) => (
                                         <tr key={rowIdx}>
                                             {props.fields.map((field, colIdx) => (
                                                 <td
