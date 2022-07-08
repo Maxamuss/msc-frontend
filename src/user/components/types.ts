@@ -1,4 +1,6 @@
 import React from 'react';
+import Model from '../core/models/model';
+import { IBaseField } from './Fields/types';
 
 export interface IButton {
     text: string;
@@ -6,17 +8,17 @@ export interface IButton {
     icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
     type?: 'button' | 'submit' | 'reset';
     onClick?: any;
+    disabled?: boolean;
 }
 
-// export interface IForm {
-//     action: string;
-//     fields: Array<IBaseField>;
-//     method: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-//     data?: any;
-//     to?: string;
-//     submitButtonText?: string;
-//     // onSubmit?: Function;
-// }
+export interface IForm {
+    model: Model;
+    method: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+    fields?: IBaseField[];
+    resource?: any;
+    to?: string;
+    submitButtonText?: string;
+}
 
 export interface IHeader {
     title: string;

@@ -37,10 +37,9 @@ export const inject = (str: string, obj: any) => str.replace(/\${(.*?)}/g, (x, g
 
 export function renderText(str: string, resource: any, model?: Model) {
     if (str && resource) {
-        if (str === '<MODEL_NAME>') {
-            if (model) return model.model_name()
-        } else if (str === '<MODEL_NAME_PLURAL>') {
-            if (model) return model.model_name_plural()
+        if (model) {
+            str = str.replace('<MODEL_NAME>', model.model_name());
+            str = str.replace('<MODEL_NAME_PLURAL>', model.model_name_plural());
         }
 
         const renderedStr = inject(str, resource);

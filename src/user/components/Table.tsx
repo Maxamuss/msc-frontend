@@ -36,7 +36,7 @@ export default function Table(props: ITable) {
                                     <th
                                         key={idx}
                                         scope='col'
-                                        className={(idx == 0 ? 'pl-6 pr-3' : 'px-3 ') + 'py-3.5 text-left text-sm font-semibold text-gray-900'}
+                                        className={(idx === 0 ? 'pl-6 pr-3' : 'px-3 ') + 'py-3.5 text-left text-sm font-semibold text-gray-900'}
                                     >
                                         {field.header_name}
                                     </th>
@@ -58,7 +58,7 @@ export default function Table(props: ITable) {
                                             {props.fields.map((field, colIdx) => (
                                                 <td
                                                     key={colIdx}
-                                                    className={(colIdx == 0 ? 'pl-6 pr-3' : 'px-3 ') + 'whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'}
+                                                    className={(colIdx === 0 ? 'pl-6 pr-3' : 'px-3 ') + 'whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'}
                                                 // className='whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'
                                                 >
                                                     {result[field.field_name] ?? '-'}

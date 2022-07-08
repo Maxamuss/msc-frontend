@@ -57,3 +57,43 @@ export function getModelObject(model: Model, modelId: string, setResource: Funct
             }
         )
 }
+
+export function sendModelObject(data: any, method: string, setResource: Function, setIsLoaded: Function, setError: Function, model?: Model, modelId?: string) {
+    let url;
+
+    if (model) {
+        url = getBaseURL() + `/data/${model.model_name_lower()}/`;
+    } else {
+        setIsLoaded(true);
+        setError({});
+        return
+    }
+
+    if (modelId) {
+        url += `/${modelId}/`;
+    }
+
+    fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            return Promise.reject(response);
+        })
+        .then(result => {
+            setResource(result);
+            setIsLoaded(true);
+        })
+        .catch(response => {
+            response.json().then((json: any) => {
+                setIsLoaded(true);
+                setError(json);
+            })
+        })
+}

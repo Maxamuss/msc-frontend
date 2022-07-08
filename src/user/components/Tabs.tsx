@@ -1,4 +1,6 @@
+import { render } from '@testing-library/react';
 import { useState } from 'react';
+import { renderer } from '../core/Page';
 import { ITabs } from './types';
 
 function classNames(...classes: any) {
@@ -12,12 +14,7 @@ export default function Tabs(props: ITabs) {
 
     return (
         <div>
-            <div className="sm:hidden">
-                <label htmlFor="tabs" className="sr-only">
-                    Select a tab
-                </label>
-            </div>
-            <div className="hidden sm:block">
+            <div className="block">
                 <div className='border-b border-gray-200 bg-white px-6'>
                     <nav className="-mb-px flex space-x-8">
                         {props.tabs.map((tab, tabIdx) => (
@@ -38,7 +35,7 @@ export default function Tabs(props: ITabs) {
             <div>
                 {props.tabs.map((tab, tabIdx) => {
                     if (isTabCurrent(tabIdx)) {
-                        return <tab.tab_content key={tabIdx} />;
+                        return renderer(tab.tab_content);
                     }
                 })}
             </div>

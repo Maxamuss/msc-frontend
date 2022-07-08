@@ -1,3 +1,4 @@
+import { IBaseField } from "../../components/Fields/types";
 import { IModel } from "./types";
 
 
@@ -27,6 +28,23 @@ export default class Model {
             }
         }
         return undefined;
+    }
+
+    getField() {
+        let fields: IBaseField[] = [];
+
+        this.definition.fields.forEach((field) => {
+            if (field.field_name !== 'id') {
+                fields.push({
+                    name: field.field_name,
+                    id: 'id_' + field.field_name,
+                    label: field.field_name,
+                    field_type: 'text',
+                })
+            }
+        })
+
+        return fields;
     }
 }
 
