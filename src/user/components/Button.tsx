@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { renderText } from '../../developer/utils/render';
-import { PageContext } from '../core/Page';
+import { PageContext, renderText } from '../core/Page';
 // import { generateSchemaPath } from '../utils/routing';
 // import { SchemaContext } from './SchemaObjectWrapper';
 
@@ -19,7 +18,7 @@ export default function Button(props: IButton) {
             >
                 {props.icon && <props.icon className='-ml-1 mr-2 h-5 w-5 text-gray-500' />}
 
-                {renderText(props.text, pageContext.resource)}
+                {renderText(props.text, pageContext.resource, pageContext.model)}
             </Link>
         )
     } else {
@@ -30,7 +29,7 @@ export default function Button(props: IButton) {
                 className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
             >
                 {props.icon && <props.icon className='-ml-1 mr-2 h-5 w-5 text-gray-500' />}
-                {renderText(props.text, pageContext.resource)}
+                {renderText(props.text, pageContext.resource, pageContext.model)}
             </button>
         )
     }

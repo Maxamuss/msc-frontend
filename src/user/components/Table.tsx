@@ -4,7 +4,6 @@ import { ITable } from './types';
 import { Link } from 'react-router-dom';
 import { getModelObjects } from '../utils/api';
 import { PageContext } from '../core/Page';
-import Model from '../core/models/model';
 
 export default function Table(props: ITable) {
     const pageContext = useContext(PageContext);
@@ -12,6 +11,7 @@ export default function Table(props: ITable) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(true);
     const [results, setResults] = useState([]);
+    const [pagination, setPagination] = useState({ 'next': null, 'prev': null, 'count': null });
 
     const actions = props.actions ?? [];
 
@@ -21,16 +21,8 @@ export default function Table(props: ITable) {
 
     const getResults = () => {
         setIsLoaded(false);
-
-        // let model = null;
-
-        // if (props.model_name) {
-        //     model = props.model_name;
-        // } else if (pageContext.model) {
-        //     model = pageContext.model.model_name_lower();
-        // }
-
-        getModelObjects(props.model_name, setResults, setIsLoaded, setError);
+        const modelName = props.model_name ?? pageContext?.model?.model_name_lower() ?? '';
+        getModelObjects(modelName, setResults, setPagination, setIsLoaded, setError);
     }
 
     return (
@@ -46,7 +38,7 @@ export default function Table(props: ITable) {
                                         scope='col'
                                         className={(idx == 0 ? 'pl-6 pr-3' : 'px-3 ') + 'py-3.5 text-left text-sm font-semibold text-gray-900'}
                                     >
-                                        {field.headerName}
+                                        {field.header_name}
                                     </th>
                                 ))}
                                 {actions.length > 0 &&
@@ -69,7 +61,7 @@ export default function Table(props: ITable) {
                                                     className={(colIdx == 0 ? 'pl-6 pr-3' : 'px-3 ') + 'whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'}
                                                 // className='whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'
                                                 >
-                                                    {result[field.fieldName] ?? '-'}
+                                                    {result[field.field_name] ?? '-'}
                                                 </td>
                                             ))}
                                             {actions.length > 0 &&

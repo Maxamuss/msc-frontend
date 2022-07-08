@@ -8,6 +8,14 @@ export default class Model {
         this.definition = definition;
     }
 
+    model_name(): string {
+        return this.definition.model_name;
+    }
+
+    model_name_plural(): string {
+        return this.definition.model_name + 's';
+    }
+
     model_name_lower(): string {
         return this.definition.model_name.replace(' ', '').toLowerCase();
     }

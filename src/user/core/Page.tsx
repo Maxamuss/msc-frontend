@@ -28,22 +28,42 @@ export default function Page() {
     }
 
     return (
-        <PageRenderer model={model} page={page} modelId={modelId} key={modelName + page} />
+        <PageRenderer model={model} page={page} modelId={modelId} key={modelName + pageName} />
     );
 }
 
-export function renderer(layout: any) {
-    const component = layout.component;
-    const componentId = layout.id;
-    let config = layout.config;
-    if (typeof componentMap[component] !== "undefined") {
-        config['id'] = componentId;
+// This function replaces template arguments with the current page's syntax definition.
+export const inject = (str: string, obj: any) => str.replace(/\${(.*?)}/g, (x, g) => obj[g]);
+
+export function renderText(str: string, resource: any, model?: Model) {
+    if (str && resource) {
+        if (str === '<MODEL_NAME>') {
+            if (model) return model.model_name()
+        } else if (str === '<MODEL_NAME_PLURAL>') {
+            if (model) return model.model_name_plural()
+        }
+
+        const renderedStr = inject(str, resource);
+        if (renderedStr) {
+            return renderedStr;
+        } else {
+            return '-'
+        }
+    }
+    return str;
+}
+
+export function renderer(component: any) {
+    const componentType = component.component;
+    let config = component.config;
+
+    if (typeof componentMap[componentType] !== "undefined") {
         config['key'] = (Math.random() + 1).toString(36);
 
         return createElement(
-            componentMap[component],
+            componentMap[componentType],
             config,
-            (config.children && config.children.map((c: any) => renderer(c)))
+            // (config.children && config.children.map((c: any) => renderer(c)))
         );
     }
 }
@@ -63,13 +83,15 @@ interface IPageRendererProps {
 
 export function PageRenderer(props: IPageRendererProps) {
     const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(true);
     const [resource, setResource] = useState({});
 
     const context = { model: props.model, page: props.page, modelId: props.modelId, resource: resource };
 
     useEffect(() => {
-        getModelObject(props.model, props.modelId ?? '', setResource, setIsLoaded, setError);
+        if (props.modelId) {
+            getModelObject(props.model, props.modelId, setResource, setIsLoaded, setError,);
+        }
     }, [])
 
     if (error) {
@@ -86,8 +108,7 @@ export function PageRenderer(props: IPageRendererProps) {
         return (
             <div className='space-y-6 mx-6'>
                 <PageContext.Provider value={context}>
-                    <div>test</div>
-                    {/* {props.page.layout.map(config => renderer(config))} */}
+                    {props.page.layout.map((component: any) => renderer(component))}
                 </PageContext.Provider>
             </div>
         );

@@ -4,6 +4,7 @@ export interface IApplicationConfig {
 
 export interface IPage {
     page_name: string;
+    layout: any;
 }
 
 export interface IModelField {
@@ -11,8 +12,6 @@ export interface IModelField {
     field_type: string;
     required?: boolean;
 }
-
-
 
 export interface IModel {
     id: string;

@@ -1,6 +1,5 @@
 import { useContext } from 'react';
-import { renderText } from '../../developer/utils/render';
-import { PageContext } from '../core/Page';
+import { PageContext, renderText } from '../core/Page';
 import Button from './Button';
 import { IHeader } from './types';
 
@@ -10,10 +9,10 @@ export default function Header(props: IHeader) {
     return (
         <div className="sm:flex sm:items-center sm:justify-between bg-white p-6 border-200 border-b">
             <div>
-                <h3 className="text-xl font-semibold text-gray-900">{renderText(props.title, pageContext.resource)}</h3>
+                <h3 className="text-xl font-semibold text-gray-900">{renderText(props.title, pageContext.resource, pageContext.model)}</h3>
                 {props.subtitle &&
                     <p className="mt-2 text-sm text-gray-700">
-                        {renderText(props.subtitle, pageContext.resource)}
+                        {renderText(props.subtitle, pageContext.resource, pageContext.model)}
                     </p>
                 }
             </div>

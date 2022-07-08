@@ -22,7 +22,7 @@ export default function App() {
 
   useEffect(() => {
     getLayoutData({
-      path: '/layout/__application__/',
+      path: '/layout/',
       setResults: setApplicationConfig,
       setIsLoaded: () => { },
       setError: setError,

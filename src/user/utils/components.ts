@@ -1,7 +1,10 @@
+import Header from "../components/Header";
+import Table from "../components/Table";
+
 export const componentMap: any = {
-    // header: Header,
+    'core@Header': Header,
+    'core@Table': Table,
     // column: Column,
-    // table: Table,
     // button: Button,
     // container: Container,
     // tabs: Tabs,

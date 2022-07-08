@@ -23,7 +23,7 @@ export function getLayoutData(args: IGetLayoutData) {
 
 }
 
-export function getModelObjects(modelName: string, setResults: Function, setIsLoaded: Function, setError: Function) {
+export function getModelObjects(modelName: string, setResults: Function, setPagination: Function, setIsLoaded: Function, setError: Function) {
     let url = getBaseURL() + `/data/${modelName}/`;
 
     fetch(url)
@@ -31,7 +31,8 @@ export function getModelObjects(modelName: string, setResults: Function, setIsLo
         .then(
             (result) => {
                 setIsLoaded(true);
-                setResults(result);
+                setResults(result.results);
+                setPagination({ 'next': result.next, 'prev': result.previous, 'count': result.count })
             },
             (error) => {
                 setIsLoaded(true);
@@ -41,11 +42,6 @@ export function getModelObjects(modelName: string, setResults: Function, setIsLo
 }
 
 export function getModelObject(model: Model, modelId: string, setResource: Function, setIsLoaded: Function, setError: Function) {
-    if (!modelId) {
-        setIsLoaded(true);
-        setResource(null);
-    }
-
     let url = getBaseURL() + `/data/${model.model_name_lower()}/${modelId}/`;
 
     fetch(url)

@@ -27,18 +27,15 @@ export interface IHeader {
 // *** Table ***
 
 export interface ITableField {
-    fieldName: string;
-    headerName: string;
+    field_name: string;
+    header_name: string;
 }
 
-// If data present, Table does not retrieve data from path.
 export interface ITable {
-    model_name: string;
-    data?: any;
     fields: ITableField[];
+    model_name?: string;
     actions?: IButton[];
 }
-
 
 export interface ITab {
     tab_name: string;
