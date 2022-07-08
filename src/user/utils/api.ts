@@ -23,7 +23,24 @@ export function getLayoutData(args: IGetLayoutData) {
 
 }
 
-export function getModelObject(model: Model, modelId: string | undefined, setResource: Function, setIsLoaded: Function, setError: Function) {
+export function getModelObjects(modelName: string, setResults: Function, setIsLoaded: Function, setError: Function) {
+    let url = getBaseURL() + `/data/${modelName}/`;
+
+    fetch(url)
+        .then(res => res.json())
+        .then(
+            (result) => {
+                setIsLoaded(true);
+                setResults(result);
+            },
+            (error) => {
+                setIsLoaded(true);
+                setError(error);
+            }
+        )
+}
+
+export function getModelObject(model: Model, modelId: string, setResource: Function, setIsLoaded: Function, setError: Function) {
     if (!modelId) {
         setIsLoaded(true);
         setResource(null);

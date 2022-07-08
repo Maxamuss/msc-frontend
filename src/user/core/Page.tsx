@@ -32,8 +32,6 @@ export default function Page() {
     );
 }
 
-export const PageContext = createContext({});
-
 export function renderer(layout: any) {
     const component = layout.component;
     const componentId = layout.id;
@@ -50,6 +48,13 @@ export function renderer(layout: any) {
     }
 }
 
+export const PageContext = createContext<{
+    model?: Model;
+    page?: IPage;
+    modelId?: string;
+    resource?: any;
+}>({ model: undefined, page: undefined, modelId: undefined, resource: undefined });
+
 interface IPageRendererProps {
     model: Model;
     page: IPage;
@@ -64,7 +69,7 @@ export function PageRenderer(props: IPageRendererProps) {
     const context = { model: props.model, page: props.page, modelId: props.modelId, resource: resource };
 
     useEffect(() => {
-        getModelObject(props.model, props.modelId, setResource, setIsLoaded, setError);
+        getModelObject(props.model, props.modelId ?? '', setResource, setIsLoaded, setError);
     }, [])
 
     if (error) {

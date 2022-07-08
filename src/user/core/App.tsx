@@ -15,7 +15,6 @@ export default function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [applicationConfig, setApplicationConfig] = useState<IApplicationConfig | undefined>(undefined);
-  const [routes, setRoutes] = useState([]);
 
   const dispatch = useDispatch();
 

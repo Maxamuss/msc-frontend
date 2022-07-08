@@ -25,21 +25,3 @@ export function getPageNameFromPath(path: string): [string, string | undefined] 
         return [splittedPath[2], splittedPath[1]];
     }
 }
-
-export function parseURI(uri: string) {
-    let path = '';
-
-    uri.split(':').forEach(arg => {
-        if (arg) {
-            path += `${arg}/`
-        }
-    });
-
-    return path;
-}
-
-// Navigate to the link specified location.
-export function navigateLink(navigate: any, uri: string) {
-    const path = parseURI(uri);
-    navigate(path);
-}
