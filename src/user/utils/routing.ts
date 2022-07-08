@@ -36,14 +36,10 @@ export function populateTo(to: string, model?: Model, resource?: any): string {
         to = to.replace('<MODEL_NAME_LOWER>', model.model_name_lower())
     }
 
-
     if (resource) {
         console.log(resource)
         to = to.replace('<OBJECT_ID>', resource.id)
     }
-
-    // Remove whitespace
-    to = to.replace(/ /g, '');
 
     return to;
 }

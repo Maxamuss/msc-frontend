@@ -4,6 +4,7 @@ import { ITable } from './types';
 import { Link } from 'react-router-dom';
 import { getModelObjects } from '../utils/api';
 import { PageContext } from '../core/Page';
+import { populateTo } from '../utils/routing';
 
 export default function Table(props: ITable) {
     const pageContext = useContext(PageContext);
@@ -66,17 +67,21 @@ export default function Table(props: ITable) {
                                             ))}
                                             {actions.length > 0 &&
                                                 <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8'>
-                                                    {actions.map((action, idx) => (
-                                                        <Link
-                                                            key={idx}
-                                                            // to={generateSchemaPath(action.to, result)}
-                                                            to=''
-                                                            className='text-indigo-600 hover:text-indigo-900'
-                                                        >
-                                                            {action.icon && <action.icon className='-ml-1 mr-2 h-5 w-5 text-gray-500' />}
-                                                            {action.text}
-                                                        </Link>
-                                                    ))}
+                                                    {actions.map((action, idx) => {
+                                                        console.log(action.to)
+                                                        if (action.to) {
+                                                            return (
+                                                                <Link
+                                                                    key={idx}
+                                                                    to={populateTo(action.to, pageContext.model, result)}
+                                                                    className='text-indigo-600 hover:text-indigo-900'
+                                                                >
+                                                                    {action.icon && <action.icon className='-ml-1 mr-2 h-5 w-5 text-gray-500' />}
+                                                                    {action.text}
+                                                                </Link>
+                                                            )
+                                                        }
+                                                    })}
                                                 </td>
                                             }
                                         </tr>
