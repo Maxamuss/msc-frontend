@@ -20,6 +20,7 @@ import PackageList from '../packages/PackageList';
 import PageEditor from '../pages/PageEditor';
 
 import ReleaseTree from '../releases/ReleaseTree';
+import ReleaseChanges from '../releases/ReleaseChanges';
 
 import UserList from '../users/UserList';
 import UserCreate from '../users/UserCreate';
@@ -52,6 +53,7 @@ function App() {
             <Route path={ROUTES.page.create} element={<PageEditor />} />
             <Route path={ROUTES.page.detail} element={<PageEditor />} />
             <Route path={ROUTES.release.tree} element={<ReleaseTree />} />
+            <Route path={ROUTES.release.changes} element={<ReleaseChanges />} />
             <Route path={ROUTES.user.list} element={<UserList />} />
             <Route path={ROUTES.user.create} element={<UserCreate />} />
             <Route path={ROUTES.user.detail} element={<UserDetail />} />

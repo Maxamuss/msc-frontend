@@ -5,6 +5,9 @@ import dagre from 'dagre';
 import ReleaseNode from './ReleaseNode';
 import { getSchemaData } from '../utils/api';
 import { IRelease } from './api';
+import ReleaseTopMenu from './ReleaseTopMenu';
+import { ROUTES } from '../utils/routing';
+import Header from '../components/Header';
 
 const nodeTypes = {
     release: ReleaseNode,
@@ -45,6 +48,17 @@ const getElementsLayout = (nodes: Array<any>, edges: Array<any>, direction = 'BT
 
     return { nodes, edges };
 };
+
+const headerConfig = {
+    title: 'Release Overview',
+    tools: [
+        {
+            children: 'Apply Changes',
+            // icon: PlusCircleIcon,
+            to: ROUTES.release.changes,
+        }
+    ]
+}
 
 export default function ReleaseTree() {
     const [error, setError] = useState(null);
@@ -105,19 +119,22 @@ export default function ReleaseTree() {
         return <div>Loading...</div>;
     } else {
         return (
-            <div style={{ height: "calc(100vh - 64px)", width: "(100vw - 335px)" }}>
-                <ReactFlow
-                    defaultNodes={nodes}
-                    defaultEdges={edges}
-                    nodeTypes={nodeTypes}
-                    defaultZoom={2}
-                    minZoom={1}
-                    maxZoom={3}
-                    fitView
-                >
-                    <Background variant={BackgroundVariant.Dots} gap={16} size={0.5} />
-                </ReactFlow>
-            </div>
+            <>
+                <Header {...headerConfig} />
+                <div style={{ height: "calc(100vh - 64px)", width: "(100vw - 335px)" }}>
+                    <ReactFlow
+                        defaultNodes={nodes}
+                        defaultEdges={edges}
+                        nodeTypes={nodeTypes}
+                        defaultZoom={2}
+                        minZoom={1}
+                        maxZoom={3}
+                        fitView
+                    >
+                        <Background variant={BackgroundVariant.Dots} gap={16} size={0.5} />
+                    </ReactFlow>
+                </div>
+            </>
         );
     }
 }

@@ -1,10 +1,11 @@
-import { IGetSchemaData, ISendSchemaData } from './types';
+import { useDispatch } from 'react-redux';
+import { IgetSchemaData, ISendSchemaData } from './types';
 
 export const getBaseURL = () => {
     return 'http://localhost:8000/internal-api/developer'
 }
 
-export function getSchemaData(args: IGetSchemaData) {
+export function getSchemaData(args: IgetSchemaData) {
     let url = getBaseURL() + args.path;
 
     if (args.fields) {
@@ -22,10 +23,8 @@ export function getSchemaData(args: IGetSchemaData) {
         .then(res => res.json())
         .then(
             (result) => {
-                const data = result.results;
-
                 args.setIsLoaded(true);
-                args.setResults(data);
+                args.setResults(result);
             },
             (error) => {
                 args.setIsLoaded(true);
@@ -46,11 +45,16 @@ export function sendSchemaData(args: ISendSchemaData) {
         .then(res => res.json())
         .then(
             (result) => {
-                args.setIsLoaded(true);
+                const data = result.data;
+                const changeCount = result.release_change_count;
+
+                console.log(changeCount)
 
                 if (args.setResults) {
-                    args.setResults(result)
+                    args.setResults(data)
                 }
+
+                args.setIsLoaded(true);
             },
             (error) => {
                 args.setIsLoaded(true);

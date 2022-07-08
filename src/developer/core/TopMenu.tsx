@@ -1,18 +1,9 @@
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { BellIcon, CloudUploadIcon, LightningBoltIcon, MenuAlt2Icon } from '@heroicons/react/outline';
-import { Link } from 'react-router-dom';
-
-import { ROUTES } from '../utils/routing';
-import { publishRelease } from '../releases/api';
+import { MenuAlt2Icon } from '@heroicons/react/outline';
 import ReleaseOverview from '../releases/ReleaseOverview';
 
 export default function TopMenu() {
-
-    const handlePublishRelease = () => {
-        publishRelease();
-    }
-
     return (
         <div className='top-0 z-10 flex-shrink-0 flex h-16 bg-white border-200 border-b'>
             <button
@@ -26,27 +17,7 @@ export default function TopMenu() {
             <div className='flex-1 px-4 flex justify-between'>
                 <div className='flex-1 flex'></div>
                 <div className='mr-4 ml-4 flex items-center md:ml-6'>
-                    <button
-                        type='button'
-                        onClick={handlePublishRelease}
-                        className='bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
-                    >
-                        <LightningBoltIcon className='h-6 w-6' aria-hidden='true' />
-                    </button>
                     <ReleaseOverview />
-                    <Link
-                        to={ROUTES.release.tree}
-                        className='bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
-                    >
-                        <CloudUploadIcon className='h-6 w-6' aria-hidden='true' />
-                    </Link>
-                    <button
-                        type='button'
-                        className='bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
-                    >
-                        <BellIcon className='h-6 w-6' aria-hidden='true' />
-                    </button>
-
                     {/* Profile dropdown */}
                     <Menu as='div' className='ml-3 relative'>
                         <div>

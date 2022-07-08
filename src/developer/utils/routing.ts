@@ -26,6 +26,7 @@ export const ROUTES = {
     },
     release: {
         tree: '/releases/',
+        changes: '/releases/changes/',
     },
     workflow: {
         list: '/workflow/',

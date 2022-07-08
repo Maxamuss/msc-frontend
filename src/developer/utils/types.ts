@@ -1,4 +1,4 @@
-export interface IGetSchemaData {
+export interface IgetSchemaData {
     path: string;
     setResults: Function;
     setIsLoaded: Function;
