@@ -7,7 +7,7 @@ import { ROUTES } from '../utils/routing';
 
 const sections = [
     {
-        'section_name': '',
+        'section_name': 'Application',
         'links': [
             {
                 'name': 'Models',
@@ -20,37 +20,12 @@ const sections = [
                 'to': ROUTES.function.list
             },
             {
-                'name': 'Packages',
-                'icon': CollectionIcon,
-                'to': ROUTES.package.list
-            },
-            {
                 'name': 'Workflows',
                 'icon': LightningBoltIcon,
                 'to': ROUTES.workflow.list
             },
         ]
     },
-    // {
-    //     'section_name': 'Interface',
-    //     'links': [
-    //         {
-    //             'name': 'Pages',
-    //             'icon': BookOpenIcon,
-    //             'to': ROUTES.page.list
-    //         },
-    //         {
-    //             'name': 'Navigation',
-    //             'icon': CursorClickIcon,
-    //             'to': 'navigation'
-    //         },
-    //         {
-    //             'name': 'Styles',
-    //             'icon': ColorSwatchIcon,
-    //             'to': 'styles'
-    //         }
-    //     ]
-    // },
     {
         'section_name': 'Administration',
         'links': [

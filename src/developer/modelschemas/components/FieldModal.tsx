@@ -1,9 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useContext, useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import Button from '../../components/Button';
 import InputField from '../../components/Fields/InputField';
 import SelectField from '../../components/Fields/SelectField';
-import { SchemaContext } from '../../components/SchemaObjectWrapper';
 
 export interface IModelSchemaField {
     field_name: string;
@@ -58,16 +58,19 @@ export default function FieldModal(props: IFieldModal) {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+                            <Dialog.Panel className="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full" style={{ minHeight: '500px' }}>
                                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                    <form onSubmit={handleSubmit(props.onSubmit)}>
+                                    <h1 className='text-xl font-semibold text-gray-900 mb-4'>Add Field</h1>
+                                    <form onSubmit={handleSubmit(props.onSubmit)} className='space-y-4'>
                                         <Controller
                                             name='field_name'
                                             control={control}
                                             render={({ field }) => <InputField
                                                 {...field}
+                                                name='field_name'
                                                 type='text'
                                                 fieldType='*'
+                                                label='Field Name'
                                             />}
                                         />
                                         <Controller
@@ -76,14 +79,30 @@ export default function FieldModal(props: IFieldModal) {
                                             render={({ field }) => <SelectField
                                                 {...field}
                                                 options={[
-                                                    { id: "chocolate", name: "Chocolate" },
-                                                    { id: "strawberry", name: "Strawberry" },
-                                                    { id: "vanilla", name: "Vanilla" }
+                                                    { id: "text", name: "Text" },
+                                                    { id: "float", name: "Float" },
+                                                    { id: "datetime", name: "Datetime" }
                                                 ]}
+                                                name='field_type'
                                                 fieldType='*'
+                                                label='Field Type'
                                             />}
                                         />
-                                        <input type="submit" />
+                                        <Controller
+                                            name='required'
+                                            control={control}
+                                            render={({ field }) => <SelectField
+                                                {...field}
+                                                options={[
+                                                    { id: "no", name: "No" },
+                                                    { id: "yes", name: "Yes" },
+                                                ]}
+                                                name='required'
+                                                fieldType='*'
+                                                label='Required'
+                                            />}
+                                        />
+                                        <Button type='submit'>Add Field</Button>
                                     </form>
                                 </div>
                             </Dialog.Panel>

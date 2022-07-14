@@ -43,8 +43,10 @@ export default function Form(props: IForm) {
     }
 
     useEffect(() => {
-        if (formResult && !error) {
+        if (formResult) {
             setIsSubmitting(false);
+
+            console.log(formResult)
 
             if (props.to) {
                 navigate(generateSchemaPath(props.to, formResult));
@@ -52,7 +54,7 @@ export default function Form(props: IForm) {
                 schemaContext.setSchema(formResult);
             }
         }
-    }, [formResult, error])
+    }, [formResult])
 
     return (
         <div className='bg-white overflow-hidden border-200 border-b p-4'>

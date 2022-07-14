@@ -63,7 +63,14 @@ export default function ReleaseChanges() {
     }, [])
 
     const mergeChanges = () => {
-        console.log('merge changes')
+        fetch(getBaseURL() + '/releases/publish/', {
+            method: 'post'
+        })
+            .then(res => res.json())
+            .then(result => {
+                // dispatch(setReleaseData(result))
+                // setIsLoaded(true);
+            })
     }
 
     const headerConfig = {

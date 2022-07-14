@@ -3,20 +3,23 @@ import Form from '../components/Form';
 import Header from '../components/Header';
 import Tabs from '../components/Tabs';
 import { IHeader, IForm, ITabs } from '../components/types';
-import SchemaObjectWrapper from '../components/SchemaObjectWrapper';
+import SchemaObjectWrapper, { SchemaContext } from '../components/SchemaObjectWrapper';
 import InputField from '../components/Fields/InputField';
 import { IInputField } from '../components/Fields/types';
 import { ROUTES } from '../utils/routing';
 import { TrashIcon } from '@heroicons/react/outline';
+import { useContext } from 'react';
 
 function TabAccountDetails() {
+    const schemaContext = useContext(SchemaContext);
+
     const headerProps: IHeader = {
         title: 'Account Details',
         subtitle: 'Account information for this user.'
     }
     const formProps: IForm = {
-        action: '/function/',
-        method: 'POST',
+        action: `/user/${schemaContext.schema.id}/`,
+        method: 'PATCH',
         fields: [
             {
                 name: 'email',

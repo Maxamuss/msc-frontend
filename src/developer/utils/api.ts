@@ -45,10 +45,14 @@ export function sendSchemaData(args: ISendSchemaData) {
         .then(res => res.json())
         .then(
             (result) => {
-                const data = result.data;
-                const changeCount = result.release_change_count;
+                let data;
 
-                console.log(changeCount)
+                if ('release_change_count' in result) {
+                    data = result.data;
+                    const changeCount = result.release_change_count;
+                } else {
+                    data = result;
+                }
 
                 if (args.setResults) {
                     args.setResults(data)

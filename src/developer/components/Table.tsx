@@ -56,53 +56,55 @@ export default function Table(props: ITable) {
                         </thead>
                         <tbody className='divide-y divide-gray-200 bg-white'>
                             {error
-                                ? <tr><td colSpan={props.fields.length}>Error</td></tr>
+                                ? <tr><td colSpan={props.fields.length + 1} className='text-center'>Error</td></tr>
                                 : !isLoaded
-                                    ? <tr><td colSpan={props.fields.length}>Loading</td></tr>
-                                    : (results ?? []).map((result, rowIdx) => (
-                                        <tr key={rowIdx}>
-                                            {props.fields.map((field, colIdx) => (
-                                                <td
-                                                    key={colIdx}
-                                                    className={(colIdx == 0 ? 'pl-6 pr-3' : 'px-3 ') + 'whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'}
-                                                // className='whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'
-                                                >
-                                                    {result[field.fieldName] ?? '-'}
-                                                </td>
-                                            ))}
-                                            {actions.length > 0 &&
-                                                <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8'>
-                                                    {actions.map((action, idx) => {
-                                                        if (action.to) {
-                                                            return (
-                                                                <Link
-                                                                    key={idx}
-                                                                    to={generateSchemaPath(action.to, result)}
-                                                                    className='text-indigo-600 hover:text-indigo-900'
-                                                                >
-                                                                    {action.icon && <action.icon className='-ml-1 mr-2 h-5 w-5 text-gray-500' />}
-                                                                    {action.children}
-                                                                </Link>
-                                                            );
-                                                        } else {
+                                    ? <tr><td colSpan={props.fields.length + 1} className='text-center'>Loading</td></tr>
+                                    : ((results ?? []).length === 0)
+                                        ? <tr><td colSpan={props.fields.length + 1} className='text-center'>No results to show</td></tr>
+                                        : (results ?? []).map((result, rowIdx) => (
+                                            <tr key={rowIdx}>
+                                                {props.fields.map((field, colIdx) => (
+                                                    <td
+                                                        key={colIdx}
+                                                        className={(colIdx == 0 ? 'pl-6 pr-3' : 'px-3 ') + 'whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'}
+                                                    // className='whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'
+                                                    >
+                                                        {result[field.fieldName] ?? '-'}
+                                                    </td>
+                                                ))}
+                                                {actions.length > 0 &&
+                                                    <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8'>
+                                                        {actions.map((action, idx) => {
+                                                            if (action.to) {
+                                                                return (
+                                                                    <Link
+                                                                        key={idx}
+                                                                        to={generateSchemaPath(action.to, result)}
+                                                                        className='text-indigo-600 hover:text-indigo-900'
+                                                                    >
+                                                                        {action.icon && <action.icon className='-ml-1 mr-2 h-5 w-5 text-gray-500' />}
+                                                                        {action.children}
+                                                                    </Link>
+                                                                );
+                                                            } else {
 
-                                                            return (
-                                                                <button
-                                                                    key={action.type || 'button'}
-                                                                    type={action.type || 'button'}
-                                                                    onClick={() => action.onClick(result)}
-                                                                    className='text-indigo-600 hover:text-indigo-900'
-                                                                >
-                                                                    {action.icon && <action.icon className='-ml-1 mr-2 h-5 w-5 text-gray-500' />}
-                                                                    {action.children}
-                                                                </button>
-                                                            );
-                                                        }
-                                                    })}
-                                                </td>
-                                            }
-                                        </tr>
-                                    ))}
+                                                                return (
+                                                                    <button
+                                                                        key={action.type || 'button'}
+                                                                        type={action.type || 'button'}
+                                                                        onClick={() => action.onClick(result)}
+                                                                        className='text-indigo-600 hover:text-indigo-900'
+                                                                    >
+                                                                        {action.icon && <action.icon className='-ml-1 mr-2 h-5 w-5 text-gray-500' />}
+                                                                        {action.children}
+                                                                    </button>
+                                                                );
+                                                            }
+                                                        })}
+                                                    </td>
+                                                }
+                                            </tr>
+                                        ))}
                         </tbody>
                     </table>
                 </div>
