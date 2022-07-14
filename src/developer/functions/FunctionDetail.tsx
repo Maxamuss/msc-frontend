@@ -1,22 +1,23 @@
-import TextField from '../components/Fields/InputField';
 import Form from '../components/Form';
 import Header from '../components/Header';
 import Tabs from '../components/Tabs';
 import { IHeader, IForm, ITabs } from '../components/types';
-import SchemaObjectWrapper from '../components/SchemaObjectWrapper';
-import InputField from '../components/Fields/InputField';
+import SchemaObjectWrapper, { SchemaContext } from '../components/SchemaObjectWrapper';
 import { IInputField } from '../components/Fields/types';
 import { TrashIcon } from '@heroicons/react/outline';
 import { ROUTES } from '../utils/routing';
+import { useContext } from 'react';
 
 function TabConfiguration() {
+    const schemaContext = useContext(SchemaContext);
+
     const headerProps: IHeader = {
-        title: 'Model Configuration',
-        subtitle: 'Configuration for this model.'
+        title: 'Function Configuration',
+        subtitle: 'Configuration for this function.'
     }
     const formProps: IForm = {
-        action: '/function/',
-        method: 'POST',
+        action: `/function/${schemaContext.schema.id}/`,
+        method: 'PATCH',
         fields: [
             {
                 name: 'function_name',
@@ -30,19 +31,37 @@ function TabConfiguration() {
 
     return (
         <>
-            <Header key='header' {...headerProps} />
-            <Form key='form' {...formProps} />
+            <Header {...headerProps} />
+            <Form {...formProps} />
         </>
     );
 }
-function TabFields() {
+function TabImplementation() {
+    const schemaContext = useContext(SchemaContext);
+
     const headerProps: IHeader = {
-        title: 'Model Fields',
-        subtitle: 'Fields belonging to this model.'
+        title: 'Fucntion Implementation',
+        subtitle: 'Implementation of this function in Python 3.'
+    }
+    const formProps: IForm = {
+        action: `/function/${schemaContext.schema.id}/`,
+        method: 'PATCH',
+        fields: [
+            {
+                name: 'function_name',
+                fieldType: 'code',
+                type: 'text',
+                label: 'Function Name',
+
+            } as IInputField
+        ],
     }
 
     return (
-        <Header key='header' {...headerProps} />
+        <>
+            <Header key='header' {...headerProps} />
+            <Form {...formProps} />
+        </>
     );
 }
 
@@ -64,7 +83,7 @@ const tabsProps: ITabs = {
         },
         {
             tabName: 'Implementation',
-            tabContent: TabFields,
+            tabContent: TabImplementation,
         },
     ]
 }

@@ -43,7 +43,8 @@ export default function ReleaseChanges() {
                 result.forEach((change: IReleaseChange) => {
                     if ('modelschema_id' in change.syntax_json) {
                         let model = groupedChanges[change.syntax_json.modelschema_id]
-                        if ('children' in model) {
+
+                        if (model && 'children' in model) {
                             model['children'].push(change)
                         } else {
                             model['children'] = [change]
@@ -99,13 +100,13 @@ export default function ReleaseChanges() {
                                             <div className="ml-2 flex-shrink-0 flex">
                                                 <p className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                                     {change.children && change.children.length > 0 &&
-                                                        <>{change.children.length} related changes</>
+                                                        <>{change.children?.length} related changes</>
                                                     }
                                                 </p>
                                             </div>
                                         </div>
                                         <div>
-                                            {change.children && change.children.map((childChange) => (
+                                            {change.children && change.children?.map((childChange) => (
                                                 <div>{toTitleCase(change.change_type)} {toTitleCase(childChange.model_type)}</div>
                                             ))}
                                         </div>

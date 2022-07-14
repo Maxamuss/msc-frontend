@@ -1,5 +1,4 @@
-import { useDispatch } from 'react-redux';
-import { IgetSchemaData, ISendSchemaData } from './types';
+import { IgetSchemaData, ISendSchemaData, IDeleteSchemaData } from './types';
 
 export const getBaseURL = () => {
     return 'http://localhost:8000/internal-api/developer'
@@ -64,5 +63,21 @@ export function sendSchemaData(args: ISendSchemaData) {
                 args.setIsLoaded(true);
                 args.setError(error);
             }
+        )
+}
+
+export function deleteSchemaData(args: IDeleteSchemaData) {
+    fetch(getBaseURL() + args.path, {
+        method: 'DELETE',
+    })
+        .then(res => {
+            console.log(res.status)
+            if (res.ok) {
+                return res.json()
+            }
+            throw res;
+        })
+        .then(
+            args.navigate(`/${args.resource}/`)
         )
 }

@@ -1,22 +1,34 @@
 import Header from '../components/Header';
-import Form from '../components/Form';
-import { IHeader, IForm, ISchemaObjectDelete } from '../components/types';
-import { ROUTES } from '../utils/routing';
-import { IInputField } from '../components/Fields/types';
+import { IHeader, ISchemaObjectDelete } from '../components/types';
 import SchemaObjectWrapper from '../components/SchemaObjectWrapper';
-
-
+import Button from './Button';
+import { deleteSchemaData } from '../utils/api';
+import { useNavigate, useParams } from 'react-router-dom';
+import { inject } from '../utils/render';
 
 export default function SchemaObjectDelete(props: ISchemaObjectDelete) {
+    let navigate = useNavigate();
+    let params = useParams();
+    const endpoint = `/${props.resource}/` + inject('${id}/', params);
+
+    const handleDelete = () => {
+        deleteSchemaData({
+            path: endpoint,
+            navigate: navigate,
+            resource: props.resource,
+        });
+    }
+
     const headerProps: IHeader = {
         title: 'Delete ' + `${props.resourceName}` + ': ${' + `${props.resourcePrimaryField}` + '}',
-        subtitle: `Are you sure you want to delete this ${props.resourceName}?`
+        subtitle: `Are you sure you want to delete this ${props.resourceName} ? `
     }
 
     return (
-        <SchemaObjectWrapper path={`/${props.resource}/` + '${id}/'}>
+        <SchemaObjectWrapper path={endpoint}>
             <>
                 <Header {...headerProps} />
+                <Button onClick={handleDelete} >Yes, I'm sure</Button>
             </>
         </SchemaObjectWrapper >
     )

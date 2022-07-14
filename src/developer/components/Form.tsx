@@ -9,9 +9,13 @@ import { SchemaContext } from './SchemaObjectWrapper';
 import { IForm } from './types';
 import { generateSchemaPath } from '../utils/routing';
 import InputField from './Fields/InputField';
+import FloatField from './Fields/FloatField';
+import CodeField from './Fields/CodeField';
 
 const fieldWidgets: any = {
     'input': InputField,
+    'float': FloatField,
+    'code': CodeField,
 }
 
 export default function Form(props: IForm) {

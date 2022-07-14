@@ -16,3 +16,9 @@ export interface ISendSchemaData {
     setResults?: Function;
     wait?: number;
 }
+
+export interface IDeleteSchemaData {
+    path: string;
+    navigate: any;
+    resource: string;
+}
