@@ -12,11 +12,15 @@ function classNames(...classes: any) {
 }
 
 export default function SelectField(props: ISelectField) {
-    const [selected, setSelected] = useState(props.selected ?? props.options?.at(0) ?? null);
+    const initial = props.options?.at(0) ?? null;
+
+    if (initial) props.onChange(initial.id)
+
+    const [selected, setSelected] = useState(props.selected ?? initial);
 
     return (
         <>
-            <Listbox {...props} name={props.name} value={selected} onChange={(e) => { setSelected(e) }}>
+            <Listbox {...props} value={selected} onChange={(e) => { props.onChange(e.id); setSelected(e) }}>
                 {({ open }) => (
                     <>
                         <div className="mt-1 relative">

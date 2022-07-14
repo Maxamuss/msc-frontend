@@ -55,9 +55,6 @@ function TabFields() {
     }
 
     const onSubmit = (data: any) => {
-        console.log(data);
-        return
-
         let schema = schemaContext.schema;
         let selectedField: IModelSchemaField | null = modalField;
 

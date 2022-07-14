@@ -5,6 +5,14 @@ import { getSchemaData } from '../utils/api';
 import { Link } from 'react-router-dom';
 import { generateSchemaPath } from '../utils/routing';
 
+function parseValue(value: any) {
+    if (typeof value == "boolean") {
+        if (value) return 'Yes'
+        else return 'No'
+    }
+    return value ?? '-';
+}
+
 export default function Table(props: ITable) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(true);
@@ -69,7 +77,8 @@ export default function Table(props: ITable) {
                                                         className={(colIdx == 0 ? 'pl-6 pr-3' : 'px-3 ') + 'whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'}
                                                     // className='whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'
                                                     >
-                                                        {result[field.fieldName] ?? '-'}
+
+                                                        {parseValue(result[field.fieldName])}
                                                     </td>
                                                 ))}
                                                 {actions.length > 0 &&

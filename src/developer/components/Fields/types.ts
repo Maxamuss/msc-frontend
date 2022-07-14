@@ -24,4 +24,5 @@ export interface ISelectField extends IBaseField {
         name: any;
     }>;
     selected?: any;
+    onChange?: any;
 }
