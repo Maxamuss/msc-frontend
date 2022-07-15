@@ -11,10 +11,12 @@ import { generateSchemaPath } from '../utils/routing';
 import InputField from './Fields/InputField';
 import FloatField from './Fields/FloatField';
 import CodeField from './Fields/CodeField';
+import IconField from './Fields/IconField';
 
 const fieldWidgets: any = {
     'input': InputField,
     'float': FloatField,
+    'icon': IconField,
     'code': CodeField,
 }
 
@@ -49,8 +51,6 @@ export default function Form(props: IForm) {
     useEffect(() => {
         if (formResult) {
             setIsSubmitting(false);
-
-            console.log(formResult)
 
             if (props.to) {
                 navigate(generateSchemaPath(props.to, formResult));

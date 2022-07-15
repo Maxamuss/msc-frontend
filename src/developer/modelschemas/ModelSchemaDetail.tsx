@@ -9,7 +9,7 @@ import Tabs from '../components/Tabs';
 import FieldModal, { IModelSchemaField } from './components/FieldModal';
 import { IHeader, IForm, ITabs, ITable } from '../components/types';
 import { ROUTES } from '../utils/routing';
-import { IInputField } from '../components/Fields/types';
+import { IIconField, IInputField } from '../components/Fields/types';
 import { sendSchemaData } from '../utils/api';
 
 function TabConfiguration() {
@@ -29,7 +29,13 @@ function TabConfiguration() {
                 type: 'text',
                 label: 'Model Name',
 
-            } as IInputField
+            } as IInputField,
+            {
+                name: 'model_icon',
+                fieldType: 'icon',
+                label: 'Icon',
+
+            } as IIconField
         ],
     }
 
