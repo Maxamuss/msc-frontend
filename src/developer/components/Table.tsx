@@ -64,11 +64,11 @@ export default function Table(props: ITable) {
                         </thead>
                         <tbody className='divide-y divide-gray-200 bg-white'>
                             {error
-                                ? <tr><td colSpan={props.fields.length + 1} className='text-center'>Error</td></tr>
+                                ? <tr><td colSpan={props.fields.length + 1} className='text-center py-3'>Error</td></tr>
                                 : !isLoaded
-                                    ? <tr><td colSpan={props.fields.length + 1} className='text-center'>Loading</td></tr>
+                                    ? <tr><td colSpan={props.fields.length + 1} className='text-center py-3'>Loading</td></tr>
                                     : ((results ?? []).length === 0)
-                                        ? <tr><td colSpan={props.fields.length + 1} className='text-center'>No results to show</td></tr>
+                                        ? <tr><td colSpan={props.fields.length + 1} className='text-center py-3'>No results to show</td></tr>
                                         : (results ?? []).map((result, rowIdx) => (
                                             <tr key={rowIdx}>
                                                 {props.fields.map((field, colIdx) => (
@@ -82,7 +82,7 @@ export default function Table(props: ITable) {
                                                     </td>
                                                 ))}
                                                 {actions.length > 0 &&
-                                                    <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8'>
+                                                    <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8 space-x-4'>
                                                         {actions.map((action, idx) => {
                                                             if (action.to) {
                                                                 return (

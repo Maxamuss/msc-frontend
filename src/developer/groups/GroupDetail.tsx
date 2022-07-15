@@ -56,6 +56,19 @@ function TabUsers() {
         });
     }
 
+    const removeGroup = (user: any) => {
+        if (window.confirm(`Are you sure you want to remove ${user.email} from this group?`)) {
+            sendSchemaData({
+                path: `/group/${schemaContext.schema.id}/remove-user/`,
+                method: 'POST',
+                data: { user_id: user.id },
+                setIsLoaded: () => { },
+                setResults: () => { setShowModal(false); setTableKey(tableKey + 1) },
+                setError: () => { },
+            });
+        }
+    }
+
     const headerProps: IHeader = {
         title: 'Users',
         subtitle: 'Users belonging to this group.',
@@ -86,9 +99,13 @@ function TabUsers() {
         ],
         actions: [
             {
-                children: 'View',
+                children: 'Remove',
+                onClick: (row: any) => removeGroup(row),
+            },
+            {
+                children: 'View User',
                 to: ROUTES.user.detail,
-            }
+            },
         ]
     }
 

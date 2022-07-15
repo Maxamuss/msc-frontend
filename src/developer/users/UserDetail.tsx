@@ -71,6 +71,19 @@ function TabGroups() {
         });
     }
 
+    const removeFromGroup = (group: any) => {
+        if (window.confirm(`Are you sure you want to remove this user from the ${group.name} group?`)) {
+            sendSchemaData({
+                path: `/user/${schemaContext.schema.id}/remove-from-group/`,
+                method: 'POST',
+                data: { group_id: group.id },
+                setIsLoaded: () => { },
+                setResults: () => { setShowModal(false); setTableKey(tableKey + 1) },
+                setError: () => { },
+            });
+        }
+    }
+
     const headerProps: IHeader = {
         title: 'Groups',
         subtitle: 'Groups this user belongs to.',
@@ -78,7 +91,7 @@ function TabGroups() {
             {
                 children: 'Add To Group',
                 icon: PlusCircleIcon,
-                onClick: () => { setShowModal(true) }
+                onClick: () => setShowModal(true),
             }
         ]
     }
@@ -92,9 +105,13 @@ function TabGroups() {
         ],
         actions: [
             {
-                children: 'View',
+                children: 'Remove From Group',
+                onClick: (row: any) => removeFromGroup(row),
+            },
+            {
+                children: 'View Group',
                 to: ROUTES.group.detail,
-            }
+            },
         ]
     }
 
