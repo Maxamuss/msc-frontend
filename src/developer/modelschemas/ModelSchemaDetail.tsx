@@ -221,7 +221,7 @@ function TabWorkflows() {
 function TabPermissions() {
     const headerProps: IHeader = {
         title: 'Model Permissions',
-        subtitle: 'Permissions belonging to this model.'
+        subtitle: 'Permissions for this model.'
     }
 
     return (
