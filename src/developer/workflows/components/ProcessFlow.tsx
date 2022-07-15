@@ -44,11 +44,11 @@ const getElementsLayout = (nodes: Array<any>, edges: Array<any>, direction = 'BT
     return { nodes, edges };
 };
 
-export default function ProcessFlow() {
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    // const [releases, setReleases]: [Array<IRelease>, Function] = useState([]);
+interface IProcessFlow {
+    workflowData?: any;
+}
 
+export default function ProcessFlow(props: IProcessFlow) {
     const [nodes, setNodes] = useNodesState([]);
     const [edges, setEdges] = useEdgesState([]);
 
@@ -98,25 +98,19 @@ export default function ProcessFlow() {
     // }, [releases])
 
 
-    if (error) {
-        return <div>Error:</div>;
-    } else if (!isLoaded) {
-        return <div>Loading...</div>;
-    } else {
-        return (
-            <div style={{ height: "calc(100vh - 64px)", width: "(100vw - 335px)" }}>
-                <ReactFlow
-                    defaultNodes={nodes}
-                    defaultEdges={edges}
-                    nodeTypes={nodeTypes}
-                    defaultZoom={2}
-                    minZoom={1}
-                    maxZoom={3}
-                    fitView
-                >
-                    <Background variant={BackgroundVariant.Dots} gap={16} size={0.5} />
-                </ReactFlow>
-            </div>
-        );
-    }
+    return (
+        <div style={{ height: "calc(100vh - 127px)", width: "(100vw - 335px)" }}>
+            <ReactFlow
+                defaultNodes={nodes}
+                defaultEdges={edges}
+                nodeTypes={nodeTypes}
+                defaultZoom={2}
+                minZoom={1}
+                maxZoom={3}
+                fitView
+            >
+                <Background variant={BackgroundVariant.Dots} gap={16} size={0.5} />
+            </ReactFlow>
+        </div>
+    );
 }

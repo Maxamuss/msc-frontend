@@ -30,7 +30,8 @@ import UserCreate from '../users/UserCreate';
 import UserDetail from '../users/UserDetail';
 import UserDelete from '../users/UserDelete';
 
-import WorkflowEditor from '../workflows/WorkflowEditor';
+import WorkflowCreate from '../workflows/WorkflowCreate';
+import WorkflowDetail from '../workflows/WorkflowDetail';
 import WorkflowList from '../workflows/WorkflowList';
 
 import { ROUTES } from '../utils/routing';
@@ -65,8 +66,8 @@ function App() {
             <Route path={ROUTES.user.detail} element={<UserDetail />} />
             <Route path={ROUTES.user.delete} element={<UserDelete />} />
             <Route path={ROUTES.workflow.list} element={<WorkflowList />} />
-            <Route path={ROUTES.workflow.create} element={<WorkflowEditor />} />
-            <Route path={ROUTES.workflow.detail} element={<WorkflowEditor />} />
+            <Route path={ROUTES.workflow.create} element={<WorkflowCreate />} />
+            <Route path={ROUTES.workflow.detail} element={<WorkflowDetail />} />
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         </main>

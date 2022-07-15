@@ -30,7 +30,7 @@ export const ROUTES = {
     },
     workflow: {
         list: '/workflow/',
-        create: '/workflow/:id/create/',
+        create: '/workflow/create/',
         detail: '/workflow/:id/',
     },
     user: {
@@ -47,8 +47,8 @@ export const ROUTES = {
     },
     permission: {
         list: '/permission/',
-        create: '/permission/create/',
-        detail: '/permission/:id/',
+        create: '/permission/:id/create/',
+        detail: '/permission/:id/edit/',
     },
 }
 
