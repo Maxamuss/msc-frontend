@@ -1,49 +1,34 @@
-import { PlusCircleIcon, TrashIcon } from '@heroicons/react/outline';
-
 import Form from '../components/Form';
 import Header from '../components/Header';
 import Tabs from '../components/Tabs';
 import { IHeader, IForm, ITabs, ITable } from '../components/types';
 import SchemaObjectWrapper, { SchemaContext } from '../components/SchemaObjectWrapper';
 import { IInputField } from '../components/Fields/types';
+import { PlusCircleIcon, TrashIcon } from '@heroicons/react/outline';
 import { ROUTES } from '../utils/routing';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import Table from '../components/Table';
-import GroupModal from './components/GroupModal';
 import { sendSchemaData } from '../utils/api';
+import UserModal from './components/UserModal';
 
-function TabAccountDetails() {
+function TabConfiguration() {
     const schemaContext = useContext(SchemaContext);
 
     const headerProps: IHeader = {
-        title: 'Account Details',
-        subtitle: 'Account information for this user.'
+        title: 'Group Configuration',
+        subtitle: 'Configuration for this group.'
     }
     const formProps: IForm = {
-        action: `/user/${schemaContext.schema.id}/`,
+        action: `/group/${schemaContext.schema.id}/`,
         method: 'PATCH',
         fields: [
             {
-                name: 'email',
+                name: 'name',
                 fieldType: 'input',
                 type: 'text',
-                label: 'Email',
+                label: 'Group Name',
 
-            } as IInputField,
-            {
-                name: 'first_name',
-                fieldType: 'input',
-                type: 'text',
-                label: 'First Name',
-
-            } as IInputField,
-            {
-                name: 'last_name',
-                fieldType: 'input',
-                type: 'text',
-                label: 'Last Name',
-
-            } as IInputField,
+            } as IInputField
         ],
     }
 
@@ -54,7 +39,7 @@ function TabAccountDetails() {
         </>
     );
 }
-function TabGroups() {
+function TabUsers() {
     const schemaContext = useContext(SchemaContext);
 
     const [showModal, setShowModal] = useState(false);
@@ -62,7 +47,7 @@ function TabGroups() {
 
     const onSubmit = (data: any) => {
         sendSchemaData({
-            path: `/user/${schemaContext.schema.id}/add-to-group/`,
+            path: `/group/${schemaContext.schema.id}/add-user/`,
             method: 'POST',
             data: data,
             setIsLoaded: () => { },
@@ -72,28 +57,37 @@ function TabGroups() {
     }
 
     const headerProps: IHeader = {
-        title: 'Groups',
-        subtitle: 'Groups this user belongs to.',
+        title: 'Users',
+        subtitle: 'Users belonging to this group.',
         tools: [
             {
-                children: 'Add To Group',
+                children: 'Add User',
                 icon: PlusCircleIcon,
                 onClick: () => { setShowModal(true) }
             }
         ]
     }
+
     const tableProps: ITable = {
-        path: `/user/${schemaContext.schema.id}/groups/`,
+        path: `/group/${schemaContext.schema.id}/users/`,
         fields: [
             {
-                fieldName: 'name',
-                headerName: 'Group Name'
-            }
+                fieldName: 'email',
+                headerName: 'Email'
+            },
+            {
+                fieldName: 'first_name',
+                headerName: 'First Name'
+            },
+            {
+                fieldName: 'last_name',
+                headerName: 'Last Name'
+            },
         ],
         actions: [
             {
                 children: 'View',
-                to: ROUTES.group.detail,
+                to: ROUTES.user.detail,
             }
         ]
     }
@@ -102,7 +96,7 @@ function TabGroups() {
         <>
             <Header {...headerProps} />
             <Table key={tableKey} {...tableProps} />
-            <GroupModal
+            <UserModal
                 onSubmit={onSubmit}
                 isOpen={showModal}
                 onClose={() => setShowModal(false)}
@@ -115,10 +109,10 @@ function TabPermissions() {
 
     const headerProps: IHeader = {
         title: 'Permissions',
-        subtitle: 'Permissions this user belongs has.'
+        subtitle: 'Permissions assigned to this group.'
     }
     const tableProps: ITable = {
-        path: `/user/${schemaContext.schema.id}/permissions/`,
+        path: `/group/${schemaContext.schema.id}/permissions/`,
         fields: [
             {
                 fieldName: 'name',
@@ -140,26 +134,25 @@ function TabPermissions() {
         </>
     );
 }
-
 const headerProps: IHeader = {
-    title: 'User: ${email}',
+    title: 'Group: ${name}',
     tools: [
         {
             children: 'Delete',
             icon: TrashIcon,
-            to: ROUTES.user.delete,
+            to: ROUTES.group.delete,
         }
     ]
 }
 const tabsProps: ITabs = {
     tabs: [
         {
-            tabName: 'Account Details',
-            tabContent: TabAccountDetails,
+            tabName: 'Configuration',
+            tabContent: TabConfiguration,
         },
         {
-            tabName: 'Groups',
-            tabContent: TabGroups,
+            tabName: 'Users',
+            tabContent: TabUsers,
         },
         {
             tabName: 'Permissions',
@@ -168,9 +161,9 @@ const tabsProps: ITabs = {
     ]
 }
 
-export default function UserDetail() {
+export default function GroupDetail() {
     return (
-        <SchemaObjectWrapper path='/user/${id}/'>
+        <SchemaObjectWrapper path='/group/${id}/'>
             <>
                 <Header {...headerProps} />
                 <Tabs {...tabsProps} />

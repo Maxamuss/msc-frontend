@@ -18,17 +18,18 @@ export interface IInputField extends IBaseField {
     type: string;
 }
 
-export interface ISelectField extends IBaseField {
-    options?: Array<{
-        id: string;
-        name: any;
-    }>;
-    selected?: any;
-    onChange?: any;
+export interface ISelectOption {
+    id: string;
+    name: any;
 }
 
-export interface IIconField extends IBaseField {
-    selected?: string;
+export interface ISelectField extends IBaseField {
+    options?: ISelectOption[];
+    selected?: any;
     onChange?: any;
+    allowMulitple?: boolean;
+}
+
+export interface IIconField extends ISelectField {
     value?: any;
 }

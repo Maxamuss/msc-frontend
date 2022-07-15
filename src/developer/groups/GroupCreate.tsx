@@ -5,24 +5,24 @@ import { ROUTES } from '../utils/routing';
 import { IInputField } from '../components/Fields/types';
 
 const headerProps: IHeader = {
-    title: 'Create Model',
+    title: 'Create Group',
 }
 const formProps: IForm = {
-    action: '/modelschema/',
+    action: '/group/',
     method: 'POST',
     fields: [
         {
-            name: 'model_name',
+            name: 'name',
             fieldType: 'input',
             type: 'text',
-            label: 'Model Name',
+            label: 'Group Name',
 
         } as IInputField
     ],
-    to: ROUTES.modelschema.detail,
+    to: ROUTES.group.detail,
 }
 
-export default function ModelSchemaCreate() {
+export default function GroupCreate() {
     return (
         <>
             <Header {...headerProps} />

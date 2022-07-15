@@ -49,7 +49,7 @@ function TabConfiguration() {
 function TabFields() {
     const schemaContext = useContext(SchemaContext);
 
-    const [showFieldModal, setShowFieldModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [modalField, setModalField] = useState(null);
 
     const [formResult, setFormResult] = useState(null);
@@ -57,7 +57,7 @@ function TabFields() {
 
     const openModal = (field: any) => {
         setModalField(field);
-        setShowFieldModal(true);
+        setShowModal(true);
     }
 
     const onSubmit = (data: any) => {
@@ -90,7 +90,7 @@ function TabFields() {
     useEffect(() => {
         if (formResult && !error) {
             schemaContext.setSchema(formResult);
-            setShowFieldModal(false);
+            setShowModal(false);
         }
     }, [formResult, error])
 
@@ -101,7 +101,7 @@ function TabFields() {
             {
                 children: 'Add Field',
                 icon: PlusCircleIcon,
-                onClick: () => { openModal(null) }
+                onClick: () => { openModal(true) }
             }
         ]
     }
@@ -137,8 +137,8 @@ function TabFields() {
             <FieldModal
                 onSubmit={onSubmit}
                 fieldData={modalField}
-                isOpen={showFieldModal}
-                onClose={() => setShowFieldModal(false)}
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
                 key={modalField ? modalField['field_name'] : ''}
             />
         </>

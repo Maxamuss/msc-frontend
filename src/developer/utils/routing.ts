@@ -10,19 +10,19 @@ export const ROUTES = {
     function: {
         list: '/function/',
         create: '/function/create/',
-        detail: '/function/edit/:id/',
-        delete: '/function/delete/:id/',
+        detail: '/function/:id/',
+        delete: '/function/:id/delete/',
     },
     package: {
         list: '/package/',
         create: '/package/create/',
-        detail: '/package/edit/:id/',
-        delete: '/package/delete/:id/',
+        detail: '/package/:id/',
+        delete: '/package/:id/delete/',
     },
     page: {
         list: '/page/',
-        create: '/page/create/:id/',
-        detail: '/page/edit/:id/',
+        create: '/page/:id/create/',
+        detail: '/page/:id/',
     },
     release: {
         tree: '/releases/',
@@ -30,24 +30,25 @@ export const ROUTES = {
     },
     workflow: {
         list: '/workflow/',
-        create: '/workflow/create/:id/',
-        detail: '/workflow/edit/:id/',
+        create: '/workflow/:id/create/',
+        detail: '/workflow/:id/',
     },
     user: {
         list: '/user/',
         create: '/user/create/',
-        detail: '/user/edit/:id/',
-        delete: '/user/delete/:id/',
+        detail: '/user/:id/',
+        delete: '/user/:id/delete/',
     },
     group: {
         list: '/group/',
         create: '/group/create/',
-        detail: '/group/edit/:id/',
+        detail: '/group/:id/',
+        delete: '/group/:id/delete/',
     },
     permission: {
         list: '/permission/',
         create: '/permission/create/',
-        detail: '/permission/edit/:id/',
+        detail: '/permission/:id/',
     },
 }
 

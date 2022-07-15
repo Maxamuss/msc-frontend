@@ -14,6 +14,9 @@ import FunctionCreate from '../functions/FunctionCreate';
 import FunctionDelete from '../functions/FunctionDelete';
 
 import GroupList from '../groups/GroupList';
+import GroupCreate from '../groups/GroupCreate';
+import GroupDetail from '../groups/GroupDetail';
+import GroupDelete from '../groups/GroupDelete';
 
 import PackageList from '../packages/PackageList';
 
@@ -49,6 +52,9 @@ function App() {
             <Route path={ROUTES.function.create} element={<FunctionCreate />} />
             <Route path={ROUTES.function.delete} element={<FunctionDelete />} />
             <Route path={ROUTES.group.list} element={<GroupList />} />
+            <Route path={ROUTES.group.create} element={<GroupCreate />} />
+            <Route path={ROUTES.group.detail} element={<GroupDetail />} />
+            <Route path={ROUTES.group.delete} element={<GroupDelete />} />
             <Route path={ROUTES.package.list} element={<PackageList />} />
             <Route path={ROUTES.page.create} element={<PageEditor />} />
             <Route path={ROUTES.page.detail} element={<PageEditor />} />
