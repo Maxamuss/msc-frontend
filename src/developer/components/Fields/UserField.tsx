@@ -15,7 +15,6 @@ export default function GroupField(props: ISelectField) {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result)
                     let userList: ISelectOption[] = [];
 
                     result.forEach((user: any) => {

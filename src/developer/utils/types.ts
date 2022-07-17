@@ -1,4 +1,4 @@
-export interface IgetSchemaData {
+export interface IGetSchemaData {
     path: string;
     setResults: Function;
     setIsLoaded: Function;
@@ -15,10 +15,12 @@ export interface ISendSchemaData {
     setError: Function;
     setResults?: Function;
     wait?: number;
+    dispatch?: any;
 }
 
 export interface IDeleteSchemaData {
     path: string;
     navigate: any;
     resource: string;
+    dispatch?: any;
 }

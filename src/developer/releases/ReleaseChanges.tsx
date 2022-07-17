@@ -1,5 +1,8 @@
 import { Children, useEffect, useState } from "react";
+import { useDispatch } from 'react-redux';
+
 import Header from "../components/Header";
+import { setReleaseData } from "../store/releaseSlice";
 import { getBaseURL } from "../utils/api";
 
 function toTitleCase(str: string) {
@@ -19,9 +22,9 @@ interface IReleaseChange {
     children?: IReleaseChange[];
 }
 
-
-
 export default function ReleaseChanges() {
+    const dispatch = useDispatch();
+
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(true);
     const [changes, setChanges] = useState<IReleaseChange[] | undefined>(undefined);
@@ -69,7 +72,7 @@ export default function ReleaseChanges() {
         })
             .then(res => res.json())
             .then(result => {
-                // dispatch(setReleaseData(result))
+                dispatch(setReleaseData(result))
                 // setIsLoaded(true);
             })
     }

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { sendSchemaData } from '../utils/api';
 import Button from './Button';
@@ -21,6 +22,7 @@ const fieldWidgets: any = {
 }
 
 export default function Form(props: IForm) {
+    const dispatch = useDispatch();
     let navigate = useNavigate();
     const schemaContext = useContext(SchemaContext);
 
@@ -45,6 +47,7 @@ export default function Form(props: IForm) {
             setIsLoaded: setIsSubmitting,
             setResults: setFormResult,
             setError: setError,
+            dispatch: dispatch,
         });
     }
 

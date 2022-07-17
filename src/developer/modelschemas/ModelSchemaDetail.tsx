@@ -13,7 +13,7 @@ import { IIconField, IInputField } from '../components/Fields/types';
 import { sendSchemaData } from '../utils/api';
 
 function TabConfiguration() {
-    const schemaContext = useContext(SchemaContext);
+    const schemaContext = useContext(SchemaContext)
 
     const headerProps: IHeader = {
         title: 'Model Configuration',

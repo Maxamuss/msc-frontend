@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+
 import Header from '../components/Header';
 import { IHeader, ISchemaObjectDelete } from '../components/types';
 import SchemaObjectWrapper from '../components/SchemaObjectWrapper';
@@ -7,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { inject } from '../utils/render';
 
 export default function SchemaObjectDelete(props: ISchemaObjectDelete) {
+    const dispatch = useDispatch();
     let navigate = useNavigate();
     let params = useParams();
     const endpoint = `/${props.resource}/` + inject('${id}/', params);
@@ -16,6 +19,7 @@ export default function SchemaObjectDelete(props: ISchemaObjectDelete) {
             path: endpoint,
             navigate: navigate,
             resource: props.resource,
+            dispatch: dispatch,
         });
     }
 

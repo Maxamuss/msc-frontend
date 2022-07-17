@@ -37,7 +37,6 @@ export function populateTo(to: string, model?: Model, resource?: any): string {
     }
 
     if (resource) {
-        console.log(resource)
         to = to.replace('<OBJECT_ID>', resource.id)
     }
 

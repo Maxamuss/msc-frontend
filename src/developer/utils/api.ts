@@ -1,16 +1,17 @@
-import { IgetSchemaData, ISendSchemaData, IDeleteSchemaData } from './types';
+import { IGetSchemaData, ISendSchemaData, IDeleteSchemaData } from './types';
+import { setReleaseData } from '../store/releaseSlice';
 
 export const getBaseURL = () => {
     return 'http://localhost:8000/internal-api/developer'
 }
 
-export function getSchemaData(args: IgetSchemaData) {
+export function getSchemaData(args: IGetSchemaData) {
     let url = getBaseURL() + args.path;
 
     if (args.fields) {
         url += '?fields=';
         args.fields.forEach((field, i) => {
-            if (args.fields?.length == i + 1) {
+            if (args.fields?.length === i + 1) {
                 url += field
             } else {
                 url += `${field}&`
@@ -46,9 +47,9 @@ export function sendSchemaData(args: ISendSchemaData) {
             (result) => {
                 let data;
 
-                if ('release_change_count' in result) {
+                if (('release_change_count' in result) && args.dispatch) {
                     data = result.data;
-                    const changeCount = result.release_change_count;
+                    args.dispatch(setReleaseData(result));
                 } else {
                     data = result;
                 }
@@ -70,14 +71,12 @@ export function deleteSchemaData(args: IDeleteSchemaData) {
     fetch(getBaseURL() + args.path, {
         method: 'DELETE',
     })
-        .then(res => {
-            console.log(res.status)
-            if (res.ok) {
-                return res.json()
+        .then(res => res.json())
+        .then((result) => {
+            if (('release_change_count' in result) && args.dispatch) {
+                args.dispatch(setReleaseData(result));
             }
-            throw res;
-        })
-        .then(
+
             args.navigate(`/${args.resource}/`)
-        )
+        })
 }
