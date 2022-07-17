@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { NavLink } from 'react-router-dom';
 import { XIcon } from '@heroicons/react/outline';
 import { useSelector } from 'react-redux';
+import Icon from '../components/Icon';
 
 export default function SideBar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -106,7 +107,7 @@ export default function SideBar() {
                                     }
 
                                 >
-                                    {/* <link.icon className='mr-3 flex-shrink-0 h-6 w-6 text-indigo-300' aria-hidden='true' /> */}
+                                    {model.definition.model_icon && <Icon iconName={model.definition.model_icon} className='mr-3 flex-shrink-0 h-6 w-6 text-indigo-300' />}
                                     {model.definition.model_name}
                                 </NavLink>
                             ))}
