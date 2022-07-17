@@ -20,7 +20,8 @@ import GroupDelete from '../groups/GroupDelete';
 
 import PackageList from '../packages/PackageList';
 
-import PageEditor from '../pages/PageEditor';
+import PageCreate from '../pages/PageCreate';
+import PageDetail from '../pages/PageDetail';
 
 import ReleaseTree from '../releases/ReleaseTree';
 import ReleaseChanges from '../releases/ReleaseChanges';
@@ -57,8 +58,8 @@ function App() {
             <Route path={ROUTES.group.detail} element={<GroupDetail />} />
             <Route path={ROUTES.group.delete} element={<GroupDelete />} />
             <Route path={ROUTES.package.list} element={<PackageList />} />
-            <Route path={ROUTES.page.create} element={<PageEditor />} />
-            <Route path={ROUTES.page.detail} element={<PageEditor />} />
+            <Route path={ROUTES.page.create} element={<PageCreate />} />
+            <Route path={ROUTES.page.detail} element={<PageDetail />} />
             <Route path={ROUTES.release.tree} element={<ReleaseTree />} />
             <Route path={ROUTES.release.changes} element={<ReleaseChanges />} />
             <Route path={ROUTES.user.list} element={<UserList />} />

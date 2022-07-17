@@ -20,7 +20,6 @@ export const ROUTES = {
         delete: '/package/:id/delete/',
     },
     page: {
-        list: '/page/',
         create: '/page/:id/create/',
         detail: '/page/:id/',
     },
