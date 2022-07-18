@@ -6,12 +6,16 @@ import Button from './Button';
 import { IForm } from './types';
 
 import TextField from './Fields/TextField';
+import FloatField from './Fields/FloatField';
+import DateTimeField from './Fields/DateTimeField';
 import { PageContext } from '../core/Page';
 import { populateTo } from '../utils/routing';
 import { sendModelObject } from '../utils/api';
 
 const fieldWidgets: any = {
     'text': TextField,
+    'float': FloatField,
+    'datetime': DateTimeField,
 }
 
 export default function Form(props: IForm) {
@@ -76,10 +80,19 @@ export default function Form(props: IForm) {
                                 help_text: fieldConfig.help_text,
                             }
 
+                            let defaultValue;
+
+                            if (fieldConfig.field_type === 'datetime') {
+                                defaultValue = new Date(Date.parse(data[fieldConfig.name]));
+                            } else {
+                                defaultValue = data[fieldConfig.name];
+                            }
+
+
                             return <Controller
                                 key={fieldConfig.name}
                                 name={fieldConfig.name}
-                                defaultValue={data[fieldConfig.name]}
+                                defaultValue={defaultValue}
                                 control={control}
                                 render={({ field }) => <FieldWidget {...field} {...fieldProps} />}
                             />;

@@ -16,6 +16,7 @@ export interface IBaseField extends IBaseHelpText, IBaseLabel {
 
 export interface IInputField extends IBaseField {
     type: string;
+    value?: any;
 }
 
 export interface ISelectField extends IBaseField {

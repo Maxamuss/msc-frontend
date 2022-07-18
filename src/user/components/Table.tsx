@@ -15,6 +15,7 @@ export default function Table(props: ITable) {
     const [pagination, setPagination] = useState({ 'next': null, 'prev': null, 'count': null });
 
     const actions = props.actions ?? [];
+    const fields = props?.fields ?? pageContext?.model?.definition.fields ?? [];
 
     useEffect(() => {
         getResults();
@@ -33,13 +34,13 @@ export default function Table(props: ITable) {
                     <table className='min-w-full divide-y divide-gray-300'>
                         <thead className='bg-gray-50'>
                             <tr>
-                                {props.fields.map((field, idx) => (
+                                {fields.map((field, idx) => (
                                     <th
                                         key={idx}
                                         scope='col'
                                         className={(idx === 0 ? 'pl-6 pr-3' : 'px-3 ') + 'py-3.5 text-left text-sm font-semibold text-gray-900'}
                                     >
-                                        {field.header_name}
+                                        {field.field_name}
                                     </th>
                                 ))}
                                 {actions.length > 0 &&
@@ -51,12 +52,12 @@ export default function Table(props: ITable) {
                         </thead>
                         <tbody className='divide-y divide-gray-200 bg-white'>
                             {error
-                                ? <tr><td colSpan={props.fields.length}>Error</td></tr>
+                                ? <tr><td colSpan={fields.length}>Error</td></tr>
                                 : !isLoaded
-                                    ? <tr><td colSpan={props.fields.length}>Loading</td></tr>
+                                    ? <tr><td colSpan={fields.length}>Loading</td></tr>
                                     : results.map((result, rowIdx) => (
                                         <tr key={rowIdx}>
-                                            {props.fields.map((field, colIdx) => (
+                                            {fields.map((field, colIdx) => (
                                                 <td
                                                     key={colIdx}
                                                     className={(colIdx === 0 ? 'pl-6 pr-3' : 'px-3 ') + 'whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900'}

@@ -23,6 +23,7 @@ export function getSchemaData(args: IGetSchemaData) {
         .then(res => res.json())
         .then(
             (result) => {
+                console.log(result)
                 args.setIsLoaded(true);
                 args.setResults(result);
             },
@@ -48,7 +49,7 @@ export function sendSchemaData(args: ISendSchemaData) {
                 let data;
 
                 if (('release_change_count' in result) && args.dispatch) {
-                    data = result.data;
+                    data = result.data
                     args.dispatch(setReleaseData(result));
                 } else {
                     data = result;
@@ -70,6 +71,9 @@ export function sendSchemaData(args: ISendSchemaData) {
 export function deleteSchemaData(args: IDeleteSchemaData) {
     fetch(getBaseURL() + args.path, {
         method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
     })
         .then(res => res.json())
         .then((result) => {

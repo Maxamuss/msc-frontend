@@ -51,8 +51,7 @@ function TabFields() {
 
     const [showModal, setShowModal] = useState(false);
     const [modalField, setModalField] = useState(null);
-
-    const [formResult, setFormResult] = useState(null);
+    const [tableKey, setTableKey] = useState(0);
     const [error, setError] = useState(null);
 
     const openModal = (field: any) => {
@@ -81,18 +80,15 @@ function TabFields() {
             method: 'PUT',
             data: schema,
             setIsLoaded: () => { },
-            setResults: setFormResult,
+            setResults: (result: any) => {
+                schemaContext.setSchema(result);
+                setShowModal(false);
+                setTableKey(tableKey + 1);
+            },
             setError: setError,
         });
 
     }
-
-    useEffect(() => {
-        if (formResult && !error) {
-            schemaContext.setSchema(formResult);
-            setShowModal(false);
-        }
-    }, [formResult, error])
 
     const headerProps: IHeader = {
         title: 'Model Fields',
@@ -107,7 +103,7 @@ function TabFields() {
     }
     const tableProps: ITable = {
         path: '',
-        data: schemaContext.schema.fields ?? [],
+        data: schemaContext.schema?.fields ?? [],
         fields: [
             {
                 fieldName: 'field_name',
@@ -133,7 +129,7 @@ function TabFields() {
     return (
         <>
             <Header {...headerProps} />
-            <Table {...tableProps} />
+            <Table key={tableKey} {...tableProps} />
             <FieldModal
                 onSubmit={onSubmit}
                 fieldData={modalField}

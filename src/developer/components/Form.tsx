@@ -52,8 +52,8 @@ export default function Form(props: IForm) {
     }
 
     useEffect(() => {
+        setIsSubmitting(false);
         if (formResult) {
-            setIsSubmitting(false);
 
             if (props.to) {
                 navigate(generateSchemaPath(props.to, formResult));
