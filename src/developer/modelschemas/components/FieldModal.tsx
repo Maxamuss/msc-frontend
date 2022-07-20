@@ -81,7 +81,8 @@ export default function FieldModal(props: IFieldModal) {
                                                 options={[
                                                     { id: "text", name: "Text" },
                                                     { id: "float", name: "Float" },
-                                                    { id: "datetime", name: "Datetime" }
+                                                    { id: "datetime", name: "Datetime" },
+                                                    { id: "fk", name: "Link" },
                                                 ]}
                                                 name='field_type'
                                                 fieldType='*'

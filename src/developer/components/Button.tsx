@@ -15,7 +15,12 @@ export default function Button(props: IButton) {
     }
 
     if (props.to) {
-        const to = generateSchemaPath(props.to, schemaContext.schema)
+        let to = '';
+
+        try {
+            to = generateSchemaPath(props.to, schemaContext.schema)
+        } catch (e) { }
+
         return (
             <Link
                 to={to}

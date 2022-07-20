@@ -22,7 +22,7 @@ export default class Model {
     }
 
     getPage(pageName: string): any {
-        for (const page of this.definition.pages) {
+        for (const page of (this.definition?.pages ?? [])) {
             if (page.page_name === pageName) {
                 return page;
             }

@@ -66,7 +66,7 @@ export default function Form(props: IForm) {
 
     return (
         <div className='bg-white overflow-hidden border-200 border-b p-4'>
-            {error && <div>error</div>}
+            {error && <div>{JSON.stringify(error)}</div>}
             <form key='form' className='space-y-8 divide-y divide-y-blue-gray-200' onSubmit={handleSubmit(onSubmit)}>
                 <div className='grid grid-cols-1 gap-y-6 md:grid-cols-2 xl:grid-cols-3 md:gap-x-6'>
                     {fields.map((fieldConfig: any) => {

@@ -1,5 +1,6 @@
 import { Children, useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 import Header from "../components/Header";
 import { setReleaseData } from "../store/releaseSlice";
@@ -24,6 +25,7 @@ interface IReleaseChange {
 
 export default function ReleaseChanges() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(true);
@@ -72,8 +74,9 @@ export default function ReleaseChanges() {
         })
             .then(res => res.json())
             .then(result => {
-                dispatch(setReleaseData(result))
+                dispatch(setReleaseData(result));
                 // setIsLoaded(true);
+                navigate('/releases/');
             })
     }
 
