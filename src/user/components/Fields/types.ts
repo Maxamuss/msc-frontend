@@ -12,6 +12,8 @@ export interface IBaseField extends IBaseHelpText, IBaseLabel {
     field_type: string;
     default?: string;
     placeholder?: string;
+    modelschema_id?: string;
+    bare?: boolean;
 }
 
 export interface IInputField extends IBaseField {
@@ -25,4 +27,8 @@ export interface ISelectField extends IBaseField {
         name: any;
     }>;
     selected?: any;
+}
+
+export interface IForeignKeyField extends IBaseField {
+    modelschema_id: string;
 }

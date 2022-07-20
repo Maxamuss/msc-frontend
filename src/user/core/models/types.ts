@@ -11,6 +11,7 @@ export interface IModelField {
     field_name: string;
     field_type: string;
     required?: boolean;
+    modelschema_id?: string;
 }
 
 export interface IModel {

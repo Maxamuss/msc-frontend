@@ -8,6 +8,7 @@ import { IForm } from './types';
 import TextField from './Fields/TextField';
 import FloatField from './Fields/FloatField';
 import DateTimeField from './Fields/DateTimeField';
+import ForeignKeyField from './Fields/ForeignKeyField';
 import { PageContext } from '../core/Page';
 import { populateTo } from '../utils/routing';
 import { sendModelObject } from '../utils/api';
@@ -16,6 +17,7 @@ const fieldWidgets: any = {
     'text': TextField,
     'float': FloatField,
     'datetime': DateTimeField,
+    'fk': ForeignKeyField,
 }
 
 export default function Form(props: IForm) {
@@ -27,7 +29,7 @@ export default function Form(props: IForm) {
     const [formResult, setFormResult] = useState(null);
     const [error, setError] = useState(null);
 
-    const fields = props.fields ?? pageContext?.model?.getField() ?? [];
+    const fields = props.fields ?? pageContext?.model?.getFields() ?? [];
 
     const onSubmit = (data: any) => {
         setIsSubmitting(true);
@@ -78,6 +80,7 @@ export default function Form(props: IForm) {
                                 id: fieldConfig.id,
                                 label: fieldConfig.label,
                                 help_text: fieldConfig.help_text,
+                                modelschema_id: fieldConfig.modelschema_id,
                             }
 
                             let defaultValue;

@@ -30,7 +30,7 @@ export default class Model {
         return undefined;
     }
 
-    getField() {
+    getFields() {
         let fields: IBaseField[] = [];
 
         (this.definition.fields || []).forEach((field) => {
@@ -40,6 +40,7 @@ export default class Model {
                     id: 'id_' + field.field_name,
                     label: field.field_name,
                     field_type: field.field_type ?? 'text',
+                    modelschema_id: field.modelschema_id,
                 })
             }
         })
@@ -51,6 +52,15 @@ export default class Model {
 export function getModel(models: Model[], modelName: string): Model | undefined {
     for (const model of models) {
         if (model.model_name_lower() === modelName) {
+            return model;
+        }
+    }
+    return undefined;
+}
+
+export function getModelById(models: Model[], modelId: string): Model | undefined {
+    for (const model of models) {
+        if (model.definition.id === modelId) {
             return model;
         }
     }
