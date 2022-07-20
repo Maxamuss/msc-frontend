@@ -95,11 +95,11 @@ export default function FieldModal(props: IFieldModal) {
                                             render={({ field }) => <SelectField
                                                 {...field}
                                                 options={[
-                                                    { id: "no", name: "No" },
+                                                    { id: "1", name: "No" },
                                                     { id: "yes", name: "Yes" },
                                                 ]}
                                                 name='required'
-                                                fieldType='*'
+                                                fieldType='boolean'
                                                 label='Required'
                                             />}
                                         />

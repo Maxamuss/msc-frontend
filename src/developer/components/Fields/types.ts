@@ -12,6 +12,7 @@ export interface IBaseField extends IBaseHelpText, IBaseLabel {
     fieldType: string;
     defaultValue?: string;
     placeholder?: string;
+    value?: any;
 }
 
 export interface IInputField extends IBaseField {
@@ -31,5 +32,5 @@ export interface ISelectField extends IBaseField {
 }
 
 export interface IIconField extends ISelectField {
-    value?: any;
+
 }

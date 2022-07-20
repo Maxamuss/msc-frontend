@@ -7,6 +7,7 @@ import SchemaObjectWrapper, { SchemaContext } from '../components/SchemaObjectWr
 import Table from '../components/Table';
 import Tabs from '../components/Tabs';
 import FieldModal, { IModelSchemaField } from './components/FieldModal';
+import PermissionModal from './components/PermissionModal';
 import { IHeader, IForm, ITabs, ITable } from '../components/types';
 import { ROUTES } from '../utils/routing';
 import { IIconField, IInputField } from '../components/Fields/types';
@@ -209,19 +210,56 @@ function TabWorkflows() {
 
     return (
         <>
-            <Header key='header' {...headerProps} />
-            <Table key='table' {...tableProps} />
+            <Header {...headerProps} />
+            <Table {...tableProps} />
         </>
     );
 }
 function TabPermissions() {
+    const schemaContext = useContext(SchemaContext);
+
+    const [showModal, setShowModal] = useState(false);
+    const [focusedPermission, setFocusedPermission] = useState();
+
     const headerProps: IHeader = {
         title: 'Model Permissions',
         subtitle: 'Permissions for this model.'
     }
+    const tableProps: ITable = {
+        path: `/permission/?modelschema_id=${schemaContext.schema.id}`,
+        fields: [
+            {
+                fieldName: 'permission_name',
+                headerName: 'Permission'
+            }
+        ],
+        actions: [
+            {
+                children: 'Edit',
+                onClick: (row: any) => {
+                    setFocusedPermission(row);
+                    setShowModal(true);
+                }
+            }
+        ]
+    }
+
+    const onSubmit = (data: any) => {
+        console.log(data)
+    }
 
     return (
-        <Header key='header' {...headerProps} />
+        <>
+            <Header {...headerProps} />
+            <Table {...tableProps} />
+            <PermissionModal
+                onSubmit={onSubmit}
+                permissionData={focusedPermission}
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+                key={focusedPermission ? focusedPermission['permission_name'] : ''}
+            />
+        </>
     );
 }
 
