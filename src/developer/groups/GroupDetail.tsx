@@ -10,6 +10,7 @@ import { useContext, useState } from 'react';
 import Table from '../components/Table';
 import { sendSchemaData } from '../utils/api';
 import UserModal from './components/UserModal';
+import PermissionModal from './components/PermissionModal';
 
 function TabConfiguration() {
     const schemaContext = useContext(SchemaContext);
@@ -124,30 +125,69 @@ function TabUsers() {
 function TabPermissions() {
     const schemaContext = useContext(SchemaContext);
 
+    const [showModal, setShowModal] = useState(false);
+    const [tableKey, setTableKey] = useState(1);
+
+    const onSubmit = (data: any) => {
+        sendSchemaData({
+            path: `/group/${schemaContext.schema.id}/add-permission/`,
+            method: 'POST',
+            data: data,
+            setIsLoaded: () => { },
+            setResults: () => { setShowModal(false); setTableKey(tableKey + 1) },
+            setError: () => { },
+        });
+    }
+
+    const removePermission = (permisson: any) => {
+        if (window.confirm(`Are you sure you want to remove the permission ${permisson.permission_name} from this group?`)) {
+            sendSchemaData({
+                path: `/group/${schemaContext.schema.id}/remove-permission/`,
+                method: 'POST',
+                data: { permission_id: permisson.id },
+                setIsLoaded: () => { },
+                setResults: () => { setShowModal(false); setTableKey(tableKey + 1) },
+                setError: () => { },
+            });
+        }
+    }
+
     const headerProps: IHeader = {
         title: 'Permissions',
-        subtitle: 'Permissions assigned to this group.'
+        subtitle: 'Permissions assigned to this group.',
+        tools: [
+            {
+                children: 'Add Permission',
+                icon: PlusCircleIcon,
+                onClick: () => { setShowModal(true) }
+            }
+        ]
     }
     const tableProps: ITable = {
         path: `/group/${schemaContext.schema.id}/permissions/`,
         fields: [
             {
-                fieldName: 'name',
+                fieldName: 'permission_name',
                 headerName: 'Permision Name'
             }
         ],
         actions: [
             {
-                children: 'View',
-                to: ROUTES.permission.detail,
-            }
+                children: 'Remove',
+                onClick: (row: any) => removePermission(row),
+            },
         ]
     }
 
     return (
         <>
             <Header {...headerProps} />
-            <Table {...tableProps} />
+            <Table key={tableKey}  {...tableProps} />
+            <PermissionModal
+                onSubmit={onSubmit}
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+            />
         </>
     );
 }

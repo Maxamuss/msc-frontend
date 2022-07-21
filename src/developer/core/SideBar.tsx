@@ -39,16 +39,6 @@ const sections = [
                 'icon': UserGroupIcon,
                 'to': ROUTES.group.list,
             },
-            {
-                'name': 'Permissions',
-                'icon': FingerPrintIcon,
-                'to': ROUTES.permission.list,
-            },
-            {
-                'name': 'Settings',
-                'icon': CogIcon,
-                'to': 'model'
-            }
         ]
     }
 ];

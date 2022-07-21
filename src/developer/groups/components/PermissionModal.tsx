@@ -2,33 +2,18 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import Button from '../../components/Button';
-import InputField from '../../components/Fields/InputField';
-import SelectField from '../../components/Fields/SelectField';
-
-interface IPermission {
-    permission_name: string;
-    modelschema_id: string;
-    groups: string[];
-    users: string[];
-}
+import PermissionField from '../../components/Fields/PermissionField';
 
 export interface IPermissionModal {
     isOpen: boolean;
     onClose: any;
     onSubmit: any;
-    permissionData?: IPermission | null;
 }
 
 export default function PermissionModal(props: IPermissionModal) {
     const cancelButtonRef = useRef(null);
 
-    // const { control, handleSubmit } = useForm({
-    //     defaultValues: {
-    //         field_name: props.fieldData?.field_name,
-    //         field_type: props.fieldData?.field_type,
-    //         required: props.fieldData?.required,
-    //     }
-    // });
+    const { control, handleSubmit } = useForm();
 
     return (
         <Transition.Root show={props.isOpen} as={Fragment}>
@@ -59,13 +44,23 @@ export default function PermissionModal(props: IPermissionModal) {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full" style={{ minHeight: '400px' }}>
+                            <Dialog.Panel className="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full" style={{ minHeight: '250px' }}>
                                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                    <h1 className='text-xl font-semibold text-gray-900 mb-4'>Edit Permission</h1>
-                                    {/* <form onSubmit={handleSubmit(props.onSubmit)} className='space-y-4'> */}
-
-                                    <Button type='submit'>Add Field</Button>
-                                    {/* </form> */}
+                                    <h1 className='text-xl font-semibold text-gray-900 mb-4'>Add Permission To Group</h1>
+                                    <form onSubmit={handleSubmit(props.onSubmit)} className='space-y-4'>
+                                        <Controller
+                                            name='permission_id'
+                                            control={control}
+                                            render={({ field }) => <PermissionField
+                                                {...field}
+                                                name='permission_id'
+                                                fieldType='*'
+                                                label='Permission'
+                                                selected={null}
+                                            />}
+                                        />
+                                        <Button type='submit'>Add Permission</Button>
+                                    </form>
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>
