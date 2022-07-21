@@ -12,6 +12,7 @@ import { IHeader, IForm, ITabs, ITable } from '../components/types';
 import { ROUTES } from '../utils/routing';
 import { IIconField, IInputField } from '../components/Fields/types';
 import { sendSchemaData } from '../utils/api';
+import { useDispatch } from 'react-redux';
 
 function TabConfiguration() {
     const schemaContext = useContext(SchemaContext)
@@ -48,6 +49,7 @@ function TabConfiguration() {
     );
 }
 function TabFields() {
+    const dispatch = useDispatch();
     const schemaContext = useContext(SchemaContext);
 
     const [showModal, setShowModal] = useState(false);
@@ -87,6 +89,7 @@ function TabFields() {
                 setTableKey(tableKey + 1);
             },
             setError: setError,
+            dispatch: dispatch,
         });
 
     }

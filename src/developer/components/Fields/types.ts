@@ -6,6 +6,11 @@ export interface IBaseLabel {
     id?: string;
     label?: string;
 }
+export interface IBaseErrorText {
+    label?: string;
+    error?: any;
+    patternMsg?: string;
+}
 
 export interface IBaseField extends IBaseHelpText, IBaseLabel {
     name: string;

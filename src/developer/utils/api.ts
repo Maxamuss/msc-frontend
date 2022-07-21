@@ -55,6 +55,8 @@ export function sendSchemaData(args: ISendSchemaData) {
                     data = result;
                 }
 
+                console.log(data)
+
                 if (args.setResults) {
                     args.setResults(data)
                 }

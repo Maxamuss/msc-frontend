@@ -6,13 +6,13 @@ import { ISelectField } from './types';
 export default function SelectField(props: ISelectField) {
     let value = props.value;
     // Convert bool to string.
-    if (typeof props.value === 'boolean') {
-        if (props.value) {
-            value = 'yes'
-        } else {
-            value = 'fasle'
-        }
-    }
+    // if (props.fieldType === 'boolean') {
+    //     if (props.value === '1') {
+    //         value = 'yes'
+    //     } else {
+    //         value = 'no'
+    //     }
+    // }
 
     return (
         <div>
