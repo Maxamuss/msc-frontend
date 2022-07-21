@@ -884,11 +884,11 @@ select {
 .h-16 {
 	height: 4rem;
 }
-.h-full {
-	height: 100%;
-}
 .h-3 {
 	height: 0.75rem;
+}
+.h-full {
+	height: 100%;
 }
 .max-h-60 {
 	max-height: 15rem;
