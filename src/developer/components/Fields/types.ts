@@ -33,7 +33,7 @@ export interface ISelectField extends IBaseField {
     options?: ISelectOption[];
     selected?: any;
     onChange?: any;
-    allowMulitple?: boolean;
+    allowMultiple?: boolean;
 }
 
 export interface IIconField extends ISelectField {

@@ -44,7 +44,6 @@ export default function ForeignKeyField(props: IForeignKeyField) {
 
     return (
         <div>
-            <BaseLabel {...props} />
             {error ? (
                 <input
                     className="mt-1 block w-full border-gray-300 rounded shadow-sm text-gray-900 sm:text-sm focus:ring-primary focus:border-primary"
@@ -59,7 +58,6 @@ export default function ForeignKeyField(props: IForeignKeyField) {
                 <SelectField {...props} options={formatItems(items)} bare={true} />
             )
             }
-            <BaseHelpText {...props} />
         </div >
     );
 }
