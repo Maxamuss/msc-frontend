@@ -23,8 +23,12 @@ export function getLayoutData(args: IGetLayoutData) {
 
 }
 
-export function getModelObjects(modelName: string, setResults: Function, setPagination: Function, setIsLoaded: Function, setError: Function) {
+export function getModelObjects(modelName: string, setResults: Function, setPagination: Function, setIsLoaded: Function, setError: Function, params?: string) {
     let url = getBaseURL() + `/data/${modelName}/`;
+
+    if (params) {
+        url += params;
+    }
 
     fetch(url)
         .then(res => res.json())

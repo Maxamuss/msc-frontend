@@ -38,6 +38,10 @@ export interface ITable {
     model_name?: string;
     actions?: IButton[];
 }
+export interface IInline {
+    modelschema_id: string;
+    actions?: IButton[];
+}
 
 export interface ITab {
     tab_name: string;
