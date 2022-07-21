@@ -19,6 +19,7 @@ export interface IFieldModal {
     onClose: any;
     onSubmit: any;
     fieldData?: IModelSchemaField | null;
+    handleRemoveField?: Function;
 }
 
 export default function FieldModal(props: IFieldModal) {
@@ -130,7 +131,10 @@ export default function FieldModal(props: IFieldModal) {
                                                 <BaseErrorText error={errors.modelschema_id} label={'Model'} />
                                             </>
                                         )}
-                                        <Button type='submit'>{props.fieldData?.field_name ? <>Save Field</> : <>Add Field</>}</Button>
+                                        <div className='space-x-4'>
+                                            {props.fieldData?.field_name && <Button type='button' onClick={() => props.handleRemoveField && props.handleRemoveField(props.fieldData)}>Remove Field</Button>}
+                                            <Button type='submit'>{props.fieldData?.field_name ? <>Save Field</> : <>Add Field</>}</Button>
+                                        </div>
                                     </form>
                                 </div>
                             </Dialog.Panel>

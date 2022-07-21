@@ -94,6 +94,27 @@ function TabFields() {
 
     }
 
+    const handleRemoveField = (field: any) => {
+        let schema = schemaContext.schema;
+        let selectedField: IModelSchemaField | null = modalField;
+
+        schema.fields = schema.fields.filter((field: IModelSchemaField) => field.field_name !== selectedField!.field_name);
+
+        sendSchemaData({
+            path: `/modelschema/${schemaContext.schema.id}/`,
+            method: 'PUT',
+            data: schema,
+            setIsLoaded: () => { },
+            setResults: (result: any) => {
+                schemaContext.setSchema(result);
+                setShowModal(false);
+                setTableKey(tableKey + 1);
+            },
+            setError: setError,
+            dispatch: dispatch,
+        });
+    }
+
     const headerProps: IHeader = {
         title: 'Model Fields',
         subtitle: 'Fields defined for this model.',
@@ -139,6 +160,7 @@ function TabFields() {
                 fieldData={modalField}
                 isOpen={showModal}
                 onClose={() => setShowModal(false)}
+                handleRemoveField={handleRemoveField}
                 key={modalField ? modalField['field_name'] : ''}
             />
         </>
@@ -150,13 +172,6 @@ function TabPages() {
     const headerProps: IHeader = {
         title: 'Model Pages',
         subtitle: 'Pages belonging to this model.',
-        tools: [
-            {
-                children: 'Create Page',
-                icon: PlusCircleIcon,
-                to: ROUTES.page.create,
-            }
-        ]
     }
     const tableProps: ITable = {
         path: `/page/?modelschema_id=${schemaContext.schema.id}`,

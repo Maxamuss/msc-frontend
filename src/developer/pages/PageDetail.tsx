@@ -10,13 +10,22 @@ export default function PageDetail() {
 
     const [error, setError] = useState();
     const [isLoaded, setIsLoaded] = useState(false);
+    const [model, setModel] = useState([]);
     const [pageLayout, setPageLayout] = useState([]);
 
     useEffect(() => {
         getSchemaData({
             path: `/page/${id}/`,
-            setResults: setPageLayout,
-            setIsLoaded: setIsLoaded,
+            setResults: (layout: any) => {
+                setPageLayout(layout);
+                getSchemaData({
+                    path: `/modelschema/${layout.modelschema_id}/`,
+                    setResults: setModel,
+                    setIsLoaded: setIsLoaded,
+                    setError: setError,
+                });
+            },
+            setIsLoaded: () => { },
             setError: setError,
         });
     }, [])
@@ -26,16 +35,6 @@ export default function PageDetail() {
     } else if (!isLoaded) {
         return <LoadingSpinner />
     } else {
-        // let pageLayoutWithIds: any = [];
-        // console.log(pageLayout)
-
-        // pageLayout.forEach((component) => {
-        //     // if (!('id' in component)) {
-        //     //     component['id'] = ''
-        //     // }
-        //     pageLayoutWithIds.push(component)
-        // })
-
-        return <PageEditor pageLayout={pageLayout} />
+        return <PageEditor model={model} pageLayout={pageLayout} pageId={id} />
     }
 }

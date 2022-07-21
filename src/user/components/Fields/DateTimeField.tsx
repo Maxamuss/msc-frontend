@@ -3,7 +3,6 @@ import BaseLabel from './Base/BaseLabel';
 import BaseHelpText from './Base/BaseHelpText';
 
 export default function DateTimeField(props: IInputField) {
-    console.log(props.default ?? props.value)
     return (
         <div>
             <BaseLabel {...props} />

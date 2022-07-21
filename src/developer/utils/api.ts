@@ -23,7 +23,6 @@ export function getSchemaData(args: IGetSchemaData) {
         .then(res => res.json())
         .then(
             (result) => {
-                console.log(result)
                 args.setIsLoaded(true);
                 args.setResults(result);
             },
@@ -54,8 +53,6 @@ export function sendSchemaData(args: ISendSchemaData) {
                 } else {
                     data = result;
                 }
-
-                console.log(data)
 
                 if (args.setResults) {
                     args.setResults(data)
