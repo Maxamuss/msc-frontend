@@ -76,6 +76,7 @@ export function sendModelObject(data: any, method: string, setResource: Function
     if (modelId) {
         url += `${modelId}/`;
     }
+    console.log(url)
 
     fetch(url, {
         method: method,

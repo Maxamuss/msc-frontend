@@ -1646,6 +1646,10 @@ select {
 		padding-left: 1.5rem;
 	}
 
+	.sm\:pl-4 {
+		padding-left: 1rem;
+	}
+
 	.sm\:align-middle {
 		vertical-align: middle;
 	}
@@ -1753,9 +1757,5 @@ select {
 	.xl\:border-gray-200 {
 		--tw-border-opacity: 1;
 		border-color: rgba(229, 231, 235, var(--tw-border-opacity));
-	}
-
-	.xl\:pl-0 {
-		padding-left: 0px;
 	}
 }

@@ -17,7 +17,7 @@ export interface IForm {
     fields?: IBaseField[];
     resource?: any;
     to?: string;
-    submitButtonText?: string;
+    submit_button_text?: string;
 }
 
 export interface IHeader {

@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(
 const site = window.location.host.split('.')[1] ? window.location.host.split('.')[0] : 'user';
 let App;
 
-if (site == 'dev') {
+if (site === 'dev') {
   App = (
     <Provider store={developerStore}>
       <DeveloperApp />
