@@ -12,10 +12,14 @@ import ForeignKeyField from './Fields/ForeignKeyField';
 import { PageContext } from '../core/Page';
 import { populateTo } from '../utils/routing';
 import { sendModelObject } from '../utils/api';
+import EmailField from './Fields/EmailField';
+import DateField from './Fields/DateField';
 
 const fieldWidgets: any = {
     'text': TextField,
+    'email': EmailField,
     'float': FloatField,
+    'date': DateField,
     'datetime': DateTimeField,
     'fk': ForeignKeyField,
 }
