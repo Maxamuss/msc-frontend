@@ -2,7 +2,7 @@ import { IGetSchemaData, ISendSchemaData, IDeleteSchemaData } from './types';
 import { setReleaseData } from '../store/releaseSlice';
 
 export const getBaseURL = () => {
-    return 'http://localhost:8000/internal-api/developer'
+    return 'http://localhost:8001/internal-api/developer'
 }
 
 export function getSchemaData(args: IGetSchemaData) {

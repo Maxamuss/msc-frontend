@@ -2,7 +2,7 @@ import Model from '../core/models/model';
 import { IGetLayoutData } from './types';
 
 export const getBaseURL = () => {
-    return 'http://localhost:8000/internal-api/application'
+    return 'http://localhost:8001/internal-api/application'
 }
 
 export function getLayoutData(args: IGetLayoutData) {
