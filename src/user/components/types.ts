@@ -17,7 +17,7 @@ export interface IForm {
     fields?: IBaseField[];
     resource?: any;
     to?: string;
-    submitButtonText?: string;
+    submit_button_text?: string;
 }
 
 export interface IHeader {
@@ -36,6 +36,10 @@ export interface ITableField {
 export interface ITable {
     fields: ITableField[];
     model_name?: string;
+    actions?: IButton[];
+}
+export interface IInline {
+    modelschema_id: string;
     actions?: IButton[];
 }
 

@@ -63,7 +63,6 @@ export function renderer(component: any) {
         return createElement(
             componentMap[componentType],
             config,
-            // (config.children && config.children.map((c: any) => renderer(c)))
         );
     }
 }

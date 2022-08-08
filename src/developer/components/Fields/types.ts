@@ -6,6 +6,11 @@ export interface IBaseLabel {
     id?: string;
     label?: string;
 }
+export interface IBaseErrorText {
+    label?: string;
+    error?: any;
+    patternMsg?: string;
+}
 
 export interface IBaseField extends IBaseHelpText, IBaseLabel {
     name: string;
@@ -28,7 +33,7 @@ export interface ISelectField extends IBaseField {
     options?: ISelectOption[];
     selected?: any;
     onChange?: any;
-    allowMulitple?: boolean;
+    allowMultiple?: boolean;
 }
 
 export interface IIconField extends ISelectField {

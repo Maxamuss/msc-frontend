@@ -2,13 +2,16 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import Button from '../../components/Button';
+import BaseErrorText from '../../components/Fields/Base/BaseErrorText';
 import InputField from '../../components/Fields/InputField';
+import ModelField from '../../components/Fields/ModelField';
 import SelectField from '../../components/Fields/SelectField';
 
 export interface IModelSchemaField {
     field_name: string;
     field_type?: string;
     required?: boolean;
+    modelschema_id?: string;
 }
 
 export interface IFieldModal {
@@ -16,18 +19,21 @@ export interface IFieldModal {
     onClose: any;
     onSubmit: any;
     fieldData?: IModelSchemaField | null;
+    handleRemoveField?: Function;
 }
 
 export default function FieldModal(props: IFieldModal) {
     const cancelButtonRef = useRef(null);
 
-    const { control, handleSubmit } = useForm({
+    const { control, watch, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             field_name: props.fieldData?.field_name,
             field_type: props.fieldData?.field_type,
             required: props.fieldData?.required,
+            modelschema_id: props.fieldData?.modelschema_id,
         }
     });
+    const watchFieldType = watch('field_type');
 
     return (
         <Transition.Root show={props.isOpen} as={Fragment}>
@@ -60,11 +66,12 @@ export default function FieldModal(props: IFieldModal) {
                         >
                             <Dialog.Panel className="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full" style={{ minHeight: '400px' }}>
                                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                    <h1 className='text-xl font-semibold text-gray-900 mb-4'>Add Field</h1>
+                                    <h1 className='text-xl font-semibold text-gray-900 mb-4'>{props.fieldData?.field_name ? <>Edit Field</> : <>Add Field</>}</h1>
                                     <form onSubmit={handleSubmit(props.onSubmit)} className='space-y-4'>
                                         <Controller
                                             name='field_name'
                                             control={control}
+                                            rules={{ required: true, pattern: /^[a-z_]+$/ }}
                                             render={({ field }) => <InputField
                                                 {...field}
                                                 name='field_name'
@@ -73,14 +80,18 @@ export default function FieldModal(props: IFieldModal) {
                                                 label='Field Name'
                                             />}
                                         />
+                                        <BaseErrorText error={errors.field_name} label={'Field Name'} patternMsg={'lowercase letters and underscores'} />
                                         <Controller
                                             name='field_type'
                                             control={control}
+                                            rules={{ required: true }}
                                             render={({ field }) => <SelectField
                                                 {...field}
                                                 options={[
                                                     { id: "text", name: "Text" },
+                                                    { id: "email", name: "Email" },
                                                     { id: "float", name: "Float" },
+                                                    { id: "date", name: "Date" },
                                                     { id: "datetime", name: "Datetime" },
                                                     { id: "fk", name: "Link" },
                                                 ]}
@@ -89,21 +100,43 @@ export default function FieldModal(props: IFieldModal) {
                                                 label='Field Type'
                                             />}
                                         />
+                                        <BaseErrorText error={errors.field_type} label={'Field Type'} />
                                         <Controller
                                             name='required'
                                             control={control}
+                                            rules={{ required: true }}
                                             render={({ field }) => <SelectField
                                                 {...field}
                                                 options={[
-                                                    { id: "1", name: "No" },
-                                                    { id: "yes", name: "Yes" },
+                                                    { id: "0", name: "No" },
+                                                    { id: "1", name: "Yes" },
                                                 ]}
                                                 name='required'
                                                 fieldType='boolean'
                                                 label='Required'
                                             />}
                                         />
-                                        <Button type='submit'>Add Field</Button>
+                                        <BaseErrorText error={errors.required} label={'Required'} />
+                                        {watchFieldType === 'fk' && (
+                                            <>
+                                                <Controller
+                                                    name='modelschema_id'
+                                                    control={control}
+                                                    rules={{ required: true }}
+                                                    render={({ field }) => <ModelField
+                                                        {...field}
+                                                        name='modelschema_id'
+                                                        fieldType='*'
+                                                        label='Model'
+                                                    />}
+                                                />
+                                                <BaseErrorText error={errors.modelschema_id} label={'Model'} />
+                                            </>
+                                        )}
+                                        <div className='space-x-4'>
+                                            {props.fieldData?.field_name && <Button type='button' onClick={() => props.handleRemoveField && props.handleRemoveField(props.fieldData)}>Remove Field</Button>}
+                                            <Button type='submit'>{props.fieldData?.field_name ? <>Save Field</> : <>Add Field</>}</Button>
+                                        </div>
                                     </form>
                                 </div>
                             </Dialog.Panel>

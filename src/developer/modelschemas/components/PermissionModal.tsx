@@ -4,6 +4,8 @@ import { Controller, useForm } from 'react-hook-form';
 import Button from '../../components/Button';
 import InputField from '../../components/Fields/InputField';
 import SelectField from '../../components/Fields/SelectField';
+import GroupField from '../../components/Fields/GroupField';
+import UserField from '../../components/Fields/UserField';
 
 interface IPermission {
     permission_name: string;
@@ -22,13 +24,12 @@ export interface IPermissionModal {
 export default function PermissionModal(props: IPermissionModal) {
     const cancelButtonRef = useRef(null);
 
-    // const { control, handleSubmit } = useForm({
-    //     defaultValues: {
-    //         field_name: props.fieldData?.field_name,
-    //         field_type: props.fieldData?.field_type,
-    //         required: props.fieldData?.required,
-    //     }
-    // });
+    const { control, handleSubmit } = useForm({
+        defaultValues: {
+            groups: [],
+            users: [],
+        }
+    });
 
     return (
         <Transition.Root show={props.isOpen} as={Fragment}>
@@ -62,10 +63,31 @@ export default function PermissionModal(props: IPermissionModal) {
                             <Dialog.Panel className="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full" style={{ minHeight: '400px' }}>
                                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                     <h1 className='text-xl font-semibold text-gray-900 mb-4'>Edit Permission</h1>
-                                    {/* <form onSubmit={handleSubmit(props.onSubmit)} className='space-y-4'> */}
-
-                                    <Button type='submit'>Add Field</Button>
-                                    {/* </form> */}
+                                    <form onSubmit={handleSubmit(props.onSubmit)} className='space-y-4'>
+                                        <Controller
+                                            name='groups'
+                                            control={control}
+                                            render={({ field }) => <GroupField
+                                                {...field}
+                                                name='groups'
+                                                label='Groups'
+                                                fieldType={''}
+                                                allowMultiple={true}
+                                            />}
+                                        />
+                                        <Controller
+                                            name='users'
+                                            control={control}
+                                            render={({ field }) => <UserField
+                                                {...field}
+                                                name='users'
+                                                label='Users'
+                                                fieldType={''}
+                                                allowMultiple={true}
+                                            />}
+                                        />
+                                        <Button type='submit'>Save</Button>
+                                    </form>
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>

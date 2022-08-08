@@ -5,26 +5,26 @@ import { getBaseURL } from '../../utils/api';
 import LoadingSpinner from '../LoadingSpinner';
 import SelectField from './SelectField';
 
-export default function PermissionField(props: ISelectField) {
+export default function ModelField(props: ISelectField) {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [permissions, setpermissions] = useState<ISelectOption[]>([]);
+    const [models, setModels] = useState<ISelectOption[]>([]);
 
     useEffect(() => {
-        fetch(getBaseURL() + '/permission/')
+        fetch(getBaseURL() + '/modelschema/')
             .then(res => res.json())
             .then(
                 (result) => {
                     let options: any = [];
 
-                    result.forEach((permission: any) => {
+                    result.forEach((model: any) => {
                         options.push({
-                            id: permission.id, name: permission.permission_name
+                            id: model.id, name: model.model_name
                         })
                     })
 
                     setIsLoaded(true);
-                    setpermissions(options);
+                    setModels(options);
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
@@ -42,7 +42,7 @@ export default function PermissionField(props: ISelectField) {
         return <LoadingSpinner />
     } else {
         return (
-            <SelectField {...props} options={permissions} />
+            <SelectField {...props} options={models} />
         )
     }
 

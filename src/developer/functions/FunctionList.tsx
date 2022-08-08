@@ -5,13 +5,6 @@ import { ROUTES } from '../utils/routing';
 
 const headerConfig = {
     title: 'Function',
-    tools: [
-        {
-            children: 'Add Function',
-            icon: PlusCircleIcon,
-            to: ROUTES.function.create
-        }
-    ]
 }
 const tableConfig = {
     path: '/function/',

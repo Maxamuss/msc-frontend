@@ -19,10 +19,35 @@ export default function WorkflowEditor(props: IWorkflowEditor) {
                 {/* Left sidebar & main wrapper */}
                 <div className="flex-1 min-w-0 bg-white xl:flex">
                     <div className="border-b border-gray-200 xl:border-b-0 xl:flex-shrink-0 xl:w-80 xl:border-r xl:border-gray-200 bg-white">
-                        <div className="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
-                            {/* Start left column area */}
-
-                            {/* End left column area */}
+                        <div className="h-full pl-4 pr-6 py-6 sm:pl-4">
+                            <h3 className="text-xl font-semibold text-gray-900">Triggers</h3>
+                            <div className='space-y-4'>
+                                <button
+                                    type='button'
+                                    // onClick={() => handleAddComponent(component.componentName)}
+                                    className="w-full rounded-lg shadow border border-gray-200 text-left p-2"
+                                >
+                                    <h1>Model Created</h1>
+                                    <p>Trigger a workflow when a model object is created.</p>
+                                </button>
+                                <button
+                                    type='button'
+                                    // onClick={() => handleAddComponent(component.componentName)}
+                                    className="w-full rounded-lg shadow border border-gray-200 text-left p-2"
+                                >
+                                    <h1>Model Updated</h1>
+                                    <p>Trigger a workflow when a model object is updated.</p>
+                                </button>
+                                <button
+                                    type='button'
+                                    // onClick={() => handleAddComponent(component.componentName)}
+                                    className="w-full rounded-lg shadow border border-gray-200 text-left p-2"
+                                >
+                                    <h1>Model Created</h1>
+                                    <p>Trigger a workflow when a model object is deleted.</p>
+                                </button>
+                            </div>
+                            <h3 className="text-xl font-semibold text-gray-900">Functions</h3>
                         </div>
                     </div>
 

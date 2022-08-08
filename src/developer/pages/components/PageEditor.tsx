@@ -1,40 +1,101 @@
 import { useState } from "react";
 import Button from "../../components/Button";
 import Header from "./Header";
+import Inline from "./Inline";
 import Table from "./Table";
+import InlineConfig from './config/InlineConfig';
+import { sendSchemaData } from "../../utils/api";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 interface IPageEditor {
-    modelId?: string;
+    model: any;
     pageLayout?: any;
+    pageId?: string;
+}
+
+export interface ISelectedComponentConfig {
+    component: any;
+    layout: any;
+    setLayoutComponents: Function;
 }
 
 const components = [
-    { name: 'Header', description: 'Caption a page' },
-    { name: 'Table', description: 'Display model data' },
+    { name: 'Header', description: 'Caption a page', componentName: 'core@Header' },
+    { name: 'Table', description: 'Display model data', componentName: 'core@Table' },
+    { name: 'Inline', description: 'Display related data', componentName: 'core@Inline' },
 ];
+
 
 const componentMapping: any = {
     'core@Header': Header,
     'core@Table': Table,
+    'core@Inline': Inline,
+}
+
+function SelectedComponentConfig(props: ISelectedComponentConfig) {
+    if (props.component.component === 'core@Inline') {
+        return <InlineConfig {...props} />
+    }
+    return (
+        <>
+            <h3 className="text-xl font-semibold text-gray-900">{props.component.component}</h3>
+            <div>Nothing to setup for this component</div>
+        </>
+    )
 }
 
 export default function PageEditor(props: IPageEditor) {
-    const [layoutComponents, setLayoutComponents] = useState(props.pageLayout.layout);
-    const [selectedComponent, setSelectedCompontent] = useState();
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const [layoutComponents, setLayoutComponents] = useState(props.pageLayout?.layout);
+    const [selectedComponent, setSelectedComponent] = useState<any>();
 
     const handleComponentClick = (component: any) => {
         if (component !== selectedComponent) {
-            setSelectedCompontent(component)
+            setSelectedComponent(component)
         } else {
-            setSelectedCompontent(undefined)
+            setSelectedComponent(undefined)
         }
+    }
+
+    const handleAddComponent = (componentName: any) => {
+        let updatedLayoutComponents = [...layoutComponents];
+        updatedLayoutComponents.push({
+            component: componentName,
+            config: {}
+        });
+
+        setLayoutComponents(updatedLayoutComponents);
+    }
+
+    const handleSave = () => {
+        const data = {
+            ...props.pageLayout,
+            layout: layoutComponents,
+        }
+
+        sendSchemaData({
+            path: `/page/${props.pageId}/`,
+            method: 'PUT',
+            data: data,
+            setIsLoaded: () => { },
+            setResults: (result: any) => {
+                navigate(`/modelschema/${props.model.id}`)
+            },
+            setError: () => { },
+            dispatch: dispatch,
+        });
     }
 
     return (
         <>
+            {/* <Header /> */}
             <nav className="bg-white z-10 flex-shrink-0 h-16 border-200 border-b">
-                <div className='flex'>
-                    <Button>Save Workflow</Button>
+                <div className='flex pl-auto'>
+                    {props.model.model_name}
+                    <Button type={'button'} onClick={handleSave}>Save Page</Button>
                 </div>
             </nav>
             <div className="relative flex flex-col" style={{ height: 'calc(100vh - 127px)' }}>
@@ -43,22 +104,26 @@ export default function PageEditor(props: IPageEditor) {
                         <div className="h-full pl-4 pr-6 py-6 space-y-3">
                             {selectedComponent && (
                                 <div className="p-2">
-                                    {/* <h1>{selectedComponent}</h1> */}
-                                    {/* <p>{selectedComponent.description}</p> */}
+                                    <SelectedComponentConfig component={selectedComponent} layout={layoutComponents} setLayoutComponents={setLayoutComponents} />
                                 </div>
                             )}
                             {!selectedComponent && components.map((component: any) => (
-                                <div key={component.name} className="rounded-lg shadow border border-gray-200 p-2">
+                                <button
+                                    key={component.name}
+                                    type='button'
+                                    onClick={() => handleAddComponent(component.componentName)}
+                                    className="w-full rounded-lg shadow border border-gray-200 text-left p-2"
+                                >
                                     <h1>{component.name}</h1>
                                     <p>{component.description}</p>
-                                </div>
+                                </button>
                             ))}
                         </div>
                     </div>
 
                     <div className="bg-white lg:min-w-0 lg:flex-1">
                         <div className="h-full">
-                            {layoutComponents.map((layout: any) => {
+                            {layoutComponents?.map((layout: any) => {
                                 if (layout.component in componentMapping) {
                                     const Component = componentMapping[layout.component];
 
@@ -70,12 +135,12 @@ export default function PageEditor(props: IPageEditor) {
                                             <div
                                                 className={'pointer-events-none select-none'}
                                             >
-                                                <Component {...layout.config} />
+                                                <Component {...layout.config} model={props.model} />
                                             </div>
                                         </div>
                                     )
                                 }
-                                return <div></div>;
+                                return <></>;
                             })}
                         </div>
                     </div>
@@ -84,3 +149,4 @@ export default function PageEditor(props: IPageEditor) {
         </>
     )
 }
+
