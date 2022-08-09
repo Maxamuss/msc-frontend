@@ -10,3 +10,5 @@ npm i
 ```bash
 npm run start
 ```
+
+3. Ensure backend is also running: https://github.com/Maxamuss/msc-backend/
