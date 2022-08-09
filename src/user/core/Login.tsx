@@ -16,12 +16,13 @@ export default function Login() {
     const [isLoaded, setIsLoaded] = useState(true);
 
     const login = (data: any) => {
-        fetch('http://localhost:8000/internal-api/auth/token/', {
+        fetch('http://localhost:8001/internal-api/auth/token/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data),
+            // mode: 'no-cors',
         })
             .then(res => res.json())
             .then(
